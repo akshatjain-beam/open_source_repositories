@@ -1,0 +1,3 @@
+# - Create regular expressions that matches for general urls and profile id specific urls for facebook.
+# - for general urls, underscore, dot and hyphen are allowed
+$PlaceHolder$
