@@ -1,0 +1,11 @@
+# - Create a class `LazyImport` to enable loading modules only when they're first accessed.
+# - Initialization:
+#     - The class should accept a module name and optionally the module's globals dictionary during initialization.
+# - Module Loading:
+#     - Implement a `_load` method to handle the actual module import, update the module's globals, and set its attributes.
+# - Attribute Access:
+#     - Override `__getattr__` to trigger the module load and return the requested attribute.
+#     - Override `__dir__` to return the list of attributes from the loaded module.
+# - Representation:
+#     - Implement `__repr__` to give a string representation of the `LazyImport` instance.
+$PlaceHolder$
