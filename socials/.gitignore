@@ -106,3 +106,4 @@ ENV/
 
 **/.DS_Store
 *.tar
+*.DS_Store
