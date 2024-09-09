@@ -10,6 +10,9 @@ COPY . /randomprofilegenerator
 # Install dependencies for the project
 RUN pip install -r requirements.txt
 
+# Install pytest if not included in requirements.txt
+RUN pip install pytest
+
 # Run tests using pytest
 RUN python -m pytest tests/
 
