@@ -1,0 +1,4 @@
+#Create a function `default_file` which finds the path of the file and returns the path:
+#    - extracts the information for `todo.txt` file, and captures its output
+#    - finds the path from the output using prefix of `task_path` and `=`
+$PlaceHolder$

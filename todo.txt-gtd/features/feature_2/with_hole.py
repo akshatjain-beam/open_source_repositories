@@ -1,4 +1,3 @@
-
 # Copyright (c) 2021 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -16,15 +15,11 @@ from .tdtcleanup import Project, Projects
 from .utils import is_task
 
 
-def default_file():
-    cp = subprocess.run(
-        ["todo.txt", "--info"],
-        capture_output=True,
-        encoding="utf-8",
-    )
+#Create a function `default_file` which finds the path of the file and returns the path:
+#    - extracts the information for `todo.txt` file configuration, and captures its output
+#    - finds the path from the output using prefix of `task_path` and `=`
+$PlaceHolder$
 
-    match = re.search("^task_path\s*=\s*(.+)$", cp.stdout, re.MULTILINE)
-    return match.group(1)
 
 def parse_args():
     parser = argparse.ArgumentParser(
