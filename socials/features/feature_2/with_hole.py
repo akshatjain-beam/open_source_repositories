@@ -11,8 +11,9 @@ PLATFORM_INSTAGRAM = 'instagram'
 PLATFORM_YOUTUBE = 'youtube'
 PLATFORM_EMAIL = 'email'
 
-# - Create regular expressions that matches for general urls and profile id specific urls for facebook.
-# - for general urls, underscore, dot and hyphen are allowed
+# - Create regular expressions and store it in variable `FACEBOOK_URL_REGEXS`.
+# - They should matche for general and profile-id specific urls for facebook.
+# - For general urls, underscore, dot and hyphen are allowed
 $PlaceHolder$
 
 GITHUB_URL_REGEXS = [

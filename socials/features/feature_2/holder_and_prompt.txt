@@ -1,3 +1,4 @@
-# - Create regular expressions that matches for general urls and profile id specific urls for facebook.
-# - for general urls, underscore, dot and hyphen are allowed
+# - Create regular expressions and store it in variable `FACEBOOK_URL_REGEXS`.
+# - They should matche for general and profile-id specific urls for facebook.
+# - For general urls, underscore, dot and hyphen are allowed
 $PlaceHolder$

@@ -20,7 +20,7 @@ GITHUB_URL_REGEXS = [
     r'^http(s)?://(www\.)?github\.com/[A-Za-z0-9_-]+/?$',
 ]
 
-# - Create a list of patterns to match LinkedIn profile URLs for both private individuals and companies. 
+# - Create a list of patterns to match LinkedIn profile URLs for both private individuals and companies in variable `LINKEDIN_URL_REGEXS`. 
 # - For private profiles, generate regular expressions to cover both the old and new formats of LinkedIn URLs. 
 # - For profiles url, the pattern allows for optional trailing slashes.
 $PlaceHolder$
