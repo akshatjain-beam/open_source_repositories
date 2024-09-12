@@ -108,8 +108,8 @@ def _parse_line(line):
         - `tw_pinyin` (str or None): The Taiwanese pronunciation if present, otherwise `None`.
         - `defs` (list of str): A list of standard definitions extracted from the portion of the line after the slashes.
         - `clfrs` (list of Classifier or None): A list of `Classifier` objects parsed from the definitions, if present. If no classifiers are found, this will be `None`.
-    """
-    $PlaceHolder$
+  """
+  $PlaceHolder$
 
 
 DIACRITIC_VOWELS = [
