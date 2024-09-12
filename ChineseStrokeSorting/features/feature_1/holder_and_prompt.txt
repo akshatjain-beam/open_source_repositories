@@ -1,0 +1,4 @@
+"""
+The code creates a list of names with their stroke counts. It then sorts this list repeatedly based on the stroke counts until the sorting criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke count data and returns only the list of names.
+"""
+$PlaceHolder$

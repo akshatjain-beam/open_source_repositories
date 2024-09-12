@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 RUN pip install pytest
 
 # Run tests using pytest
-RUN python -m pytest chinese_stroke_sorting//
+RUN python -m pytest chinese_stroke_sorting/
 
 # Set the working directory to the root
 WORKDIR /
