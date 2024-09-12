@@ -5,13 +5,12 @@ class Classifier:
     self.pinyin = pinyin
 
   @classmethod
-  def parse(cls, s):
-    if '|' in s:
-      trad, rest = s.split('|')
-      simp, pinyin = rest.split('[')
+  def parse(cls, text):
+    if '|' in text:
+      trad, rest = text.split('|', 1)
+      simp, pinyin = rest.split('[', 1)
     else:
-      trad = s
-      simp = s
-      simp, pinyin = s.split('[')
+      trad = text
+      simp, pinyin = text.split('[', 1)
     pinyin = pinyin.rstrip(']')
     return cls(trad, simp, pinyin)

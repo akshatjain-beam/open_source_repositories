@@ -4,8 +4,12 @@
 #   - When you create a new `Classifier` object, you provide three pieces of information: traditional characters, simplified characters, and pinyin. These are stored in the instance variables `trad`, `simp`, and `pinyin`, respectively.
 # 
 # - Parsing (`parse` class method):
+#   - Input
+#       - A single string that contains the three components (traditional characters, simplified characters, and pinyin)
 #   - The class also has a method called `parse` that takes a single string as input and extracts the three components (traditional characters, simplified characters, and pinyin) from it.
 #   - If the string contains a `|` character, it is split at this character. The part before the `|` is considered the traditional characters, and the part after is further processed to separate simplified characters from pinyin using `[` character.
 #   - If the string does not contain a `|`, it is assumed that the traditional characters and simplified characters are the same. The string is split at the `[` character to separate the characters from the pinyin.
 #   - The method then trims any trailing `]` from the pinyin and creates a new `Classifier` object with the extracted values.
+#   - Output
+#       - The method returns a new `Classifier` object with the extracted values
 $PlaceHolder$
