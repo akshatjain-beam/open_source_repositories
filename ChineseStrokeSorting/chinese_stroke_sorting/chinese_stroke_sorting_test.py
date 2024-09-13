@@ -2,7 +2,7 @@ import os
 import unittest
 
 from .chinese_stroke_sorting import sort_by_stroke, write_sort_result_to_human, write_sort_result_to_file, \
-    read_name_list_from_file
+    read_name_list_from_file, __sort__
 
 
 class SortByNameTest(unittest.TestCase):
@@ -36,5 +36,46 @@ class SortByNameTest(unittest.TestCase):
         output_file = 'result.txt'
         write_sort_result_to_file(sort_result, output_file, split_char='\n')  # 将排序结果写入到文件
 
-# if __name__ == "__main__":
-#     unittest.main()
+
+class TestSortFunction(unittest.TestCase):
+    def setUp(self):
+        global __char_num_i
+        # Set a default value for __char_num_i for each test
+        __char_num_i = 0
+
+    def test_empty_list(self):
+        global __char_num_i
+        __char_num_i = 0
+        result = __sort__([])
+        self.assertEqual(result, [])
+
+    def test_single_element(self):
+        global __char_num_i
+        __char_num_i = 0
+        result = __sort__([('name1', ['3'])])
+        self.assertEqual(result, [('name1', ['3'])])
+
+    def test_basic_sorting(self):
+        input_list = [['Name1', ['5', '3']], ['Name2', ['3', '4']], ['Name3', ['4', '2']]]
+        expected_output = [['Name1', ['5', '3', '0']], ['Name2', ['3', '4', '0']], ['Name3', ['4', '2', '0']]]
+        self.assertEqual(__sort__(input_list), expected_output)
+    
+    def test_equal_first_char(self):
+        global __char_num_i
+        __char_num_i = 1
+        input_list = [['Name1', ['3', '5']], ['Name2', ['3', '3']], ['Name3', ['3', '4']]]
+        expected_output = [['Name1', ['3', '5', '0']], ['Name2', ['3', '3', '0']], ['Name3', ['3', '4', '0']]]
+        self.assertEqual(__sort__(input_list), expected_output)
+    
+    def test_different_length_lists(self):
+        input_list = [['Name1', ['5']], ['Name2', ['3', '4']], ['Name3', ['4', '2', '1']]]
+        expected_output = [['Name1', ['5', '0', '0']], ['Name2', ['3', '4', '0']], ['Name3', ['4', '2', '1']]]
+        self.assertEqual(__sort__(input_list), expected_output)
+
+    def test_all_equal(self):
+        input_list = [['Name1', ['3', '2']], ['Name2', ['3', '2']], ['Name3', ['3', '2']]]
+        expected_output = [['Name1', ['3', '2', '0']], ['Name2', ['3', '2', '0']], ['Name3', ['3', '2', '0']]]
+        self.assertEqual(__sort__(input_list), expected_output)
+
+if __name__ == "__main__":
+    unittest.main()

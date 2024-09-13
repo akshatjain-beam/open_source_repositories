@@ -1,0 +1,11 @@
+"""
+1. Initial Comparison:
+   - If `__char_num_i` is `0`, it compares the stroke counts at the current position (`j`) and the next position (`j + 1`).
+   - If the stroke count at position `j` is greater than that at position `j + 1`, it swaps the values.
+2. Handling Different Lengths of Stroke Counts:
+   - If the stroke count list at position `j` or `j + 1` is shorter than `__char_num_i`, then appends a '0'.
+3. Subsequent Comparison:
+   - If `__char_num_i` is not `0`, it compares the stroke counts at the previous position (`__char_num_i - 1`) first. If they are equal, it compares the stroke counts at the current position (`__char_num_i`).
+        - If the conditions are met (i.e., for the current index, the stroke count of `j` is greater than that of `j + 1`), it swaps the tuples.
+"""
+$PlaceHolder$
