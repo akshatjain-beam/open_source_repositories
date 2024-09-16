@@ -175,15 +175,13 @@ HTML_TEMPLATE = {
 
 def process_documents(documents):
     base2p15_arrs = list()
-    for document in documents:
-        bit_arr = bitarray()
-        with open(document[0], "rb") as f:
-            bit_arr.fromfile(f)
-        base2p15_arrs.append([base2p15_encode(bit_arr.to01()), 
-                              document[1], 
-                              document[2], 
-                              document[3], 
-                              document[0]])
+    # 1. Iterate over the `documents` and do the following:
+    # 2. Initialize an empty `bitarray` instance.
+    # 3. Open the binary file and convert its content into a binary string.
+    # 4. Encode the binary string using the `base2p15_encode` function.
+    # 5. Create a list containing the encoded data and document metadata from index 1 to the end of the list, then add the data at index 0.
+    # 6. Append this list to the `base2p15_arrs` list.
+    $PlaceHolder$
     
     return base2p15_arrs
 
