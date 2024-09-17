@@ -1,22 +1,9 @@
 ```
-    if len(base2p15) <= 1:
-        return ''
+    bit_string = ""
+    offset = 0xa1
     padding_bits = int(base2p15[0], 16)
-    bit_string = ''
-    for char in base2p15[1:-1]:
-        # Convert the character to its Unicode code point
-        code_point = ord(char)
-        
-        # Subtract the offset to get the 15-bit value
-        value = code_point 
-        
-        # Convert the 15-bit value to a binary string of length 15 (padded with leading zeros)
-        bit_string += format(value, '015b')
-    
-    # Handle the last character separately to remove padding
-    last_char = base2p15[-1]
-    code_point = ord(last_char)
-    value = code_point 
-    bit_string += format(value, '015b')[:15 - padding_bits]
-    return bit_string
+    base2p15 = base2p15[1:]
+    for character in base2p15:
+        bit_string += bin(ord(character) - offset)[2:].zfill(15)
+    return bit_string[:-padding_bits]
 ```

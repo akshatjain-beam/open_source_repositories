@@ -60,33 +60,11 @@ def base2p15_decode(base2p15: str) -> str:
     """
     Decode a base2p15 encoded string into a binary string.
 
-    The base2p15 encoding represents binary data using a specific encoding scheme:
-    - The first character of the `base2p15` string specifies the number of padding bits 
-        (0-15) that need to be removed from the last 15-bit segment.
-    - Each character (except the first and last) in the remaining portion of the `base2p15` 
-        string encodes a full 15-bit segment of the binary data.
-    - The last character encodes the final segment of the binary data, which may be less 
-        than 15 bits if padding is applied.
-
-    :param base2p15: A base2p15 encoded string where:
-                        - The first character indicates the number of padding bits to be removed
-                        from the final 15-bit segment.
-                        - Each character (except the last) represents a 15-bit segment of the binary data.
-                        - The last character represents the final segment and is padded to 15 bits
-                        but only includes the significant bits after removing padding.
+    :param base2p15: A base2p15 encoded string 
     :type base2p15: str
-    :returns: A binary string representing the decoded binary data, concatenated from all 15-bit 
-                segments, with the final segment truncated according to the padding specification.
-    :rtype: str
 
-    The decoding process involves:
-    1. Extracting Padding Information: The number of padding bits is determined from the first character
-        of the base2p15 string.
-    2. Decoding 15-bit Segments: For each character in the string (excluding the first and last), 
-        it is converted from its ASCII value to a 15-bit binary string.
-    3. Handling the Final Segment: The last character is processed similarly but is truncated according 
-        to the padding information to obtain the correct length for the final segment.
-    4. Concatenation: All decoded 15-bit segments are concatenated together to form the final binary string.
+    :returns: A binary string representing the decoded binary data
+    :rtype: str
     """
     $PlaceHolder$
 
