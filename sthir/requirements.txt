@@ -5,3 +5,4 @@ newspaper3k
 lxml
 requests
 pytest
+mmh3

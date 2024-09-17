@@ -37,14 +37,7 @@ class Hash_Funcs:
         :param word_list: List of words
         :returns: set of indices
         """
-        faulty_words = set()
-        for w in word_list:
-            indices = self.get_hashes(w)
-            print(indices)
-            res = Hash_Funcs.check_duplicates(indices)
-            if res and res[1] not in faulty_words:
-                faulty_words.add(res[1])
-        return faulty_words
+        $PlaceHolder$
 
     @staticmethod
     def check_duplicates(indices_list: list):
