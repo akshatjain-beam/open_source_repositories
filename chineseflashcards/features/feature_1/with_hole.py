@@ -62,18 +62,19 @@ class CedictWord:
     )
 
 
-# Create a class called `Classifier` that is designed to handle three types of Chinese text inputs: traditional characters, simplified characters, and pinyin (which is the Romanization of Chinese characters). 
+# Create a class called `Classifier` to handle three types of Chinese text inputs: traditional characters, simplified characters, and pinyin. 
 # 
 # - Initialization (`__init__` method):
-#   - When you create a new `Classifier` object, you provide three pieces of information: traditional characters, simplified characters, and pinyin. These are stored in the instance variables `trad`, `simp`, and `pinyin`, respectively.
+#   - Create a new `Classifier` object, while providing three pieces of information: traditional characters, simplified characters, and pinyin. These are stored in the instance variables `trad`, `simp`, and `pinyin`.
 # 
 # - Parsing (`parse` class method):
 #   - Input
 #       - A single string that contains the three components (traditional characters, simplified characters, and pinyin)
-#   - The class also has a method called `parse` that takes a single string as input and extracts the three components (traditional characters, simplified characters, and pinyin) from it.
-#   - If the string contains a `|` character, it is split at this character. The part before the `|` is considered the traditional characters, and the part after is further processed to separate simplified characters from pinyin using `[` character.
-#   - If the string does not contain a `|`, it is assumed that the traditional characters and simplified characters are the same. The string is split at the `[` character to separate the characters from the pinyin.
-#   - The method then trims any trailing `]` from the pinyin and creates a new `Classifier` object with the extracted values.
+#   - Process
+#       - The class also has a method called `parse` that takes a single string as input and extracts the three components (traditional characters, simplified characters, and pinyin) from it.
+#       - Split the string at `|`. If present, the part before `|` is traditional characters; the part after is split at `[` to separate simplified characters from pinyin.
+#       - If `|` is absent, treat the both traditional and simplified characters as same, and split at `[` to extract pinyin.
+#       - The method then trims any trailing `]` from the pinyin.
 #   - Output
 #       - The method returns a new `Classifier` object with the extracted values
 $PlaceHolder$
