@@ -101,13 +101,7 @@ def _parse_line(line):
     - `line` (str): The input line of text to be parsed. It should adhere to the format described above.
 
     Returns:
-    - `CedictWord`: An instance of the `CedictWord` class, initialized with the following attributes:
-        - `trad` (str): The traditional form of the term from the line (first capture group).
-        - `simp` (str): The simplified form of the term from the line (second capture group).
-        - `pinyin` (str): The pinyin transcription from the line (third capture group).
-        - `tw_pinyin` (str or None): The Taiwanese pronunciation if present, otherwise `None`.
-        - `defs` (list of str): A list of standard definitions extracted from the portion of the line after the slashes.
-        - `clfrs` (list of Classifier or None): A list of `Classifier` objects parsed from the definitions, if present. If no classifiers are found, this will be `None`.
+    - `CedictWord`: An instance of the `CedictWord` class
   """
   $PlaceHolder$
 

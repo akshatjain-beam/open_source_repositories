@@ -1,20 +1,25 @@
-  match = re.match(r'^(.+?) (.+?) \[(.+?)\] /(.*)/$', line)
-  if not match:
-    raise ValueError('line does not match expected format: {}'.format(repr(line)))
-
-  trad, simp, pinyin, defs_str = match.groups()
-
+```
+  trad, simp, rest = re.match(r'(.*?) (.*?) \[(.*?)\] /(.*)/', line).groups()
+  if trad == simp:
+    simp = None
+  pinyin = rest.split(' ')[0]
   defs = []
   clfrs = []
-  tw_pinyin = None
 
-  for piece in defs_str.split('/'):
-    if piece.startswith('CL:'):
-      for clfr_str in piece[len('CL:'):].split(','):
-        clfrs.append(Classifier.parse(clfr_str.strip()))
-    elif piece.startswith('Taiwan pr.'):
-      tw_pinyin = piece[len('Taiwan pr. '):][1:-1]
+  for part in rest.split('/')[1:]:
+    if part.startswith('CL:'):
+      clfrs = [Classifier.parse(s.strip()) for s in part[3:].split(',')]
+    elif part.startswith('Taiwan pr.'):
+      tw_pinyin = part[len('Taiwan pr. ['):-1]
     else:
-      defs.append(piece.strip())
+      defs.append(part)
 
-  return CedictWord(trad, simp, pinyin, tw_pinyin, defs, clfrs or None)
+  return CedictWord(
+    trad=trad,
+    simp=simp,
+    pinyin=pinyin,
+    tw_pinyin=tw_pinyin if 'tw_pinyin' in locals() else None,
+    defs=defs,
+    clfrs=clfrs if clfrs else None,
+  )
+```

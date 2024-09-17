@@ -1,3 +1,4 @@
+```
   m = re.match(r'(.+?) (.+?) \[(.+?)\] /(.+)/', line.strip())
   defs = m.group(4).split('/')
 
@@ -15,3 +16,4 @@
 
   return CedictWord(
     m.group(1), m.group(2), m.group(3), tw_pinyin, actual_defs, clfrs)
+```
