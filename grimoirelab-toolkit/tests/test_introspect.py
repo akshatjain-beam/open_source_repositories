@@ -111,6 +111,52 @@ class TestInspectSignatureParameters(unittest.TestCase):
         params = [p.name for p in params]
         self.assertListEqual(params, expected)
 
+    def test_inspect_no_parameters(self):
+        """Check a callable with no parameters."""
+
+        def no_params():
+            pass
+
+        expected = []
+        params = inspect_signature_parameters(no_params)
+        params = [p.name for p in params]
+        self.assertListEqual(params, expected)
+
+    def test_inspect_keyword_only_parameters(self):
+        """Check a callable with keyword-only parameters."""
+
+        def keyword_only(*, a, b=2):
+            pass
+
+        expected = ['a', 'b']
+        params = inspect_signature_parameters(keyword_only)
+        params = [p.name for p in params]
+        self.assertListEqual(params, expected)
+    
+    def test_inspect_mixed_parameters(self):
+        """Check a callable with mixed types of parameters."""
+
+        def mixed_params(a, /, b, *, c):
+            pass
+
+        expected = ['a', 'b', 'c']
+        params = inspect_signature_parameters(mixed_params)
+        params = [p.name for p in params]
+        self.assertListEqual(params, expected)
+
+    def test_inspect_excluding_defaults(self):
+        """Check a callable with parameters that have default values."""
+
+        def defaults(a, b=2, c=3):
+            pass
+
+        excluded = ['b', 'c']
+
+        expected = ['a']
+        params = inspect_signature_parameters(defaults, excluded=excluded)
+        params = [p.name for p in params]
+        self.assertListEqual(params, expected)
+
 
 class TestFindSignatureParameters(unittest.TestCase):
     """Unit tests for find_signature_parameters."""

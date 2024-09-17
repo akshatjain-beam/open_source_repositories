@@ -1,0 +1,15 @@
+"""
+Create a function `inspect_signature_parameters` which do the following:
+
+Get the parameters of a callable.
+
+Returns a list with the signature parameters of `callable_`.
+Parameters contained in `excluded` tuple will not be included
+in the result.
+
+:param callable_: callable object
+:param excluded: tuple with default parameters to exclude, having default value `None`
+
+:result: list of parameters
+"""
+$PlaceHolder$
