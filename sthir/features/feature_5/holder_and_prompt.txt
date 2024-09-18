@@ -1,5 +1,5 @@
 """
-Logs the duplicate hashed indices for words in words_list
+Create a function `check_hashes` which logs the duplicate hashed indices for words in words_list
 
 :param word_list: List of words
 :returns: set of indices

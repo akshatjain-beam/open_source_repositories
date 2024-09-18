@@ -30,14 +30,14 @@ class Hash_Funcs:
         """
         return [self.hash_funcs_list[i](word, i) for i in range(self.k)]
 
-    def check_hashes(self, word_list: list):
-        """
-        Logs the duplicate hashed indices for words in words_list
+    
+    """
+    Create a function `check_hashes` which logs the duplicate hashed indices for words in words_list
 
-        :param word_list: List of words
-        :returns: set of indices
-        """
-        $PlaceHolder$
+    :param word_list: List of words
+    :returns: set of indices
+    """
+    $PlaceHolder$
 
     @staticmethod
     def check_duplicates(indices_list: list):
