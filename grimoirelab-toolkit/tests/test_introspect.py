@@ -36,7 +36,13 @@ class FakeCallable:
     def __init__(self, *args, **kwargs):
         pass
 
-    def test_args(self, a, **kwargs):
+    def test_args(a, b, *args):
+        pass
+
+    def test_kwargs(self, a, **kwargs):
+        pass
+
+    def test_mixed(a, b, *args, **kwargs):
         pass
 
     def test(self, a, b, c=None):
@@ -135,6 +141,13 @@ class TestFindSignatureParameters(unittest.TestCase):
 
         expected = {'a': 1, 'b': 2}
         params = {'a': 1, 'b': 2}
+        found = find_signature_parameters(FakeCallable.test_kwargs, params)
+        self.assertDictEqual(found, expected)
+    
+    def test_find_parameters_with_args(self):
+        """Test if *args are correctly ignored."""
+        expected = {'a': 1, 'b': 2}
+        params = {'a': 1, 'b': 2}
         found = find_signature_parameters(FakeCallable.test_args, params)
         self.assertDictEqual(found, expected)
 
@@ -156,6 +169,23 @@ class TestFindSignatureParameters(unittest.TestCase):
             _ = find_signature_parameters(FakeCallable.test, params)
 
         self.assertEqual(e.exception.args[1], 'b')
+    
+    def test_excluding_self_cls(self):
+        """Test excluding default parameters 'self' and 'cls'."""
+        class TestClass:
+            def method(self, cls, a, b):
+                pass
+        expected = {'a': 1, 'b': 2}
+        params = {'self': None, 'cls': None, 'a': 1, 'b': 2}
+        found = find_signature_parameters(TestClass().method, params)
+        self.assertDictEqual(found, expected)
+    
+    def test_mixed_args_kwargs(self):
+        """Test if mixed *args and **kwargs are handled correctly."""
+        expected = {'a': 1, 'b': 2, 'd': 4, 'e': 5}
+        params = {'a': 1, 'b': 2, 'd': 4, 'e': 5}
+        found = find_signature_parameters(FakeCallable.test_mixed, params)
+        self.assertDictEqual(found, expected)
 
 
 class PropertiesClass:
