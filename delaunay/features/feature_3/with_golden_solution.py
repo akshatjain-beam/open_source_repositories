@@ -1,3 +1,15 @@
+```
+def tri_contains_point(t, p):
+    """
+    Determine whether the given triangle contains the given point. May raise ValueError.
+
+    Arguments:
+    t is a Triangle object
+    p is a Point object
+
+    Returns:
+    True if t contains p and False otherwise.
+    """
     # Error within 1ppm is acceptable
     epsilon = 1e-6
     # Calcula1te the barycentric coordinates of p
@@ -17,3 +29,4 @@
     # Invalid triangle
     else:
         return False
+```

@@ -386,21 +386,20 @@ def edges_to_vertices(t):
     )
 
 
-def tri_contains_point(t, p):
-    """
-    Determine whether the given triangle contains the given point using Barycentric Coordinates. May raise ValueError.
+"""
+Create a function `tri_contains_point` which determine whether the given triangle contains the given point using Barycentric Coordinates.
 
-    Arguments:
-    t is a Triangle object
-    p is a Point object
+Arguments:
+t is a Triangle object
+p is a Point object
 
-    Returns:
-    True if t contains p and False otherwise.
+Returns:
+True if t contains p and False otherwise.
 
-    Note:
-    Epsilon is used to handle floating-point precision errors and is set to a small value (e.g., 1e-6).
-    """
-    $PlaceHolder$
+Note:
+Epsilon is used to handle floating-point precision errors and is set to a small value (e.g., 1e-6).
+"""
+$PlaceHolder$
 
 
 def tri_circumcenter(t):
