@@ -1,4 +1,15 @@
 """
-The code creates a list of names with their stroke counts. It then sorts this list repeatedly based on the stroke counts until the sorting criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke count data and returns only the list of names.
+Create a function `sort_by_stroke` which sorts a list of names based on their stroke counts.
+
+This function takes a list of names, computes the stroke counts for each name, 
+and repeatedly sorts the list based on these stroke counts until the sorting 
+criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke 
+count data and returns only the list of names.
+
+Args:
+    name_list_input (list): A list of names (strings) to be sorted.
+
+Returns:
+    list: A sorted list of names based on their stroke counts.
 """
 $PlaceHolder$

@@ -102,14 +102,21 @@ def write_sort_result_to_file(sort_result_list, output_file, split_char='\n'):
         f.write(split_char.join(str(i) for i in sort_result_list))
 
 
-def sort_by_stroke(name_list_input):
-    global __char_num_i
-    __char_num_i = 0
-    """
-    The code creates a list of names with their stroke counts. It then sorts this list repeatedly based on the stroke counts until the sorting criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke count data and returns only the list of names.
-    """
-    $PlaceHolder$
-    return name_result_list
+"""
+Create a function `sort_by_stroke` which sorts a list of names based on their stroke counts.
+
+This function takes a list of names, computes the stroke counts for each name, 
+and repeatedly sorts the list based on these stroke counts until the sorting 
+criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke 
+count data and returns only the list of names.
+
+Args:
+    name_list_input (list): A list of names (strings) to be sorted.
+
+Returns:
+    list: A sorted list of names based on their stroke counts.
+"""
+$PlaceHolder$
 
 
 def write_sort_result_to_human(sort_result_list, split_char=' '):
