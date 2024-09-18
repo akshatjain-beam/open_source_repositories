@@ -26,13 +26,33 @@
 import datetime
 import unittest
 
-import dateutil
+import types
+import sys
+
+import dateutil.tz
+import dateutil.parser
 
 from grimoirelab_toolkit.datetime import (InvalidDateError,
                                           datetime_to_utc,
                                           str_to_datetime,
                                           unixtime_to_datetime,
                                           datetime_utcnow)
+
+
+def freeVar(val):
+  def nested():
+    return val
+  return nested.__closure__[0]
+
+codeAttribute = '__code__' if sys.version_info[0] == 3 else 'func_code'
+
+def nested(outer, innerName, **freeVars):
+  if isinstance(outer, (types.FunctionType, types.MethodType)):
+    outer = outer.__getattribute__(codeAttribute)
+  for const in outer.co_consts:
+    if isinstance(const, types.CodeType) and const.co_name == innerName:
+      return types.FunctionType(const, globals(), None, None, tuple(
+          freeVar(freeVars[name]) for name in const.co_freevars))
 
 
 class TestInvalidDateError(unittest.TestCase):
@@ -209,6 +229,95 @@ class TestStrToDatetime(unittest.TestCase):
         expected = "UTC+00:00"
 
         self.assertTrue(timezone, expected)
+    
+    def test_iso_format_with_timezone(self):
+        """Test ISO 8601 format with timezone."""
+        date = str_to_datetime('2024-09-18T14:23:45Z')
+        expected = datetime.datetime(2024, 9, 18, 14, 23, 45, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_extreme_future_date(self):
+        """Test handling of extreme future dates."""
+        date = str_to_datetime('3000-01-01T00:00:00Z')
+        expected = datetime.datetime(3000, 1, 1, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_empty_string(self):
+        """Test handling of empty string."""
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('')
+
+    def test_whitespace_string(self):
+        """Test handling of whitespace string."""
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('    ')
+
+
+# Helper function for testing the nested function
+def helper_nested_parse_datetime(ts):
+    nested_parse_datetime = nested(str_to_datetime, 'parse_datetime', ts=ts)
+    result = nested_parse_datetime(ts)
+    return result
+
+
+class TestParseDatetime(unittest.TestCase):
+    def assert_datetime_equal(self, dt1, dt2):
+        self.assertEqual(dt1.year, dt2.year)
+        self.assertEqual(dt1.month, dt2.month)
+        self.assertEqual(dt1.day, dt2.day)
+        self.assertEqual(dt1.hour, dt2.hour)
+        self.assertEqual(dt1.minute, dt2.minute)
+        self.assertEqual(dt1.second, dt2.second)
+        self.assertEqual(dt1.tzinfo, dt2.tzinfo)
+
+    def test_parse_datetime_with_timezone(self):
+        ts = "2024-09-18T12:00:00+02:00"
+        expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzoffset(None, 7200))
+        result = helper_nested_parse_datetime(ts)
+
+        self.assert_datetime_equal(result, expected_dt)
+    
+    def test_parse_datetime_without_timezone(self):
+        ts = "2024-09-18T12:00:00"
+        expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzutc())
+        result = helper_nested_parse_datetime(ts)
+        
+        self.assert_datetime_equal(result, expected_dt)
+
+    def test_parse_datetime_with_utc(self):
+        ts = "2024-09-18T12:00:00Z"
+        expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzutc())
+        result = helper_nested_parse_datetime(ts)
+        
+        self.assert_datetime_equal(result, expected_dt)
+
+    def test_parse_datetime_with_date_only(self):
+        ts = "2024-09-18"
+        expected_dt = datetime.datetime(2024, 9, 18, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
+        result = helper_nested_parse_datetime(ts)
+        
+        self.assert_datetime_equal(result, expected_dt)
+    
+    def test_parse_datetime_with_ambiguous_date(self):
+        ts = "2024-09-18T00:00:00+0000"
+        expected_dt = datetime.datetime(2024, 9, 18, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
+        result = helper_nested_parse_datetime(ts)
+        
+        self.assert_datetime_equal(result, expected_dt)
+    
+    def test_parse_datetime_with_empty_string(self):
+        ts = ""
+        with self.assertRaises(ValueError):
+            helper_nested_parse_datetime(ts)
+
+    def test_parse_datetime_with_future_date(self):
+        ts = "3000-01-01T00:00:00Z"
+        expected_dt = datetime.datetime(3000, 1, 1, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
+        result = helper_nested_parse_datetime(ts)
+        
+        self.assert_datetime_equal(result, expected_dt)
 
 
 class TestUnixTimeToDatetime(unittest.TestCase):
