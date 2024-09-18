@@ -209,6 +209,37 @@ class TestStrToDatetime(unittest.TestCase):
         expected = "UTC+00:00"
 
         self.assertTrue(timezone, expected)
+    
+    def test_iso_format_with_timezone(self):
+        """Test ISO 8601 format with timezone."""
+        date = str_to_datetime('2024-09-18T14:23:45Z')
+        expected = datetime.datetime(2024, 9, 18, 14, 23, 45, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_extreme_future_date(self):
+        """Test handling of extreme future dates."""
+        date = str_to_datetime('3000-01-01T00:00:00Z')
+        expected = datetime.datetime(3000, 1, 1, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_invalid_timezone_format(self):
+        """Test handling of dates with invalid timezone formats."""
+        date = str_to_datetime('2024-09-18T14:23:45 +9999')
+        expected = datetime.datetime(2024, 9, 18, 14, 23, 45, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_empty_string(self):
+        """Test handling of empty string."""
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('')
+
+    def test_whitespace_string(self):
+        """Test handling of whitespace string."""
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('    ')
 
 
 class TestUnixTimeToDatetime(unittest.TestCase):
