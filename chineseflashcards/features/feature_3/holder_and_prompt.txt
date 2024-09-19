@@ -1,23 +1,19 @@
 """
 Determines the syllable's diacritic and tone number from the given syllable string.
 
-This function processes a syllable string to extract its diacritic and tone number.
-It handles specific cases such as the syllable "r" and identifies tones based on 
-the presence of numeric characters and vowel groups.
+It processes a syllable string to extract its diacritic and tone number.
+It identifies tones based on the presence of numeric characters and vowel groups.
 
 Parameters:
-- syl (str): The input syllable string to be analyzed. It should be a non-empty string 
-    representing a syllable, which may end with a tone number (1-5) or contain diacritic vowels.
+- syl (str): Either an ASCII representation of a pinyin syllable, like ni3, ge5, or lu:4, or a diacritic-based
+      representation like nǐ, ge, or lǜ.
 
 Returns:
-- tuple: A tuple containing two elements:
-    1. `diacritic_syl` (str): The syllable with diacritic applied, if applicable, or the original syllable.
-    2. `tone` (int): The tone number (1-5) extracted from the syllable. If no tone is explicitly 
-        indicated, it is determined based on vowel groups.
+- return (str, int): The syllable with a diacritic added and its tone. For example, both syl='ni3' and syl='nǐ' return
+      ('nǐ', 3), both syl='ge5' and syl='ge' return ('ge', 5), and both syl='lu:4' and syl='lǜ' return ('lǜ', 4).
 
 Raises:
-- ValueError: If the syllable string does not conform to expected patterns or contains unexpected 
-    characters.
+- ValueError: If the syllable string does not conform to expected patterns
 
 Notes:
 - The function handles edge cases, such as the syllable "r" which is a special case in CC-CEDICT.
