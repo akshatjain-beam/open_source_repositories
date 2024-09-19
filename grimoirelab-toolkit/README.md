@@ -6,6 +6,8 @@ This package provides a library composed by functions widely used in other
 GrimoireLab projects. These function deal with date handling, introspection,
 URIs/URLs, among other topics.
 
+commit hash - b3328c2031aa9d3b7ac0ce3c129c6b06a8302d9e
+
 ## Requirements
 
 * Python >= 3.7
