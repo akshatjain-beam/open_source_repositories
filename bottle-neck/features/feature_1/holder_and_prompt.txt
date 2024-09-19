@@ -1,0 +1,19 @@
+"""
+Create a function `cached_classproperty` which is a decorator to 
+create a cached class property.
+
+It implements the above `classproperty` decorator, with
+the difference that the function result is computed and attached
+to class as direct attribute. (Lazy loading and caching.)
+
+Args:
+    fun: The method to be cached as a class property.
+
+Returns:
+    A class property that returns the cached value.
+
+Raises:
+    AttributeError: If the cache cannot be initialized.
+    KeyError: If the cache does not contain the value.
+"""
+$PlaceHolder$

@@ -62,4 +62,4 @@ target/
 # remove DS_Store files
 *.DS_Store
 
-**/.tar
+**.tar
