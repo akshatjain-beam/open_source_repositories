@@ -1,0 +1,25 @@
+"""
+Create a class method `_build_routes` that create Bottle routes for a handler HTTP method.
+
+This method constructs a list of route endpoints based on the provided 
+method arguments and an optional URL extra part.
+
+If no arguments are provided, return just the base endpoint.
+For each combination of arguments, create routes that follow the structure of the base endpoint, 
+appending parameters appropriately and ensuring correct formatting.
+
+Args:
+    cls (type): The class from which the method is called
+    method_args (list): A list of argument names to be included as 
+                        dynamic parameters in the route.
+    url_extra_part (str, optional): An optional additional path segment 
+                                        to prepend to the base endpoint. 
+                                        Defaults to None.
+
+Returns:
+    list: A list of constructed endpoint routes
+
+Note:
+    the code uses old route syntax for defining dynamic parameters, eg `:name`
+"""
+$PlaceHolder$
