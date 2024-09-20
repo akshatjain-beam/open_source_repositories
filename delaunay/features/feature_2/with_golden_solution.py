@@ -1,3 +1,4 @@
+```
     # Simplest case
     if a == b:
         return True
@@ -11,3 +12,4 @@
         return True
 
     return False
+```

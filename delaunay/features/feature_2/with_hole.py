@@ -246,7 +246,7 @@ def line_from_segment(segment):
 
 def compare_tris(a, b):
     """
-    Determine whether two triangles are equal.
+    Determine whether two triangles (vertex or edge defined) are equal.
 
     Arguments:
     a is a Triangle or 3-tuple defining a triangle by its vertices or edges
