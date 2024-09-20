@@ -1,3 +1,4 @@
+```
     colors = []
     # The size of the screen
     s = sqrt(image_size[0]**2+image_size[1]**2)
@@ -10,3 +11,4 @@
         frac = sqrt(c[0]**2+c[1]**2)/s
         colors.append(calculate_color(gradient, frac))
     return colors
+```

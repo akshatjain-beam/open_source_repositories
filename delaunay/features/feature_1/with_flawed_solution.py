@@ -1,3 +1,4 @@
+```
     colors = []
     # Calculate the diagonal length of the image
     diagonal_length = sqrt(image_size[0]**2 + image_size[1]**2) 
@@ -20,3 +21,4 @@
         colors.append(calculate_color(gradient, val))
 
     return colors
+```
