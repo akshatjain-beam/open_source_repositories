@@ -1,3 +1,4 @@
+```
     pdict = read_proj(tdpath)
 
     for project in list(pdict):
@@ -13,3 +14,4 @@
     write_proj(editpath, pdict)
 
     return {x for x in pdict if x != "_None"}
+```

@@ -1,3 +1,4 @@
+```
     current = read_proj(tdpath)
     projhdrs = set(current.keys())
     if terms:
@@ -14,3 +15,4 @@
     write_proj(editpath, current)
     projhdrs.discard("_None")
     return projhdrs
+```
