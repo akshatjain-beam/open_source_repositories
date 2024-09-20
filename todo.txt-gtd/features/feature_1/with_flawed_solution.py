@@ -1,3 +1,4 @@
+```
     def LineGen(self, todotxt):
         curr_proj = None
         deferredTasks = []
@@ -19,3 +20,4 @@
 
         for line in deferredTasks:
             yield TaskProj(line), line
+```
