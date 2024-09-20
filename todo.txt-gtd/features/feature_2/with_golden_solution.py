@@ -1,3 +1,4 @@
+```
 def default_file():
     cp = subprocess.run(
         ["todo.txt", "--info"],
@@ -7,3 +8,4 @@ def default_file():
 
     match = re.search("^task_path\s*=\s*(.+)$", cp.stdout, re.MULTILINE)
     return match.group(1)
+```
