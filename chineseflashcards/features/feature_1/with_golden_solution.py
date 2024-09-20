@@ -1,3 +1,4 @@
+```
 class Classifier:
   def __init__(self, trad, simp, pinyin):
     self.trad = trad
@@ -15,3 +16,4 @@ class Classifier:
     pinyin = rest.rstrip(']')
 
     return cls(trad, simp, pinyin)
+```
