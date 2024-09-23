@@ -1,0 +1,17 @@
+"""Compute pagination info for collection filtering.
+
+Args:
+    limit (int): Collection filter limit.
+    offset (int): Collection filter offset.
+    record_count (int): Collection filter total record count.
+    base_uri (str): Collection filter base uri (without limit, offset)
+    page_nav_tpl (str): Pagination template.
+
+Returns:
+    A mapping of pagination info with keys `total_count`, `total_pages`, `next_page`, and `prev_page`
+
+Note:
+    The `next_page` link is provided if there are remaining records to display, including when the current page is full.
+    The `prev_page` link is provided if `offset` is greater than or equal to `limit`.
+"""
+$PlaceHolder$
