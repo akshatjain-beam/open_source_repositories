@@ -54,15 +54,12 @@ def __sort__(name_stroke_count_list):
     for i in range(len(name_stroke_count_list)):
         for j in range(len(name_stroke_count_list) - i - 1):
             """
-            1. Initial Comparison:
-            - If `__char_num_i` is `0`, it compares the stroke counts at the current position (`j`) and the next position (`j + 1`) directly.
-            - If the stroke count at position `j` is greater than that at position `j + 1`, it swaps the two tuples.
-            2. Handling Different Lengths of Stroke Counts:
-            - If the stroke count list at position `j` or `j + 1` is shorter than `__char_num_i`, the function appends a '0' to make them of equal length.
-            3. Subsequent Comparison:
-            - If `__char_num_i` is not `0`, it compares the stroke counts at the previous position (`__char_num_i - 1`) first. If they are equal, it compares the stroke counts at the current position (`__char_num_i`).
-                1. Swapping:
-                    - If the conditions are met (i.e., for the current index, the stroke count of `j` is greater than that of `j + 1`), it swaps the tuples.
+            - The code begins by comparing stroke counts. 
+            - For the first character, it checks if the stroke count at the current position is greater than the next. If so, it swaps the values. 
+            - If any stroke count list is shorter than the current character index, it adds a '0' to that list. 
+            - For subsequent characters, it compares stroke counts at the previous position first. 
+            - If they are equal, it then compares the current position. 
+            - If the current stroke count is higher, it swaps the tuples.
             """
             $PlaceHolder$
     return name_stroke_count_list
