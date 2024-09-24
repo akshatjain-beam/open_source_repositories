@@ -36,10 +36,12 @@ def test_edge_case_31_day_month(mock_datetime, mock_randint):
 
     # Assert the random.randint calls were as expected
     sorted_calls = sorted(mock_randint.call_args_list)
+
+    # Specifies the expected ranges for month, day, and year based on the given month
     expected_sorted_calls = [
-        ((1, 12),),
-        ((1, 31),),
-        ((1944, 2006),)
+        ((1, 12),),     # Month should be between 1 and 12
+        ((1, 31),),     # Day should be between 1 and 31
+        ((1944, 2006),) # Year should be between 1944 and 2006
     ]
     assert sorted_calls == expected_sorted_calls
 
