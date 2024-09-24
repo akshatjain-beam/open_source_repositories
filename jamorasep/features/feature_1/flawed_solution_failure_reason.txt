@@ -1,0 +1,3 @@
+The llm model generated code has following issues -  
+1. The code does not check if the mora is in katakana before converting from hiragana to katakana or vice versa. 
+2. The special format conversion for katakana is not implemented as specified for kanamap headers, about first converting the output from hiragana to katakana.
