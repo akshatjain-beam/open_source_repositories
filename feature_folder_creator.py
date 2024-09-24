@@ -27,7 +27,8 @@ def create_feature_structure(parent_folder_name):
         'with_hole.py',
         'with_golden_solution.py',
         'with_flawed_solution.py',
-        'holder_and_prompt.txt'
+        'holder_and_prompt.txt',
+        'flawed_solution_failure_reason.txt'
     ]
 
     # Create test_images folder
