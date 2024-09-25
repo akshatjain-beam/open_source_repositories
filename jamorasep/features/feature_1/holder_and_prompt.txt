@@ -6,9 +6,9 @@
 # 3. phoneme, with default value as `false`
 #
 # Working
-# 1. If the output format is "hiragana", checks if the mora is in kanamap keys and converts katakana to hiragana.
-# 2. If the output format is "katakana", checks if the mora is in kanamap keys and converts hiragana to katakana.
-# 3. If the output format is in `kanamap` headers, convert it from hiragana to katakana, and check if the mora is in kanamap keys and then convert into a special format
+# 1. If the output format is "hiragana", checks if the mora is in kanamap keys and converts katakana to hiragana, No conversion is required if mora is not in kanamap keys.
+# 2. If the output format is "katakana", checks if the mora is in kanamap keys and converts hiragana to katakana. No conversion is required if mora is not in kanamap keys
+# 3. If the output format is in `kanamap` headers, convert it from hiragana to katakana, and check if the mora is in kanamap keys and then convert into a special format.  No conversion is required if mora is not in kanamap keys
 #   1. If the output format is not "simple-ipa", applies additional modifications to special morae.
 #   2. If phoneme is True, combines the morae into a single string of phonemes and then convert it to list.
 # 4. If output format does not matches with any, raise `ValueError`
