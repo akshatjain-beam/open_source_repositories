@@ -343,6 +343,12 @@ class TestLineIntersectVertical(unittest.TestCase):
 class TestCompareTris(unittest.TestCase):
     # Compare two identical triangles
     def test_same_tri(self):
+        """
+        Test that two identical triangles are considered equal.
+        
+        This test creates two identical triangles using the same line segments
+        and checks if the compare_tris function returns True.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 4))
         lineb = LineSegment(Point(0, 4), Point(3, 0))
         linec = LineSegment(Point(3, 0), Point(0, 0))
@@ -351,6 +357,12 @@ class TestCompareTris(unittest.TestCase):
         
     # Compare identical triangles with vertices rearranged
     def test_rearranged_tri(self):
+        """
+        Test that identical triangles with vertices rearranged are considered equal.
+        
+        This test creates a triangle and rearranges its vertices in different orders,
+        then checks if the compare_tris function returns True for each rearrangement.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 4))
         lineb = LineSegment(Point(0, 4), Point(3, 0))
         linec = LineSegment(Point(3, 0), Point(0, 0))
@@ -362,6 +374,12 @@ class TestCompareTris(unittest.TestCase):
         self.assertTrue(compare_tris(Triangle(linea, lineb, linec), Triangle(linec, lineb, linea)))
 
     def test_reversed_edges(self):
+        """
+        Test that triangles with reversed edge orientations are considered equal.
+        
+        This test creates a triangle and another triangle with edges in reverse order,
+        then checks if the compare_tris function returns True.
+        """
         vert1 = Point(0, 0)
         vert2 = Point(0, 1)
         vert3 = Point(1, 0)
@@ -376,6 +394,12 @@ class TestCompareTris(unittest.TestCase):
         self.assertTrue(compare_tris(Triangle(linea, lineb, linec), Triangle(linea_rev, lineb_rev, linec_rev)))
 
     def test_different_tris(self):
+        """
+        Test that two different triangles are considered not equal.
+        
+        This test creates two different triangles and checks if the compare_tris 
+        function returns False.
+        """
         tri_a = Triangle(Point(0, 1), Point(1, 2), Point(0, 2))
         tri_b = Triangle(Point(1, 3), Point(3, 1), Point(0, 0))
 
@@ -384,6 +408,14 @@ class TestCompareTris(unittest.TestCase):
 class TestCalculateTriVertices(unittest.TestCase):
     # Try to make a triangle with parallel sides
     def test_parallel_sides(self):
+        """
+        Test that no triangle is formed with parallel sides.
+        
+        This test creates line segments that are parallel and attempts to form a 
+        triangle. It checks if the calculate_tri_vertices function returns None 
+        for all permutations of these line segments, indicating that no valid 
+        triangle can be formed.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 5))
         lineb = LineSegment(Point(1, 0), Point(1, 5))
         linec = LineSegment(Point(0, 0), Point(1, 0))
@@ -397,6 +429,13 @@ class TestCalculateTriVertices(unittest.TestCase):
 
     # Try a 3-4-5 triangle in quadrant I
     def test_345_q1(self):
+        """
+        Test that a 3-4-5 triangle in quadrant I is correctly calculated.
+        
+        This test creates line segments that form a 3-4-5 triangle in the first 
+        quadrant and checks if the calculate_tri_vertices function returns the 
+        correct triangle for all permutations of these line segments.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 4))
         lineb = LineSegment(Point(0, 4), Point(3, 0))
         linec = LineSegment(Point(3, 0), Point(0, 0))
@@ -412,6 +451,13 @@ class TestCalculateTriVertices(unittest.TestCase):
 
     # Try a 3-4-5 triangle in quadrant II
     def test_345_q2(self):
+        """
+        Test that a 3-4-5 triangle in quadrant II is correctly calculated.
+        
+        This test creates line segments that form a 3-4-5 triangle in the second 
+        quadrant and checks if the calculate_tri_vertices function returns the 
+        correct triangle.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 4))
         lineb = LineSegment(Point(0, 4), Point(-3, 0))
         linec = LineSegment(Point(-3, 0), Point(0, 0))
@@ -422,6 +468,13 @@ class TestCalculateTriVertices(unittest.TestCase):
 
     # Try a 3-4-5 triangle in quadrant III
     def test_345_q3(self):
+        """
+        Test that a 3-4-5 triangle in quadrant III is correctly calculated.
+        
+        This test creates line segments that form a 3-4-5 triangle in the third 
+        quadrant and checks if the calculate_tri_vertices function returns the 
+        correct triangle.
+        """
         linea = LineSegment(Point(0, 0), Point(0, -4))
         lineb = LineSegment(Point(0, -4), Point(-3, 0))
         linec = LineSegment(Point(-3, 0), Point(0, 0))
@@ -432,6 +485,13 @@ class TestCalculateTriVertices(unittest.TestCase):
 
     # Try a 3-4-5 triangle in quadrant IV
     def test_345_q4(self):
+        """
+        Test that a 3-4-5 triangle in quadrant IV is correctly calculated.
+        
+        This test creates line segments that form a 3-4-5 triangle in the fourth 
+        quadrant and checks if the calculate_tri_vertices function returns the 
+        correct triangle.
+        """
         linea = LineSegment(Point(0, 0), Point(0, -4))
         lineb = LineSegment(Point(0, -4), Point(3, 0))
         linec = LineSegment(Point(3, 0), Point(0, 0))
@@ -443,6 +503,13 @@ class TestCalculateTriVertices(unittest.TestCase):
 
     # Try to make a triangle out of points that lie on the same line
     def test_line(self):
+        """
+        Test that no triangle is formed with collinear points.
+        
+        This test creates line segments from collinear points and checks if the 
+        calculate_tri_vertices function returns None, indicating that no valid 
+        triangle can be formed.
+        """
         linea = LineSegment(Point(0, 0), Point(0, 1))
         lineb = LineSegment(Point(0, 1), Point(0, 2))
         linec = LineSegment(Point(0, 2), Point(0, 3))
@@ -518,6 +585,12 @@ class TestEdgeEquivalence(unittest.TestCase):
 class TestTriContainsPoint(unittest.TestCase):
     # Try a vertex
     def test_vertex(self):
+        """
+        Test if the function correctly identifies points that are vertices of the triangle.
+        
+        This test creates a triangle and checks if the tri_contains_point function
+        returns True for points that are exactly at the vertices of the triangle.
+        """
         tri = Triangle(Point(0, 0), Point(0, 4), Point(3, 0))
 
         self.assertTrue(tri_contains_point(tri, Point(0, 0)))
@@ -526,6 +599,12 @@ class TestTriContainsPoint(unittest.TestCase):
 
     # Try a point in the middle of the triangle
     def test_point_center(self):
+        """
+        Test if the function correctly identifies points inside the triangle.
+        
+        This test creates a triangle and checks if the tri_contains_point function
+        returns True for a point that lies inside the triangle.
+        """
         tri = Triangle(Point(0, 0), Point(0, 4), Point(3, 0))
         point = Point(1, 1.33)
 
@@ -533,6 +612,12 @@ class TestTriContainsPoint(unittest.TestCase):
 
     # Try a point on the edge of the triangle
     def test_point_edge(self):
+        """
+        Test if the function correctly identifies points on the edge of the triangle.
+        
+        This test creates a triangle and checks if the tri_contains_point function
+        returns True for a point that lies on the edge of the triangle.
+        """
         tri = Triangle(Point(0, 0), Point(0, 4), Point(3, 0))
         point = Point(0, 2)
 
@@ -540,6 +625,12 @@ class TestTriContainsPoint(unittest.TestCase):
 
     # Try a point outside the triangle
     def test_point_outside(self):
+        """
+        Test if the function correctly identifies points outside the triangle.
+        
+        This test creates a triangle and checks if the tri_contains_point function
+        returns False for a point that lies outside the triangle.
+        """
         tri = Triangle(Point(0, 0), Point(0, 4), Point(3, 0))
         point = Point(-1, -1)
 
