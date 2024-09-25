@@ -1,17 +1,32 @@
 ```
     def convert_lst_of_mora(self, lst : List[str], output_format : str = "katakana", phoneme : bool = False) -> List[str]:
+        """
+        Convert a list of morae into a different format.
+
+        Args:
+            lst (List[str]): A list of morae.
+            output_format (str): The output format of the morae. Defaults to "katakana".
+                Options are ["katakana", "hiragana"], and any of the columns in the kanamap.csv file,
+                including ["kunrei", "hepburn", "simple-ipa"].
+            phoneme (bool): If True, the output is a list of phonemes. Defaults to False.
+                This flag is only valid when output_format is either of ["kunrei", "hepburn", "simple-ipa"].
+        Returns:
+            Union[List[str], str]: A list of morae in the specified format.
+                If phoneme is True, the output is a single string of phonemes.
+        Raises:
+            ValueError: If the output format is invalid.
+        """
         if output_format == "hiragana":
-            result = [k2h(self.kanamap[mora]["hiragana"]) if mora in self.kanamap else mora for mora in lst]
+            return [k2h(m) if m in self.kanamap.lst_katakana() else m for m in lst]
         elif output_format == "katakana":
-            result = [self.kanamap[mora]["katakana"] if mora in self.kanamap else mora for mora in lst]
+            return [h2k(m) if m in self.kanamap.lst_katakana() else m for m in lst]
         elif output_format in self.kanamap.header():
-            result = [self.kanamap[mora][output_format] if mora in self.kanamap else mora for mora in lst]
+            res = [self.kanamap(h2k(m))[output_format] if m in self.kanamap.lst_katakana() else m for m in lst]
             if output_format != "simple-ipa":
-                result = self.modify_special_mora(result)
+                res = self.modify_special_mora(res)
             if phoneme:
-                result = "".join(result)
-                result = list(result)
+                res = "".join(res)
+            return res
         else:
-            raise ValueError(f"Invalid output format: {output_format}")
-        return result
+            raise ValueError("Invalid output_format.")
 ```
