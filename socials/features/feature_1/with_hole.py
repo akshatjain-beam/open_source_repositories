@@ -20,10 +20,15 @@ GITHUB_URL_REGEXS = [
     r'^http(s)?://(www\.)?github\.com/[A-Za-z0-9_-]+/?$',
 ]
 
-# - Create a list of patterns to match LinkedIn profile URLs for both private individuals and companies in variable `LINKEDIN_URL_REGEXS`. 
-# - For private profiles, generate regular expressions to cover both the old and new formats of LinkedIn URLs.
-# - For the regex including the `pub` part in it, the username should be should be followed by three additional segments that may include letters and numbers, each separated by slashes
-# - For profiles url, the pattern allows for optional trailing slashes.
+"""
+Regular expressions to match LinkedIn profile URLs for both private individuals and companies.
+For private profiles, regular expressions cover both the old and new formats of LinkedIn URLs.
+    - Pattern for old private profile URLs (e.g., http://linkedin.com/pub/jane_doe/ab/cd/efg/)
+    - Pattern for new private profile URLs (e.g., https://www.linkedin.com/in/john-doe)
+
+Pattern for company profile URLs (e.g., https://www.linkedin.com/company/linkedin)
+For profiles url, the pattern allows for optional trailing slashes.
+"""
 $PlaceHolder$
 
 TWITTER_URL_REGEXS = [
