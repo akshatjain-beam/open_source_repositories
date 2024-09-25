@@ -1,0 +1,18 @@
+"""
+Implement a funcion `split_regions` that splits the input text 
+into regions based on line prefixes.
+
+As the function processes each line, it tracks the current prefix. 
+When lines share the same prefix, they are combined into a single 
+region; otherwise, a new region is created.
+
+Args:
+    text (str): The input text
+
+Returns:
+    list: A list of Region objects
+
+Note:
+    Include the new line for the last line
+"""
+$PlaceHolder$
