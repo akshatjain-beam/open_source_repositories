@@ -1,0 +1,8 @@
+# - The `kana2mora` function converts a Japanese string (hiragana/katakana) into a list of morae (syllable units).
+# - Non-Japanese characters or symbols are separated and returned as individual characters.
+# - It adds `[BOS]` (start) and `[EOS]` (end) tokens to handle edge cases.
+# - Iterates through consecutive character pairs using `check_if_successive_2chars_compose_mora` to form morae.
+# - Filters out the `[BOS]` and `[EOS]` tokens and returns the list of morae.
+# - Args: a string of Japanese text (hiragana or katakana).
+# - Returns: a list of morae.
+$PlaceHolder$
