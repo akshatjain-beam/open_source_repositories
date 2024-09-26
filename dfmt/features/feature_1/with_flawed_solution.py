@@ -2,16 +2,12 @@
 def split_regions(text):
     regions = []
     current_region = None
-
     for line in text.splitlines(keepends=True):
-        prefix = get_prefix(line)
-        if prefix == current_region.prefix if current_region else None:
+        new_prefix = get_prefix(line)
+        if current_region is not None and current_region.prefix == new_prefix:
             current_region.text += line
         else:
-            if current_region:
-                regions.append(current_region)
-            current_region = Region(text=line, prefix=prefix)
-    if current_region:
-        regions.append(current_region)
+            current_region = Region(text=line, prefix=new_prefix)
+            regions.append(current_region)
     return regions
 ```

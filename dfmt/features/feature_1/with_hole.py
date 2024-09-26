@@ -52,7 +52,8 @@ into regions based on line prefixes.
 
 As the function processes each line, it tracks the current prefix. 
 When lines share the same prefix, they are combined into a single 
-region; otherwise, a new region is created.
+region; otherwise, a new region is created. When adding the new line
+in the region, add the new line character to the line 
 
 Args:
     text (str): The input text
@@ -60,8 +61,6 @@ Args:
 Returns:
     list: A list of Region objects
 
-Note:
-    Include the new line for the last line
 """
 $PlaceHolder$
 
