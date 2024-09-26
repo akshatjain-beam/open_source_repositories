@@ -1,11 +1,27 @@
-# - Create a class `LazyImport` to enable loading modules only when they're first accessed.
-# - Initialization:
-#     - The class should accept a module name and optionally the module's globals dictionary during initialization.
-# - Module Loading:
-#     - Implement a `_load` method to handle the actual module import, update the module's globals, and set its attributes.
-# - Attribute Access:
-#     - Override `__getattr__` to trigger the module load and return the requested attribute.
-#     - Override `__dir__` to return the list of attributes from the loaded module.
-# - Representation:
-#     - Implement `__repr__` to give a string representation of the `LazyImport` instance.
+"""
+Create a static method `parse` which parses a given time string into a datetime object.
+
+This method attempts to convert a time string into a `datetime` object using the specified format 
+or by trying multiple common date formats if no format is provided.
+
+Args:
+    time_str (str): 
+        The time string to be parsed. Leading and trailing whitespace will be removed.
+    fmt (str, optional): 
+        A specific format string to use for parsing the time string. 
+
+Returns:
+    datetime: 
+        A `datetime` object representing the parsed time.
+
+Raises:
+    ValueError: 
+        If the time string cannot be parsed into a valid `datetime` object using 
+        the provided format or any of the common date formats.
+
+Note:
+    The method uses a various formats from 
+    `DATETIME_COMMON`, `DATETIME_FORMATS`, and `DATE_FORMATS` if no format 
+    is provided. 
+"""
 $PlaceHolder$
