@@ -11,9 +11,13 @@ PLATFORM_INSTAGRAM = 'instagram'
 PLATFORM_YOUTUBE = 'youtube'
 PLATFORM_EMAIL = 'email'
 
-# - Create regular expressions and store it in variable `FACEBOOK_URL_REGEXS`.
-# - They should matche for general and profile-id specific urls for facebook.
-# - For general urls, underscore, dot and hyphen are allowed
+"""
+Create a list of regular expressions for variable (`FACEBOOK_URL_REGEXS`) to validate different formats of Facebook URLs:
+1. URLs for Facebook profiles with a custom username. Hyphen, underscore and dots are allowed in username:
+   - Example: `https://www.facebook.com/username` or `http://fb.com/username`
+2. URLs for Facebook profiles with a numeric ID:
+   - Example: `https://www.facebook.com/profile.php?id=123456789` or `http://fb.com/profile.php?id=123456789`
+"""
 $PlaceHolder$
 
 GITHUB_URL_REGEXS = [
