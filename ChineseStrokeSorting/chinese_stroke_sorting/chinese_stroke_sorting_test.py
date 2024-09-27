@@ -7,18 +7,22 @@ from .chinese_stroke_sorting import sort_by_stroke, write_sort_result_to_human, 
 
 class SortByNameTest(unittest.TestCase):
     def read_name_list_from_file_test(self, input_test):
+        """Helper function to verify the output of the read_name_list_from_file function."""
         right_result = ['张三', '李四', '王五', '赵六', '王一', '王一二']
         self.assertEqual(input_test, right_result)
 
     def sort_by_stroke_test(self, input_test):
+        """Helper function to verify the output of the sort_by_stroke function."""
         right_result = ['王一', '王一二', '王五', '李四', '张三', '赵六']
         self.assertEqual(input_test, right_result)
 
     def write_sort_result_to_human_test(self, input_test):
+        """Helper function to verify the output of write_sort_result_to_human function."""
         right_result = '王一|王一二|王五|李四|张三|赵六'
         self.assertEqual(input_test, right_result)
 
     def testDefaultStopwords(self):
+        """Test the sorting of names from a file and writing results to an output file."""
         current_package_path = os.path.dirname(os.path.abspath(__file__))
         name_list_file_path = str("".join([current_package_path, '/test_name_list.txt']))
         name_list = read_name_list_from_file(name_list_file_path)  # 从文件中读取
@@ -37,16 +41,19 @@ class SortByNameTest(unittest.TestCase):
         write_sort_result_to_file(sort_result, output_file, split_char='\n')  # 将排序结果写入到文件
 
     def test_empty_name_list(self):
+        """Test the function with an empty list of names."""
         name_list = []
         result = sort_by_stroke(name_list)
         self.assertEqual(result, [])
 
     def test_single_name(self):
+        """Test the function with a single name."""
         name_list = ['王一']
         result = sort_by_stroke(name_list)
         self.assertEqual(result, ['王一'])
 
     def test_names_with_identical_strokes(self):
+        """Test the function with names that have identical stroke counts."""
         name_list = ['王五', '李四', '赵六', '张三']
         result_name_list = ['王五', '李四', '张三', '赵六']
     
@@ -54,12 +61,14 @@ class SortByNameTest(unittest.TestCase):
         self.assertEqual(result, result_name_list)
 
     def test_large_input(self):
+        """Test the function with a large input of identical names."""
         name_list = ['一'] * 100 + ['二'] * 100
         # With a large input of identical characters, the result should be sorted by stroke counts
         result = sort_by_stroke(name_list)
         self.assertEqual(result, ['一'] * 100 + ['二'] * 100)
 
     def test_sorting_edge_cases(self):
+        """Test the function with edge cases for names with single characters."""
         # Edge cases like names with only one character or names with stroke counts that are the same
         name_list = ['一', '丨', '亅', '丿', '丶', '乀', '乁', '乙']
         result = sort_by_stroke(name_list)
@@ -68,6 +77,7 @@ class SortByNameTest(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_invalid_input(self):
+        """Test the function's handling of invalid input types."""
         # Test handling of unexpected input types or values
         with self.assertRaises(TypeError):
             sort_by_stroke(None)  # Passing None should raise an error

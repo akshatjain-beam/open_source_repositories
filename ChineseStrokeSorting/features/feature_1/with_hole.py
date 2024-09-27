@@ -108,7 +108,8 @@ Create a function `sort_by_stroke` which sorts a list of names based on their st
 This function takes a list of names, computes the stroke counts for each name, 
 and repeatedly sorts the list based on these stroke counts until the sorting 
 criteria (`__char_num_i`) no longer change. After sorting, it removes the stroke 
-count data and returns only the list of names.
+count data and returns only the list of names. The variable `__char_num_i` is used 
+as a global counter and is initalised to `0`.
 
 Args:
     name_list_input (list): A list of names (strings) to be sorted.
