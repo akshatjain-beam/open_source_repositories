@@ -1,0 +1,3 @@
+In case of llm generated code, 
+1. Tracking the Previous Line: Instead of tracking the previous line, the llm generated solution tries to use the last task of the current project (self[curr_proj].tasks[-1].text). This is problematic because it may not accurately reflect the intended context for identifying headers, especially if there are no tasks yet in the project.
+2. Condition to Update curr_proj: The llm generated code uses the last task of the current project, which can lead to incorrect identification and updating of the current project.
