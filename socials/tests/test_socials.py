@@ -39,7 +39,18 @@ def test_command_line_interface():
 
 
 def test_extract():
-    """Test the extract method."""
+    """
+    Test the extract method for various URL formats.
+
+    This test verifies that the extract method correctly identifies
+    and categorizes valid URLs across different platforms while 
+    ignoring invalid formats.
+
+    Expectations:
+        The matches dictionary should contain the correct counts and 
+        URLs for platforms like Facebook, email, LinkedIn, Twitter, 
+        Instagram, and YouTube, reflecting valid extractions.
+    """
     urls = [
         'http://google.de',
         'http://facebook.com',
@@ -95,7 +106,16 @@ def test_extract():
 
 
 def test_extract_linkedin():
-    """Test the extract method."""
+    """
+    Test the extraction of LinkedIn URLs.
+
+    This test verifies that the extract method correctly identifies valid
+    LinkedIn profile and company URLs while ignoring invalid formats.
+
+    Expectations:
+        The matches for LinkedIn should include the correct number of valid
+        URLs while excluding any invalid formats.
+    """
 
     valid_urls = [
         # LinkedIn private profiles (valid)
@@ -135,7 +155,16 @@ def test_extract_linkedin():
         assert url in matches_linkedin
 
 def test_extract_facebook():
-    """Test the extract method for Facebook URLs."""
+    """
+    Test the extraction of Facebook URLs.
+
+    This test verifies that the extract method correctly identifies valid
+    Facebook profile URLs while ignoring invalid formats.
+
+    Expectations:
+        The matches for Facebook should include all valid URLs and exclude 
+        any invalid formats.
+    """
 
     valid_urls = [
         # Facebook profiles (valid)
