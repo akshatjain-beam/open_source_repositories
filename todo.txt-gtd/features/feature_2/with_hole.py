@@ -16,7 +16,7 @@ from .utils import is_task
 
 
 #Create a function `default_file` which finds the path of the file and returns the path:
-#    - extracts the information for `todo.txt` file configuration, and captures its output
+#    - extracts the information for `todo.txt` file using `subprocess.run` method, and captures its output
 #    - finds the path from the output using prefix of `task_path` and `=`
 $PlaceHolder$
 

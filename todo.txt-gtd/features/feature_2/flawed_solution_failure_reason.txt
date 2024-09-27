@@ -1,0 +1,3 @@
+The llm generated code has following issues:
+1. The llm generated code uses 'todo.sh' file instead of 'todo.txt' despite beig explicitly mentioning it in the prompt
+2. The llm generated code return None as well, which was not mentioned in the prompt and not expected
