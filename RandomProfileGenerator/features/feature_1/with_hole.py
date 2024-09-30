@@ -54,7 +54,7 @@ def ipv4_gen() -> str:
 
 
 # - Create a function `generate_dob_age` that generates a random date of birth in format of `date/month/year` and calculates the corresponding age.
-# - the year should be between 18 to 80 years ago
+# - the year should be between 18 to 80 years ago, and account for the different number of days in each month.
 # - :return: A tuple containing the date of birth (str) and the age (int).
 $PlaceHolder$
 
