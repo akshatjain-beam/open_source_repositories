@@ -55,7 +55,21 @@ class TestInspectSignatureParameters(unittest.TestCase):
     """Unit tests for inspect_signature_parameters."""
 
     def test_inspect(self):
-        """Check the parameters from a callable."""
+        """
+        Test retrieving parameters from various callables.
+
+        This test checks the parameters of different methods and functions
+        in the FakeCallable class, ensuring that the expected parameters 
+        match the actual parameters retrieved. Each method's parameters 
+        are asserted against predefined expected lists.
+
+        Expectations:
+        - FakeCallable should return ['args', 'kwargs']
+        - __init__ should return ['self', 'args', 'kwargs']
+        - test should return ['self', 'a', 'b', 'c']
+        - class_test should return ['a', 'b']
+        - static_test should return ['a', 'b']
+        """
 
         expected = ['args', 'kwargs']
         params = inspect_signature_parameters(FakeCallable)
@@ -83,7 +97,19 @@ class TestInspectSignatureParameters(unittest.TestCase):
         self.assertListEqual(params, expected)
 
     def test_inspect_excluding_parameters(self):
-        """Check the parameters from a callable when some are excluded."""
+        """
+        Test retrieving parameters while excluding certain ones.
+
+        This test checks the parameters of various methods and functions in 
+        FakeCallable while excluding specific parameters ('self', 'cls', and 'a'). 
+        It verifies that the excluded parameters do not appear in the output.
+
+        Expectations:
+        - FakeCallable should return ['args', 'kwargs']
+        - test should return ['b', 'c']
+        - class_test should return ['b']
+        - static_test should return ['b']
+        """
 
         excluded = ['self', 'cls', 'a']
 
@@ -112,7 +138,16 @@ class TestInspectSignatureParameters(unittest.TestCase):
         self.assertListEqual(params, expected)
 
     def test_inspect_no_parameters(self):
-        """Check a callable with no parameters."""
+        """
+        Test a callable with no parameters.
+
+        This test verifies that a function defined with no parameters returns
+        an empty list. It ensures that the inspect_signature_parameters function
+        can handle callables without any parameters gracefully.
+
+        Expectation:
+        - A callable with no parameters should return an empty list.
+        """
 
         def no_params():
             pass
@@ -123,7 +158,16 @@ class TestInspectSignatureParameters(unittest.TestCase):
         self.assertListEqual(params, expected)
 
     def test_inspect_keyword_only_parameters(self):
-        """Check a callable with keyword-only parameters."""
+        """
+        Test a callable with keyword-only parameters.
+
+        This test checks a function that defines parameters as keyword-only.
+        It verifies that the parameters are correctly returned and not confused
+        with positional parameters.
+
+        Expectation:
+        - A function with keyword-only parameters should return ['a', 'b'].
+        """
 
         def keyword_only(*, a, b=2):
             pass
@@ -134,7 +178,16 @@ class TestInspectSignatureParameters(unittest.TestCase):
         self.assertListEqual(params, expected)
     
     def test_inspect_mixed_parameters(self):
-        """Check a callable with mixed types of parameters."""
+        """
+        Test a callable with mixed types of parameters.
+
+        This test checks a function that has a mix of positional-only, positional,
+        and keyword-only parameters. It verifies that all parameters are 
+        correctly returned.
+
+        Expectation:
+        - A function with mixed parameters should return ['a', 'b', 'c'].
+        """
 
         def mixed_params(a, /, b, *, c):
             pass
@@ -145,7 +198,17 @@ class TestInspectSignatureParameters(unittest.TestCase):
         self.assertListEqual(params, expected)
 
     def test_inspect_excluding_defaults(self):
-        """Check a callable with parameters that have default values."""
+        """
+        Test a callable with parameters that have default values.
+
+        This test verifies that when parameters with default values are excluded,
+        the remaining parameters are correctly returned. It ensures that the 
+        function can exclude parameters regardless of their default status.
+
+        Expectation:
+        - A function with parameters 'a', 'b=2', and 'c=3' should return ['a'] 
+        when 'b' and 'c' are excluded.
+        """
 
         def defaults(a, b=2, c=3):
             pass
