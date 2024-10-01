@@ -264,6 +264,7 @@ def helper_nested_parse_datetime(ts):
 
 class TestParseDatetime(unittest.TestCase):
     def assert_datetime_equal(self, dt1, dt2):
+        """Helper method to assert that two datetime objects are equal by comparing their individual components."""
         self.assertEqual(dt1.year, dt2.year)
         self.assertEqual(dt1.month, dt2.month)
         self.assertEqual(dt1.day, dt2.day)
@@ -273,6 +274,13 @@ class TestParseDatetime(unittest.TestCase):
         self.assertEqual(dt1.tzinfo, dt2.tzinfo)
 
     def test_parse_datetime_with_timezone(self):
+        """
+        Test parsing a datetime string with a specified timezone.
+        
+        The input string '2024-09-18T12:00:00+02:00' should be parsed to a 
+        datetime object representing September 18, 2024, at 12:00 PM with 
+        a timezone offset of +2 hours.
+        """
         ts = "2024-09-18T12:00:00+02:00"
         expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzoffset(None, 7200))
         result = helper_nested_parse_datetime(ts)
@@ -280,6 +288,13 @@ class TestParseDatetime(unittest.TestCase):
         self.assert_datetime_equal(result, expected_dt)
     
     def test_parse_datetime_without_timezone(self):
+        """
+        Test parsing a datetime string without a timezone.
+        
+        The input string '2024-09-18T12:00:00' should be parsed to a 
+        datetime object representing September 18, 2024, at 12:00 PM in 
+        UTC.
+        """
         ts = "2024-09-18T12:00:00"
         expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzutc())
         result = helper_nested_parse_datetime(ts)
@@ -287,6 +302,13 @@ class TestParseDatetime(unittest.TestCase):
         self.assert_datetime_equal(result, expected_dt)
 
     def test_parse_datetime_with_utc(self):
+        """
+        Test parsing a datetime string that uses 'Z' to denote UTC.
+        
+        The input string '2024-09-18T12:00:00Z' should be parsed to a 
+        datetime object representing September 18, 2024, at 12:00 PM in 
+        UTC.
+        """
         ts = "2024-09-18T12:00:00Z"
         expected_dt = datetime.datetime(2024, 9, 18, 12, 0, 0, tzinfo=dateutil.tz.tzutc())
         result = helper_nested_parse_datetime(ts)
@@ -294,6 +316,12 @@ class TestParseDatetime(unittest.TestCase):
         self.assert_datetime_equal(result, expected_dt)
 
     def test_parse_datetime_with_date_only(self):
+        """
+        Test parsing a date-only string.
+        
+        The input string '2024-09-18' should be parsed to a datetime 
+        object representing September 18, 2024, at 00:00:00 in UTC.
+        """
         ts = "2024-09-18"
         expected_dt = datetime.datetime(2024, 9, 18, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
         result = helper_nested_parse_datetime(ts)
@@ -301,6 +329,13 @@ class TestParseDatetime(unittest.TestCase):
         self.assert_datetime_equal(result, expected_dt)
     
     def test_parse_datetime_with_ambiguous_date(self):
+        """
+        Test parsing a datetime string with an ambiguous format.
+        
+        The input string '2024-09-18T00:00:00+0000' should be parsed to a 
+        datetime object representing September 18, 2024, at 00:00:00 in 
+        UTC.
+        """
         ts = "2024-09-18T00:00:00+0000"
         expected_dt = datetime.datetime(2024, 9, 18, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
         result = helper_nested_parse_datetime(ts)
@@ -308,11 +343,24 @@ class TestParseDatetime(unittest.TestCase):
         self.assert_datetime_equal(result, expected_dt)
     
     def test_parse_datetime_with_empty_string(self):
+        """
+        Test parsing an empty string.
+        
+        An empty string should raise a ValueError, as it is not a valid 
+        datetime format.
+        """
         ts = ""
         with self.assertRaises(ValueError):
             helper_nested_parse_datetime(ts)
 
     def test_parse_datetime_with_future_date(self):
+        """
+        Test parsing a future date.
+        
+        The input string '3000-01-01T00:00:00Z' should be parsed to a 
+        datetime object representing January 1, 3000, at 00:00:00 in 
+        UTC.
+        """
         ts = "3000-01-01T00:00:00Z"
         expected_dt = datetime.datetime(3000, 1, 1, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
         result = helper_nested_parse_datetime(ts)
