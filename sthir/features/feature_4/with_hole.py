@@ -59,6 +59,8 @@ def base2p15_encode(bit_string: str) -> str:
 def base2p15_decode(base2p15: str) -> str:
     """
     Decode a base2p15 encoded string into a binary string.
+    The first character of the encoded string represents the 
+    number of padding bits to ignore in the last 15-bit sequence.
 
     :param base2p15: A base2p15 encoded string 
     :type base2p15: str
