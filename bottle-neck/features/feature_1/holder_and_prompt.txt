@@ -6,14 +6,17 @@ It implements the above `classproperty` decorator, with
 the difference that the function result is computed and attached
 to class as direct attribute. (Lazy loading and caching.)
 
+The cache is maintained in a class attribute named `__cache`, where the 
+function itself is used as the key for caching.
+
 Args:
     fun: The method to be cached as a class property.
 
 Returns:
     A class property that returns the cached value.
 
-Raises:
-    AttributeError: If the cache cannot be initialized.
-    KeyError: If the cache does not contain the value.
+Note:
+    AttributeError is raised: If the cache cannot be initialized.
+    KeyError is raised: If the cache does not contain the value.
 """
 $PlaceHolder$

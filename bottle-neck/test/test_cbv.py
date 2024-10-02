@@ -83,6 +83,12 @@ def clear_cache():
 
 
 def test_cached_classproperty():
+    """
+    Test that the cached_classproperty decorator caches the value correctly.
+
+    This test checks if the value property is computed and cached correctly.
+    It also verifies that the cache contains the computed value.
+    """
     assert TestClass.value == 42
     assert hasattr(TestClass, '__cache')
 
@@ -92,33 +98,58 @@ def test_cached_classproperty():
 
 
 def test_cached_classproperty_multiple_access():
-    # Test that the value is cached and not recomputed on multiple access
+    """
+    Test that the value is cached and not recomputed on multiple accesses.
+
+    This test ensures that accessing the cached property multiple times does
+    not recompute the value and uses the cached value instead.
+    """
     assert TestClass.value == 42
     assert TestClass.value == 42
     assert len(TestClass.__cache) == 1
 
 
 def test_cached_classproperty_multiple_properties():
-    # Test that multiple properties are cached correctly
+    """
+    Test that multiple properties are cached correctly.
+
+    This test checks if multiple cached properties are stored correctly
+    in the cache without interfering with each other.
+    """
     assert TestClass.value == 42
     assert TestClass.another_value == 24
     assert len(TestClass.__cache) == 2
 
 
 def test_cached_classproperty_exception():
-    # Test that an exception is raised when accessing a property that raises an exception
+    """
+    Test that an exception is raised when accessing a property that raises an exception.
+
+    This test verifies that accessing a cached property which raises an exception
+    correctly raises the intended exception.
+    """
     with pytest.raises(ValueError):
         TestClass.exception_value
 
 
 def test_cached_classproperty_none():
-    # Test that a property that returns None is cached correctly
+    """
+    Test that a property that returns None is cached correctly.
+
+    This test checks if a property returning None is properly cached
+    and stored in the cache.
+    """
     assert TestClass.none_value is None
     assert len(TestClass.__cache) == 1
 
 
 def test_cached_classproperty_reset_cache():
-    # Test that the cache is reset when the class is redefined
+    """
+    Test that the cache is reset when the class is redefined.
+
+    This test ensures that redefining a class resets the cache,
+    ensuring no old cached values are present.
+    """
     class NewTestClass:
         @cached_classproperty
         def value(cls):
@@ -129,7 +160,12 @@ def test_cached_classproperty_reset_cache():
 
 
 def test_cached_classproperty_inheritance():
-    # Test that the cache is inherited by subclasses
+    """
+    Test that the cache is inherited by subclasses.
+
+    This test checks if subclasses inherit the cache from their parent class
+    and use it correctly.
+    """
     class SubClass(TestClass):
         pass
 
@@ -138,7 +174,12 @@ def test_cached_classproperty_inheritance():
 
 
 def test_cached_classproperty_override():
-    # Test that a subclass can override a cached property
+    """
+    Test that a subclass can override a cached property.
+
+    This test verifies that subclasses can override a cached property
+    and the new value is cached correctly without affecting the parent class cache.
+    """
     class SubClass(TestClass):
         @cached_classproperty
         def value(cls):
