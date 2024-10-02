@@ -355,7 +355,7 @@ class BaseHandler(object):
         method_args (list): A list of argument names to be included as 
                             dynamic parameters in the route.
         url_extra_part (str, optional): An optional additional path segment 
-                                            to prepend to the base endpoint. 
+                                            to append to the base endpoint. 
                                             Defaults to None.
 
     Returns:
