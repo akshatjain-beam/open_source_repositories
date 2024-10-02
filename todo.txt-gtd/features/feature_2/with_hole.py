@@ -15,9 +15,18 @@ from .tdtcleanup import Project, Projects
 from .utils import is_task
 
 
-#Create a function `default_file` which finds the path of the file and returns the path:
-#    - extracts the information for `todo.txt` file using `subprocess.run` method, and captures its output
-#    - finds the path from the output using prefix of `task_path` and `=`
+"""
+Retrieves the default file path for the task list used by the 'todo.txt' application.
+
+This function runs the 'todo.txt' command with the '--info' option to obtain configuration information. 
+It captures the output using `subprocess.run` method, then uses a regex pattern to search for the line starting with `task_path`, followed by any amount of whitespace, an equal sign, and the path.
+
+Returns:
+    str: The default file path for the task list
+
+Raises:
+    AttributeError: If the 'task_path' entry is not found in the command output, with message "'NoneType' object has no attribute 'group'"
+"""
 $PlaceHolder$
 
 
