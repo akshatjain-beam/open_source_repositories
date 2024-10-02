@@ -6,13 +6,16 @@ class Classifier:
     self.pinyin = pinyin
 
   @classmethod
-  def parse(cls, text):
-    if '|' in text:
-      trad, rest = text.split('|', 1)
+  def parse(cls, s):
+    if '|' in s:
+      trad, rest = s.split('|', 1)
       simp, pinyin = rest.split('[', 1)
     else:
-      trad = text
-      simp, pinyin = text.split('[', 1)
+      trad = s.split('[', 1)[0]
+      simp = trad
+      pinyin = s.split('[', 1)[1]
+
     pinyin = pinyin.rstrip(']')
+
     return cls(trad, simp, pinyin)
 ```

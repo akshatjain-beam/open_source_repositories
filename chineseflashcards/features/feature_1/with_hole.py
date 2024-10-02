@@ -73,7 +73,7 @@ class CedictWord:
 #   - Process
 #       - The class also has a method called `parse` that takes a single string as input and extracts the three components (traditional characters, simplified characters, and pinyin) from it.
 #       - Split the string at `|`. If present, the part before `|` is traditional characters; the part after is split at `[` to separate simplified characters from pinyin.
-#       - If `|` is absent, treat the both traditional and simplified characters as same, and split at `[` to extract pinyin from the traditional.
+#       - If the `|` character is not present, then split the string at `[` to extract the pinyin which is present after `[` and traditional characters from before`[`. Also, consider traditional and simplified characters as same.
 #       - The method then trims any trailing `]` from the pinyin.
 #   - Output
 #       - The method returns a new `Classifier` object with the extracted values
