@@ -28,22 +28,24 @@ class PythonFilesProject(DeploymentPackage):
                 relpath = os.path.relpath(file, cwd)
                 zf.write(file, relpath)
 
-    def deploy(self, s3_code_uri: str) -> str:
-        """
-        Copies local code to S3 and returns the path to the uploaded entrypoint 
-        """
-        s3_client = boto3.client("s3")
-        bucket, prefix = parse_bucket_uri(s3_code_uri)
-        filename = os.path.basename(self.entry_point_path)
+    """
+    Create a function `deploy` that uploads the local entry point code and related Python modules to an Amazon S3 bucket.
 
-        console_log(f"Deploying {filename} and local python modules to {s3_code_uri}")
+    This function takes an S3 URI and copies the specified entry point file along with
+    a ZIP file of local Python modules to the designated S3 location.
 
-        s3_client.upload_file(self.entry_point_path, bucket, f"{prefix}/{filename}")
-        s3_client.upload_file(
-            f"{self.dist_dir}/pyfiles.zip", bucket, f"{prefix}/pyfiles.zip")
+    Parameters:
+    s3_code_uri : str
+        The S3 URI where the code will be uploaded, formatted as 
+        's3://bucket-name/prefix'.
 
-        return f"s3://{bucket}/{prefix}/{filename}"
+    Returns:
+    str
+        The S3 URI of the uploaded entry point, formatted as 
+        's3://bucket-name/prefix/filename'.
 
+    """
+    $PlaceHolder$
 
     def spark_submit_parameters(self) -> str:
         zip_path = os.path.join(self.s3_uri_base, "pyfiles.zip")
