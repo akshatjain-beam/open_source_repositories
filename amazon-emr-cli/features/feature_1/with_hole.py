@@ -92,7 +92,7 @@ class PythonPoetryProject(DeploymentPackage):
     ```
     Create a function `_parse_bucket_uri` that Extracts the bucket name and prefix from a given S3 URI.
 
-    This method takes an S3 URI in the format 's3://bucket-name/prefix' 
+    This method takes an S3 URI 
     and returns the bucket name and the path prefix as a list.
     Parameters
     uri : str
