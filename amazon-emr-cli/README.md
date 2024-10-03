@@ -15,6 +15,8 @@ The initial use cases are:
 
 > **Warning**: This tool is still under active development, so commands may change until a stable 1.0 release is made.
 
+commit hash - 830e5f3a9291c4d6c5a1dbdcfd66c0da8ca7950b
+
 ## Quick Start
 
 You can use the EMR CLI to take a project from nothing to running in EMR Serverless is 2 steps.
