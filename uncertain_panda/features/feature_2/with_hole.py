@@ -2,7 +2,6 @@ from matplotlib import pyplot as plt
 
 
 def plot_with_uncertainty(df, key=None, **kwargs):
-   
     """
     Plots data from a DataFrame with associated uncertainty.
 
@@ -33,4 +32,3 @@ def plot_with_uncertainty(df, key=None, **kwargs):
     simple plot without error bars.
     """
     $PlaceHolder$
-            
