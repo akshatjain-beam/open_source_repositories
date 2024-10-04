@@ -15,6 +15,8 @@ by applying the method of bootstrapping.
 .. image:: https://img.shields.io/pypi/v/uncertain_panda?logo=pypi
            :target: https://pypi.python.org/pypi/uncertain_panda
 
+commit hash - 373d1f629b2596517b5fc56485b5e688937536e4
+
 
 Why is the panda uncertain?
 ---------------------------
