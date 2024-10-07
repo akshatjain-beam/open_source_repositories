@@ -31,8 +31,6 @@ def link_internal(data, fields=("name", "product", "location", "unit")):
                     "Can't find linking activity for exchange:\n{}".format(pformat(exc))
                 )
     return data
- 
-
 
 
 def check_internal_linking(data):
@@ -48,8 +46,6 @@ def check_internal_linking(data):
                             pformat(exc)
                         )
                     )
-
-   
 
 
 def change_db_name(data, name):

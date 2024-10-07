@@ -1,5 +1,4 @@
 """
-
     Write lines of code to Link internal exchanges in a dataset based on specified fields.
 
     1. This will iterates through the provided dataset of activities.
@@ -25,6 +24,5 @@
     Raises:
     ValueError: If an exchange of type 'biosphere' is found that cannot be linked to any activity.
     KeyError: If an exchange cannot be linked to an existing activity based on the specified fields.
-
 """
 $PlaceHolder$
