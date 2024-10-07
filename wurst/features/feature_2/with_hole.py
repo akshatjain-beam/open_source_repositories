@@ -7,33 +7,36 @@ get_input_databases = lambda data: {ds["database"] for ds in data}
 
 
 def link_internal(data, fields=("name", "product", "location", "unit")):
-    """Link internal exchanges by ``fields``. Creates ``input`` field in newly-linked exchanges."""
-    input_databases = get_input_databases(data)
-    get_tuple = lambda exc: tuple([exc[f] for f in fields])
-    products = {
-        get_tuple(reference_product(ds)): (ds["database"], ds["code"]) for ds in data
-    }
+    """
 
-    for ds in data:
-        for exc in ds["exchanges"]:
-            if exc.get("input"):
-                continue
+    Write lines of code to Link internal exchanges in a dataset based on specified fields.
 
-            if exc["type"] == "biosphere":
-                raise ValueError(
-                    "Unlinked biosphere exchange:\n{}".format(pformat(exc))
-                )
+    1. This will iterates through the provided dataset of activities.
+    2. And links internal exchanges by creating an 'input' field for each exchange that matches the specified fields. 
+    
 
-            try:
-                exc["input"] = products[get_tuple(exc)]
-            except KeyError:
-                raise KeyError(
-                    "Can't find linking activity for exchange:\n{}".format(pformat(exc))
-                )
-    return data
- 
+    Args:
+    data (list[dict]): A list of activity datasets. Each dataset is expected to be a 
+    dictionary containing:
+    - database (str): The name of the database.
+    - code (str): A unique identifier for the activity.
+    - exchanges (list[dict]): A list of exchanges, where each exchange is expected to 
+    contain keys defined in the `fields` argument.  
 
+    fields (tuple): A tuple of strings representing the keys in the exchanges that will be 
+    used to create a unique identifier for linking. Defaults to ("name", "product", 
+    "location", "unit").
 
+    Returns:
+    list[dict]: The updated list of activity datasets, where each internal exchange has 
+    an 'input' field populated with a tuple containing the database and code of the linked activity.
+
+    Raises:
+    ValueError: If an exchange of type 'biosphere' is found that cannot be linked to any activity.
+    KeyError: If an exchange cannot be linked to an existing activity based on the specified fields.
+
+    """
+    $PlaceHolder$
 
 def check_internal_linking(data):
     """Check that each internal link is to an actual activity"""
