@@ -22,6 +22,7 @@ Notes
     of 15 by appending '0' bits.
 - The first character of the output string represents the number of padding bits
     added (in hexadecimal).
+- No padding is required if length of input string is already a multiple of 15
 - Each 15-bit chunk of the padded binary string is then converted to an integer,
     which is mapped to a character by adding an offset of 0xA1 (161 in decimal).
 - The function uses the `gen_chunks` helper function to split the input string
