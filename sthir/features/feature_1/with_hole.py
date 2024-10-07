@@ -178,15 +178,14 @@ Make a function process_documents which do the following:
 
 Processes a list of documents by encoding their binary content and preserving metadata.
 
-Implementation Details:
-1. Iterate over the documents and do the following:
-2. Initialize an empty bitarray instance.
-3. Open the binary file and convert its content into a binary string.
-4. Encode the binary string using the base2p15_encode function.
-5. Create a list containing the encoded data and document metadata from index 1 to
-the end of the list.
-6. Add the data from index 0, to the end of list.
-7. Append this list to the base2p15_arrs list.
+1. Iterate over each document in the dataset.
+2. For each document, initialize a storage mechanism for the binary data.
+3. Read the binary file from the document index 0, which contains the file path and extract its binary content.
+4. Convert the binary content into a binary string format.
+5. Encode this binary string using the `base2p15_encode` function to compress the data.
+6. Collect the encoded data along with relevant document metadata, excluding the first item in the list.
+7. Merge the initial item with the rest of the collected metadata and encoded data.
+8. Append the resulting data structure to the base2p15_arrs collection for further processing or storage.
 
 Args:
 documents (list): A list of documents where each document is represented as a list
