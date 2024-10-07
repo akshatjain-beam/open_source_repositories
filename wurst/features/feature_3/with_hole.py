@@ -26,6 +26,5 @@ Notes:
 - The function assumes that the first axis of the input array matches the order of locations.
 - If the input array is 1D, the function returns a dictionary with scalar values.
 - If the input array is 2D or higher, the function returns a dictionary with array values.
-
 """
 $PlaceHolder$

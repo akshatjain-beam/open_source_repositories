@@ -1,4 +1,3 @@
-# from .metadata import 
 from . import REGIONS
 
 
@@ -31,4 +30,3 @@ def convert_to_location_dictionary(array, locations=REGIONS):
             for index, loc in enumerate(locations)
             if index < size
         }
-
