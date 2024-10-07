@@ -2,6 +2,15 @@ from wurst.ecoinvent.electricity_markets import *
 
 
 def test_empty_low_voltage_markets():
+    """
+    Test the empty_low_voltage_markets function with a given input representing
+    a market for low voltage electricity. This test verifies that the function
+    correctly filters out unnecessary exchanges and retains only the relevant
+    exchanges related to the low voltage electricity market.
+
+    The input contains various exchanges, and the expected output confirms that
+    only the relevant exchanges with the appropriate amounts are returned.
+    """
     given = [
         {
             "exchanges": [
@@ -76,6 +85,16 @@ def test_empty_low_voltage_markets():
 
 
 def test_empty_medium_voltage_markets():
+    """
+    Test the empty_medium_voltage_markets function with a given input representing
+    a market for medium voltage electricity. This test verifies that the function
+    accurately filters the exchanges related to the medium voltage electricity market,
+    ensuring only the relevant exchanges with proper amounts are retained.
+
+    The input contains a list of exchanges, and the expected output confirms that
+    unnecessary exchanges are removed, resulting in a correct representation of the
+    medium voltage market.
+    """
     given = [
         {
             "exchanges": [
@@ -150,6 +169,16 @@ def test_empty_medium_voltage_markets():
 
 
 def test_empty_high_voltage_markets():
+    """
+    Test the empty_high_voltage_markets function with a given input representing
+    a market for high voltage electricity. This test checks that the function
+    properly filters the exchanges related to the high voltage electricity market,
+    ensuring that only the relevant exchanges are included in the output.
+
+    The input consists of various exchanges, and the expected output confirms that
+    unnecessary exchanges are excluded, resulting in a correct representation of the
+    high voltage market.
+    """
     given = [
         {
             "exchanges": [
@@ -222,6 +251,16 @@ def test_empty_high_voltage_markets():
 
 
 def test_move_all_generation_to_high_voltage():
+    """
+    Test that the function correctly moves all electricity generation to high voltage.
+
+    This test checks that the function moves all electricity generation from low 
+    and medium voltage to high voltage, while keeping other exchanges unchanged.
+
+    The test case includes various types of exchanges, such as production, 
+    technosphere, and biosphere exchanges, to ensure that the function handles 
+    different types of exchanges correctly.
+    """
     given = [
         {
             "location": "CZ",
@@ -573,6 +612,16 @@ def test_move_all_generation_to_high_voltage():
 
 
 def test_remove_electricity_trade():
+    """
+    Test that the function correctly removes electricity trade exchanges.
+
+    This test checks that the function removes all exchanges that are related to 
+    electricity trade, such as imports from other countries, while keeping other 
+    exchanges unchanged.
+
+    The test case includes multiple imports from different countries to ensure 
+    that the function handles multiple trade exchanges correctly.
+    """
     given = [
         {
             "location": "CZ",
@@ -667,6 +716,287 @@ def test_remove_electricity_trade():
                     "amount": 0.3,
                     "type": "technosphere",
                     "name": "electricity production, wind, 1-3MW turbine, onshore",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    assert remove_electricity_trade(given) == expected
+
+
+def test_remove_electricity_trade_multiple_imports():
+    """
+    Test that the function correctly removes multiple electricity trade exchanges.
+
+    This test checks that the function removes all exchanges that are related to 
+    electricity trade, such as imports from multiple countries, while keeping 
+    other exchanges unchanged.
+
+    The test case includes multiple imports from different countries to ensure 
+    that the function handles multiple trade exchanges correctly.
+    """
+    given = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "market for transmission network, long-distance",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.05,
+                    "type": "technosphere",
+                    "name": "electricity, high voltage, import from AT",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.05,
+                    "type": "technosphere",
+                    "name": "electricity, high voltage, import from DE",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.1,
+                    "type": "technosphere",
+                    "name": "electricity, high voltage, import from PL",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    expected = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "market for transmission network, long-distance",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    assert remove_electricity_trade(given) == expected
+
+
+def test_remove_electricity_trade_no_imports():
+    """
+    Test that the function correctly handles cases with no electricity trade exchanges.
+
+    This test checks that the function leaves the input unchanged when there are 
+    no electricity trade exchanges.
+    """
+    given = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "market for transmission network, long-distance",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    expected = given  # Should remain unchanged
+    assert remove_electricity_trade(given) == expected
+
+
+def test_remove_electricity_trade_empty_input():
+    """
+    Test that the function correctly handles empty input.
+
+    This test checks that the function returns an empty list when the input is 
+    empty.
+    """
+    given = []
+    expected = []  # Should remain unchanged
+    assert remove_electricity_trade(given) == expected
+
+
+def test_remove_electricity_trade_no_name_key():
+    """
+    Test that the function correctly handles exchanges with no name key.
+
+    This test checks that the function leaves the input unchanged when there are 
+    exchanges with no name key.
+    """
+    given = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    expected = given  # Should remain unchanged as there's no name key in the first exchange
+    assert remove_electricity_trade(given) == expected
+
+
+def test_remove_electricity_trade_mixed():
+    """
+    Test that the function correctly handles mixed exchanges.
+
+    This test checks that the function correctly removes electricity trade 
+    exchanges while leaving other exchanges unchanged.
+
+    The test case includes a mix of electricity trade exchanges and other 
+    exchanges to ensure that the function handles mixed cases correctly.
+    """
+    given = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "market for transmission network, long-distance",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.4,
+                    "type": "technosphere",
+                    "name": "electricity production, hard coal",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.05,
+                    "type": "technosphere",
+                    "name": "electricity, high voltage, import from AT",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.05,
+                    "type": "technosphere",
+                    "name": "irrelevant exchange",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+            ],
+        }
+    ]
+    expected = [
+        {
+            "location": "CZ",
+            "name": "market for electricity, high voltage",
+            "unit": "kilowatt hour",
+            "exchanges": [
+                {
+                    "uncertainty type": 2,
+                    "amount": 3,
+                    "type": "technosphere",
+                    "name": "market for transmission network, long-distance",
+                    "unit": "kilometer",
+                    "location": "GLO",
+                },
+                {
+                    "uncertainty type": 0,
+                    "loc": 1.0,
+                    "amount": 1.0,
+                    "type": "production",
+                    "name": "market for electricity, high voltage",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.4,
+                    "type": "technosphere",
+                    "name": "electricity production, hard coal",
+                    "unit": "kilowatt hour",
+                    "location": "CZ",
+                },
+                {
+                    "uncertainty type": 0,
+                    "amount": 0.05,
+                    "type": "technosphere",
+                    "name": "irrelevant exchange",
                     "unit": "kilowatt hour",
                     "location": "CZ",
                 },
