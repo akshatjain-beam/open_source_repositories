@@ -1,0 +1,8 @@
+"""
+create  Python dictionaries named `INITIAL` and `MEDIAL` that maps Korean consonants and their combinations to their corresponding composed forms. The dictionary should include entries as key and value pairs where keys for `INITIAL` are - ['ㄱ', 'ㄱㅇ', 'ㄴ', 'ㄷ', 'ㄷㅇ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅇㅂ', 'ㅅ', 'ㅇㅅ', '', 'ㅈ', 'ㅈㅇ', 'ㅎㅈ', 'ㅎㄱ', 'ㅎㄷ', 'ㅎㅂ', 'ㅎ']
+and `MEDIAL` are ['ㅏ', 'ㅏㅣ', 'ㅏ*', 'ㅏ*ㅓ', 'ㅓ', 'ㅓㅣ', '*ㅓ', 'ㅗㅓㅣ', 'ㅗ', 'ㅗㅏ', 'ㅗㅏㅣ', 'ㅗㅣ', 'ㅗ*', 'ㅜ', 'ㅜㅓ', 'ㅜㅓㅣ', 'ㅜㅣ', 'ㅜ*', 'ㅏㅓ', 'ㅏㅓㅣ', 'ㅣ'].
+
+Example:
+>>'': 'ㅇ'
+"""
+$PlaceHolder$
