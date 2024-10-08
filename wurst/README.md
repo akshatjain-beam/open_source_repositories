@@ -14,6 +14,8 @@ Wurst is a python package for linking and modifying industrial ecology models, w
 
 See also the separate [wurst examples](https://github.com/IndEcol/wurst-examples) repository.
 
+commit hash - d2770711435661b77462e57b8c0408eb7d713f47
+
 ## Installation
 
 Download and install [miniconda](https://conda.io/miniconda.html), create and activate a [new environment](https://conda.io/docs/user-guide/tasks/manage-environments.html), and then install::
