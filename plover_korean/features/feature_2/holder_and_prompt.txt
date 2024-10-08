@@ -1,0 +1,20 @@
+"""
+Create a function `lookup` that Retrieves the text output corresponding to the provided strokes.
+
+Args:
+    strokes: A tuple of strokes to look up text for.
+
+Returns:
+    The text text output for the stroke.
+
+Raises:
+    KeyError: The lookup failed to find any matching text.
+
+Notes:
+    If the input strokes are invalid or cannot be parsed, a KeyError is raised.
+    The function uses the INITIAL, MEDIAL, and FINAL dictionaries to compose the text output.
+    The hgtk library is used to compose the text output into a single Unicode character.
+    If any errors occur during the lookup or composition process, a KeyError is raised.
+    If length of strokes is not equal to LONGEST_KEY , a KeyError is raised.
+"""
+$PlaceHolder$

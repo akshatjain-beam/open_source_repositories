@@ -1,0 +1,6 @@
+The LLM Generated solution fails due to-
+1. THe LLM Generated solution only catches KeyError exceptions when looking up the initial, medial, or final strokes. As it provides-
+    ```except KeyError:
+        raise KeyError()```
+but if any other exception occurs, it would not be handled properly. Using `except Exception` would be more in line with the prompt's specifications to raise a KeyError for any lookup failures.The LLM Generated solution attempts to directly map the parsed strokes to the INITIAL, MEDIAL, and FINAL dictionaries, but it does not handle the case where any of these lookups fail. If a key is not found in any of the dictionaries, it should raise a KeyError.
+2. The LLM Generated solution directly composes the initial, medial, and final sounds. This approach is less robust and is more prone to erronous output.
