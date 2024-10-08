@@ -3,6 +3,11 @@ Decode a base2p15 encoded string into a binary string.
 The first character of the encoded string represents the 
 number of padding bits to ignore in the last 15-bit sequence.
 
+Note:
+Last character may be  partially used based on the padding value. 
+Convert the last character of the input string to its ASCII value, 
+subtract the offset, and convert to a binary string.
+
 :param base2p15: A base2p15 encoded string 
 :type base2p15: str
 
