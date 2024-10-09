@@ -6,6 +6,8 @@ Korean stenography for [Plover](https://github.com/openstenoproject/plover).
 - [Korean Modern S - Sorizava-based System](#korean-modern-s)
 - [Meta Plugins](#meta-plugins)
 
+commit hash - 3ab40fbf0ea3f0dc8f1fe610adf8be90112f650d
+
 ## Installation
 
 *This plugin has not been released on PyPI yet, so locally installing from source is currently the only option*
