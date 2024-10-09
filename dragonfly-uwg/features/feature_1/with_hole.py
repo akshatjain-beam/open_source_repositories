@@ -197,7 +197,8 @@ class BuildingUWGProperties(object):
         return _RefDefaults.shgc_by_era_zone(self._vintage, climate_zone)
 
     def infer_program_from_energy_program(self):
-        """Attempt to infer the UWG building program from the honeybee-energy program.
+        """
+        This Attempts to infer the UWG building program from the honeybee-energy program.
 
         The inferring will happen by first finding the most common energy ProgramType
         among the assigned Room2Ds. If the identifier of this most common program
@@ -205,17 +206,8 @@ class BuildingUWGProperties(object):
         as this object's building program. If no match is found or there's no
         honeybee-energy extension installed, this object's program will remain unchanged.
         """
-        try:
-            room_progs = [rm.properties.energy.program_type.identifier
-                          for rm in self.host.unique_room_2ds]
-        except AttributeError:  # dragonfly-energy extension is not installed
-            room_progs = None
-        if room_progs is not None:
-            primary_prog = max(set(room_progs), key=room_progs.count)
-            for prog in self.PROGRAMS:
-                if prog in primary_prog:
-                    self._program = prog
-                    break
+        $PlaceHolder$
+
     @classmethod
     def from_dict(cls, data, host):
         """Create BuildingUWGProperties from a dictionary.
