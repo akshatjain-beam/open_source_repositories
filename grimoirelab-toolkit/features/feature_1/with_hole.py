@@ -42,14 +42,11 @@ __all__ = [
 """
 Create a function `inspect_signature_parameters` which do the following:
 
-Get the parameters of a callable.
-
-Returns a list with the signature parameters of `callable_`.
-Parameters contained in `excluded` tuple will not be included
-in the result.
+Get the parameters of a callable and returns a list with the signature parameters of `callable_`.
+Exclude the values present in the `excluded` parameter.
 
 :param callable_: callable object
-:param excluded: tuple with default parameters to exclude, having default value `None`
+:param excluded: tuple with default parameters to exclude. Defaults to empty tuple
 
 :result: list of parameters
 """
