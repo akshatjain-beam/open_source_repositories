@@ -2,6 +2,8 @@
 ## Usage
 For generating the documents locally use commands below from the root folder. 
 
+commit hash - 61fcc166ef7d9a7e0450aba9ad87d1f8b696e593 
+
 ```shell
 # install dependencies
 pip install Sphinx sphinxcontrib-fulltoc sphinx_bootstrap_theme
