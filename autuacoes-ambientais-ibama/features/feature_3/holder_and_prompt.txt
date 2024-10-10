@@ -27,3 +27,4 @@
     Returns:
         str: string containing the two checksum digits.
 """
+$PlaceHolder$
