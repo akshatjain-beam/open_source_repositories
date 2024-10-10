@@ -1,0 +1,24 @@
+"""
+    Create a function with name `split_state_city` which does the following:
+
+    1. Checks if the first part of the string is a two-letter state acronym.
+       - If true, returns the acronym and the remaining string as the city name.
+    2. If the first part is not a state acronym, it assumes the string begins with a full state name.
+       - Iteratively joins words to form possible state names.
+       - Checks against a predefined dictionary of state names (STATE_NAMES).
+       - Once found, returns the full state name and the remaining part of the string as the city name.
+
+    Notes:
+        The function raises a ValueError if the input string does not contain a recognizable state name or acronym.
+        This function relies on an external `slug` function to normalize the state name.
+        The function uses `functools.lru_cache` to cache results for frequently requested combinations with max size of `5570*2`.
+
+    Args:
+        text (str): name of the state and city.
+
+    Returns:
+        tuple: containing the state and city.
+    
+    Raises:
+        ValueError: If the input does not contain a recognizable state name or acronym.
+"""
