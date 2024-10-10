@@ -18,6 +18,7 @@ Metodologia:
 - Na parte "Dados da Infração", seleciona um dos estados (o programa pode passar por todos os estados - mas esse caso, só fiz para o PA)
 - Preenche o período de 01/01/ANO até 31/12/ANO, onde "ANO" varia de 1980 a 2021 (o programa roda uma vez para cada ano possível, porque o máximo permitido é 1 ano)- Baixa o PDF resultante da busca- Converte o PDF para CSV- Limpa o arquivo CSV (corrige nomes de municípios, adiciona código IBGE dos municípios etc.)
 
+commit hash - 6ffdb5b7806dc6a2d3fb5b5f49307d4f24801feb
 
 ## Instalando
 
