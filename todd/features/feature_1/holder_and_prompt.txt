@@ -1,0 +1,19 @@
+"""
+Create a function `set_priority` that sets a new priority for the task.
+
+Args:
+    new_priority (str): The new priority to be set. It should be a single uppercase letter.
+
+Behavior:
+    - If the current priority matches the new priority, the function exits without making changes.
+    - If the task already has a priority, it replaces the existing priority with the new one.
+    - If the task does not have a priority but has a completion date at the start, it inserts the new priority after the completion date.
+    - If the task does not have a priority or a completion date, it prepends the new priority to the task string.
+
+Note:
+    - The `raw` attribute contains the task string 
+    - The `update` method to update the task with the new string.
+    - The completion date format is "x YYYY-MM-DD"
+
+"""
+$PlaceHolder$
