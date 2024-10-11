@@ -8,6 +8,8 @@ The file format conforms to [todo.txt](https://github.com/todotxt/todo.txt#readm
 
 Thanks to the creator and contributors of [todotxt-machine](https://github.com/AnthonyDiGirolamo/todotxt-machine/tree/04a0306ea30c2645f2474da5830852ccd8e49082) for providing the basis for this project.
 
+commit hash - d8c387ec65783b9b2e676434e608f6ddb21ef538
+
 ## Features
 
 - View your tasks in a column formatted list with relative due dates
