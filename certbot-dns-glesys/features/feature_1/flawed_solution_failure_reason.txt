@@ -1,0 +1,2 @@
+The LLM generated solution fails as-
+1. The subdomain parts are appended to subdomain_parts of `DomainParts` based on the initial split of the domain. This leads to an incorrect formation of the subdomain variants. Whereas the prompt, mentions to prepend the existing subdomain parts to the domain parts. 
