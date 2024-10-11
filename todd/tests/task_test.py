@@ -11,7 +11,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.task = Task("Sample task", self.task_id)
 
     def test_mark_done_when_not_done(self):
-        """Test that marking a task as done updates its status correctly.
+        """
+        Test that marking a task as done updates its status correctly.
         
         When a task is initially not done and is marked done, 
         the task's status should reflect that it is done, 
@@ -23,7 +24,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertIn(datetime.date.today().isoformat(), self.task.raw)
 
     def test_mark_done_when_already_done(self):
-        """Test that marking a task as done again does not change the raw text.
+        """
+        Test that marking a task as done again does not change the raw text.
         
         When a task is already marked done, calling set_done(True) again
         should not modify the task's raw text.
@@ -34,7 +36,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertEqual(self.task.raw, initial_raw)  # Raw should not change
 
     def test_mark_not_done_when_done(self):
-        """Test that marking a task as not done updates its status correctly.
+        """
+        Test that marking a task as not done updates its status correctly.
         
         When a task is marked done and then marked not done, 
         the task's status should reflect that it is no longer done,
@@ -46,7 +49,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertNotIn("x ", self.task.raw)
 
     def test_set_done_does_not_change_when_done(self):
-        """Test that calling set_done(True) does not change the task when it's already done.
+        """
+        Test that calling set_done(True) does not change the task when it's already done.
         
         When a task is already marked done, calling set_done(True) 
         should maintain the same raw text without any changes.
@@ -57,7 +61,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertEqual(self.task.raw, previous_raw)
 
     def test_raw_text_after_setting_done(self):
-        """Test that the raw text is updated correctly when marking a task as done.
+        """
+        Test that the raw text is updated correctly when marking a task as done.
         
         After marking a task as done, the raw text should start with 'x ' 
         and include today's date.
@@ -68,7 +73,8 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertIn(datetime.date.today().isoformat(), self.task.raw)
 
     def test_raw_text_after_unsetting_done(self):
-        """Test that the raw text is updated correctly when unmarking a task as done.
+        """
+        Test that the raw text is updated correctly when unmarking a task as done.
         
         After marking a task as done, when it is then marked not done,
         the raw text should not contain 'x '.
