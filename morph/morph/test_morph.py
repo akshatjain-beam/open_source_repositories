@@ -356,7 +356,115 @@ class TestMorph(unittest.TestCase):
       ('key', dict(item_value=[8, {'k2': -2}], dict=src, root=src)),
     ], key=str))
 
-
 #------------------------------------------------------------------------------
 # end of $Id$
 #------------------------------------------------------------------------------
+
+class CustomDictLike:
+    def keys(self):
+        return ['key1', 'key2']
+
+    def values(self):
+        return ['value1', 'value2']
+
+    def items(self):
+        return [('key1', 'value1'), ('key2', 'value2')]
+
+    def __getitem__(self, key):
+        # This makes it behave like a dictionary
+        return f'value for {key}'
+
+import unittest
+
+class TestIsDict(unittest.TestCase):
+    """
+    A test suite for the `isdict` function.
+    """
+
+    def test_custom_dict_like(self):
+        """
+        Test that a custom dict-like object is correctly identified.
+
+        This test creates a `CustomDictLike` object, which should be considered
+        dict-like by the `isdict` function.
+        """
+        self.assertTrue(morph.isdict(CustomDictLike()))
+
+    def test_custom_sequence(self):
+        """
+        Test that a custom sequence object is not considered dict-like.
+
+        This test creates a `CustomSequence` object, which should not be
+        considered dict-like by the `isdict` function.
+        """
+        class CustomSequence:
+            """
+            A custom sequence object.
+            """
+            def __getitem__(self, index):
+                return index
+
+            def __len__(self):
+                return 2
+
+        self.assertFalse(morph.isdict(CustomSequence()))
+
+    def test_string(self):
+        """
+        Test that a string is not considered dict-like.
+
+        This test checks that a string is correctly identified as not being
+        dict-like by the `isdict` function.
+        """
+        self.assertFalse(morph.isdict("string"))
+
+    def test_regular_dict(self):
+        """
+        Test that a standard dictionary is considered dict-like.
+
+        This test creates a standard dictionary and checks that it is correctly
+        identified as dict-like by the `isdict` function.
+        """
+        standard_dict = {'key1': 'value1', 'key2': 'value2'}
+        self.assertTrue(morph.isdict(standard_dict))
+
+    def test_non_dict_like_object(self):
+        """
+        Test that an object that does not implement dict-like methods is not considered dict-like.
+
+        This test creates a `NonDictLike` object, which does not implement any
+        dict-like methods, and checks that it is correctly identified as not
+        being dict-like by the `isdict` function.
+        """
+        class NonDictLike:
+            """
+            An object that does not implement dict-like methods.
+            """
+            pass
+
+        self.assertFalse(morph.isdict(NonDictLike()))
+
+    def test_partial_dict_like_object(self):
+        """
+        Test that an object implementing some dict-like methods but missing others is not considered dict-like.
+
+        This test creates a `PartialDictLike` object, which implements some
+        dict-like methods but is missing others, and checks that it is correctly
+        identified as not being dict-like by the `isdict` function.
+        """
+        class PartialDictLike:
+            """
+            An object implementing some dict-like methods but missing others.
+            """
+            def keys(self):
+                return ['key1']
+
+            def values(self):
+                return ['value1']
+
+            # Missing items() method
+
+            def __getitem__(self, key):
+                return f'value for {key}'
+
+        self.assertFalse(morph.isdict(PartialDictLike()))  
