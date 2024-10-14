@@ -1,5 +1,5 @@
 ```
-return \
+  return \
     not isstr(obj) \
     and ( isinstance(obj, (list, tuple)) \
           or ( hasattr(obj, '__getitem__') \

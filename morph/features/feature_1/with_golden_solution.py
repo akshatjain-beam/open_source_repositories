@@ -1,5 +1,5 @@
 ```
-return \
+  return \
     not isstr(obj) \
     and not isdict(obj) \
     and ( isinstance(obj, (list, tuple)) \
