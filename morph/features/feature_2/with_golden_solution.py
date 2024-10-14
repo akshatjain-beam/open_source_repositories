@@ -1,5 +1,5 @@
 ```
-isdict(obj):
+def isdict(obj):
   '''
   Returns True if `obj` is a dict-like object (but not a string or
   list); i.e. a dict, subclass thereof, or having an interface that
