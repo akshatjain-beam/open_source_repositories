@@ -57,7 +57,6 @@ class TestMorph(unittest.TestCase):
     class myobj(object): pass
     self.assertFalse(morph.isseq(myobj()))
     self.assertFalse(morph.isseq(dict(abc='def')))
-    #-----------------
 
   #----------------------------------------------------------------------------
   def test_isdict(self):
