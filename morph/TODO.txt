@@ -1,0 +1,8 @@
+* allow pick's and omit's `prefix` and `tree` parameters to be used
+  together. first figure out what that means...
+
+* make sure the is*() functions work with the `collections` module
+  objects as expected.
+
+* it would be great if the README pulled the documentation from
+  the code...
