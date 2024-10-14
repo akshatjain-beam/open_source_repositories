@@ -3,6 +3,7 @@ GleSYS DNS Authenticator for Certbot
 This allows automatic completion of `Certbot's <https://github.com/certbot/certbot>`_
 DNS01 challange for domains managed on `GleSYS <https://www.glesys.com/>`_ DNS.
 
+commit hash - 900809ecded2060e0254ec98eda7841232ee69e3
 
 Installing
 ----------
