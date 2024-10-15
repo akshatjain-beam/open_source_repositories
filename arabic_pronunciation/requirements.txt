@@ -1,0 +1,2 @@
+alphabet_detector
+argparse
