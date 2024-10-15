@@ -10,5 +10,5 @@ def isdict(obj):
     and ( isinstance(obj, dict) \
           or ( callable(getattr(obj, 'keys', None)) \
                and callable(getattr(obj, 'values', None)) \
-               and callable
+               and callable(getattr(obj, 'items', None)) ))
 ```
