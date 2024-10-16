@@ -110,25 +110,29 @@ class WSResponse(object):
     @classmethod
     def from_status(cls, status_line, msg=None):
         """Returns a class method from bottle.HTTPError.status_line attribute.
-        Useful for patching `bottle.HTTPError` for web services.
+		Useful for patching `bottle.HTTPError` for web services.
 
-        Args:
-            status_line (str):  bottle.HTTPError.status_line text.
-            msg: The message data for response.
+		The status_line input should be converted to lowercase, 
+		with only alphabetic characters considered, and spaces 
+		replaced with underscores.
 
-        Returns:
-            Class method based on status_line arg.
+		Args:
+		    status_line (str):  bottle.HTTPError.status_line text. 
+		    msg: The message data for response.
 
-        Examples:
-            >>> status_line = '401 Unauthorized'
-            >>> error_msg = 'Get out!'
-            >>> resp = WSResponse.from_status(status_line, error_msg)
-            >>> resp['errors']
-            ['Get out!']
-            >>> resp['status_text']
-            'Unauthorized'
-        """
-        $PlaceHolder$
+		Returns:
+		    Class method based on status_line arg.
+
+		Examples:
+		    >>> status_line = '401 Unauthorized'
+		    >>> error_msg = 'Get out!'
+		    >>> resp = WSResponse.from_status(status_line, error_msg)
+		    >>> resp['errors']
+		    ['Get out!']
+		    >>> resp['status_text']
+		    'Unauthorized'
+		"""
+		$PlaceHolder$
 
     @classmethod
     def ok(cls, data):

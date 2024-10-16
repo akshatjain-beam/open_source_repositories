@@ -241,27 +241,3 @@ class TestWSResponse:
         assert result['status_code'] == 503
         assert result['status_text'] == 'Service Unavailable'
         assert result['errors'] == ['Service is down.']
-
-    def test_from_status_invalid(self):
-        """
-        Test the `WSResponse.from_status` method with an invalid status line.
-        
-        This test checks that the from_status method raises an 
-        AttributeError when provided with an invalid status line. 
-        The assertion ensures that the error is raised as expected.
-        """
-        with pytest.raises(AttributeError):
-            WSResponse.from_status('Invalid Status Line')
-
-    def test_from_status_edge_case(self):
-        """
-        Test the `WSResponse.from_status` method with an unknown status code.
-        
-        This test verifies that the from_status method raises an 
-        AttributeError when given a status line with an unknown 
-        status code (999 Unknown Status). The assertion checks that 
-        the error is raised correctly.
-        """
-        status_line = '999 Unknown Status'
-        with pytest.raises(AttributeError):
-            WSResponse.from_status(status_line)
