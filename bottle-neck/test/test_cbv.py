@@ -2,13 +2,20 @@
 """Unit Tests for `bottle_neck.cbv` module.
 """
 
-
 from bottle_neck.cbv import BaseHandlerPlugin
 
 
 class TestBaseHandlerPlugin:
     def setup_method(self):
         self.plugin = BaseHandlerPlugin(lambda x: x, 1, 2, a=3, b=4)
+        self.clear_cache()
+
+    def clear_cache(self):
+        """Clears the cached properties to ensure tests start with a fresh state."""
+        try:
+            del self.plugin.__class__.__cache  # Reset the cache
+        except AttributeError:
+            pass  # If there's no cache, we can safely ignore this
 
     def test_func_name_with_camel_case(self):
         """
@@ -54,7 +61,6 @@ class TestBaseHandlerPlugin:
             pass
         plugin = Plugin123Case(lambda x: x, 1, 2, a=3, b=4)
         assert plugin.func_name == 'plugin123_case'  # Expected result after conversion
-
 
     def test_func_name_with_empty_class_name(self):
         """
