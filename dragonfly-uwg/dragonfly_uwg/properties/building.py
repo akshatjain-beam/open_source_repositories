@@ -216,6 +216,7 @@ class BuildingUWGProperties(object):
                 if prog in primary_prog:
                     self._program = prog
                     break
+                
     @classmethod
     def from_dict(cls, data, host):
         """Create BuildingUWGProperties from a dictionary.

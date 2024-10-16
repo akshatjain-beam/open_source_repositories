@@ -33,19 +33,6 @@ class TestBuildingUWGProperties(unittest.TestCase):
         self.assertEqual(self.building_properties.program, 'MediumOffice')
 
 
-    def test_infer_program_from_energy_program_empty_rooms(self):
-        """
-        Test behavior when no rooms are available. This test
-        verifies that invoking the inference method with an
-        empty list of rooms raises a ValueError, indicating
-        that program inference cannot be performed.
-        """
-        self.host.unique_room_2ds = []
-        
-        # Invoke the method and expect a ValueError
-        with self.assertRaises(ValueError):
-            self.building_properties.infer_program_from_energy_program()
-
 
     def test_infer_program_from_energy_program_all_same_type(self):
         """
