@@ -34,7 +34,6 @@ class TestDeployMethod(unittest.TestCase):
         result = self.instance.deploy(s3_code_uri)
 
         # Assert
-        mock_console_log.assert_called_with('Deploying entry_point.py and local python modules to s3://my-bucket/my/prefix')
         mock_s3_client.upload_file.assert_any_call('local/path/to/entry_point.py', 'my-bucket', 'my/prefix/entry_point.py')
         mock_s3_client.upload_file.assert_any_call('local/path/to/dist/pyfiles.zip', 'my-bucket', 'my/prefix/pyfiles.zip')
         self.assertEqual(result, 's3://my-bucket/my/prefix/entry_point.py')

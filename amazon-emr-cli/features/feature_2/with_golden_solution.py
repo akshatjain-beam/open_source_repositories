@@ -1,5 +1,4 @@
-```
-    
+``` 
     def deploy(self, s3_code_uri: str) -> str:
         """
         Copies local code to S3 and returns the path to the uploaded entrypoint

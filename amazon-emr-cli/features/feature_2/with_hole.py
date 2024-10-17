@@ -29,21 +29,22 @@ class PythonFilesProject(DeploymentPackage):
                 zf.write(file, relpath)
 
     """
-    Create a function `deploy` that uploads the local entry point code and related Python modules to an Amazon S3 bucket.
+    Create a function `deploy` which uploads the local entry point script and associated Python modules to an S3 bucket.
 
-    This function takes an S3 URI and copies the specified entry point file along with
-    a ZIP file of local Python modules to the designated S3 location.
+    This method takes a specified S3 URI, uploads the entry point script and 
+    a zip file containing local Python modules to the corresponding S3 bucket and 
+    returns the S3 path of the uploaded entry point script.
+    
+    The filename of the entry point script is derived from the entry point path 
+    specified in the instance variable. 
 
     Parameters:
-    s3_code_uri : str
-        The S3 URI where the code will be uploaded, formatted as 
-        's3://bucket-name/prefix'.
+        s3_code_uri (str): The S3 URI where the code will be uploaded. 
+                            It should be in the format 's3://bucket-name/prefix/'.
 
     Returns:
-    str
-        The S3 URI of the uploaded entry point, formatted as 
-        's3://bucket-name/prefix/filename'.
-
+        str: The S3 path of the uploaded entry point script.
+                It should formatted as 's3://bucket-name/prefix/filename'.
     """
     $PlaceHolder$
 
