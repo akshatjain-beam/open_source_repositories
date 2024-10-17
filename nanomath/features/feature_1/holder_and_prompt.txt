@@ -1,0 +1,6 @@
+"""
+Calculate the N50 length of a set of read lengths.
+This line of code returns the first value from the readlengths array at which the cumulative sum of the readlengths
+reaches or exceeds 50% of the total sum of all readlengths.
+"""
+$PlaceHolder$

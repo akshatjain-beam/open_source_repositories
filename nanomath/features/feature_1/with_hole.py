@@ -125,12 +125,12 @@ class Stats(object):
 
 
 def get_N50(readlengths):
-    """Calculate read length N50.
-
-    Based on https://github.com/PapenfussLab/Mungo/blob/master/bin/fasta_stats.py
     """
-    return readlengths[np.where(np.cumsum(readlengths) >= 0.5 * np.sum(readlengths))[0][0]]
-     
+    Calculate the N50 length of a set of read lengths.
+    This line of code returns the first value from the readlengths array at which the cumulative sum of the readlengths
+    reaches or exceeds 50% of the total sum of all readlengths.
+    """
+    $PlaceHolder$
 
 
 @deprecated
