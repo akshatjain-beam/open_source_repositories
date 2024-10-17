@@ -1,0 +1,5 @@
+.remote-sync.json
+nanomath.egg-info/
+nanomath/__pycache__/
+README.rst
+dist/
