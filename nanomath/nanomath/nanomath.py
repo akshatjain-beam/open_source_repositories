@@ -137,7 +137,6 @@ def remove_length_outliers(df, columnname):
     return df[df[columnname] < (np.median(df[columnname]) + 3 * np.std(df[columnname]))]
     
 
-
 def errs_tab(n):
     """Generate list of error rates for qualities less than equal than n."""
     return [10**(q / -10) for q in range(n+1)]
