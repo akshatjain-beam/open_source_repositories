@@ -89,19 +89,25 @@ class PythonPoetryProject(DeploymentPackage):
         tar_path = os.path.join(self.s3_uri_base, "pyspark_deps.tar.gz")
         return f"--conf spark.archives={tar_path}#environment --conf spark.emr-serverless.driverEnv.PYSPARK_DRIVER_PYTHON=./environment/bin/python --conf spark.emr-serverless.driverEnv.PYSPARK_PYTHON=./environment/bin/python --conf spark.executorEnv.PYSPARK_PYTHON=./environment/bin/python"  # noqa: E501
 
-    ```
+    """
     Create a function `_parse_bucket_uri` that Extracts the bucket name and prefix from a given S3 URI.
 
     This method takes an S3 URI 
     and returns the bucket name and the path prefix as a list.
-    Parameters
+    Parameters:
     uri : str
         The S3 URI to parse.
 
-    Returns
+    Returns:
     List[str]
         A list where the first element is the bucket name and the 
         second element is the path prefix.
-    ```
+
+    Note: 
+        -  The URI may contain leading and trailing slashes that need to be discarded.
+        -  There is no need to check the validity of the URI being an S3 URI.
+        -  Fragment identifiers shouldn't be considered.
+
+    """
     $PlaceHolder$
 
