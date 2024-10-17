@@ -12,6 +12,8 @@ This project is based on the workings of
 
 I just refactored the code and added an api wrapper for it to be used easily through installing a package
 
+commit hash - 3e72e3d0870dc168ea0222ab629b95b153cc8c22
+
 ## Usage
 ```python
 from arabic_pronunciation import phonetise_Arabic
