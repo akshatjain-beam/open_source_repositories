@@ -3,4 +3,4 @@
 set -euo pipefail
 
 cd /nanomath
-python -m pytest python -m pytest nanomath/
+python -m pytest nanomath/
