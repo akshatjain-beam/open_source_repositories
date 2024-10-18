@@ -686,7 +686,9 @@ class MockExchange:
     """Mock class for database exchanges."""
     def __init__(self, input_data):
         self.input = input_data
-
+    
+    def __getitem__(self, key):
+        return getattr(self, key)
 
 class MockActivity:
     """Mock class for database activities."""
