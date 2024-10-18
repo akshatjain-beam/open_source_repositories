@@ -14,35 +14,17 @@ def pandas_coverage(df, cl=ONE_SIGMA/100):
 
 
 def value_counts(df, *args, normalize=False, **kwargs):
-    """
-        Returns a Series containing counts of unique rows in the DataFrame.
+    possible_values = set(df)
+    normalization = len(df)
 
-        Parameters
-        df : pandas.DataFrame
-            The input DataFrame.
+    if normalize:
+        normalization = 1
 
-        *args
-            Variable number of arguments to pass to the `unc.mean` method.
-
-        normalize : bool, optional
-            If True, returns the frequencies of unique rows. Default is False.
-
-        **kwargs
-            Additional keyword arguments to pass to the `unc.mean` method.
-
-        Returns
-        -------
-        pandas.Series
-            A Series containing counts of unique rows in the DataFrame, indexed by a CategoricalIndex of unique values.
-
-        Notes
-        -----
-        - This function uses the `unc.mean` method to calculate the mean of the uncertainty values for each unique row.
-        - If `normalize` is True, the function returns the  frequencies of unique rows, which can be useful for comparing the distribution of values across different DataFrames.
-        - The function assumes that the input DataFrame contains uncertainty values that can be used to calculate the mean.
-    """
-    $PlaceHolder$
-
+    count = {
+        val: (df == val).unc.mean(*args, **kwargs) * normalization
+        for val in possible_values
+    }
+    return pd.Series(count, index=pd.CategoricalIndex(possible_values))
 
 
 def coverage(series, cl=0.68):
@@ -50,7 +32,11 @@ def coverage(series, cl=0.68):
 
     if len(series) == 0:
         return np.NAN  # pragma: no cover
-
-    centered_dist = np.abs(series - np.median(series))
-    b = np.percentile(centered_dist, 100 * cl)
-    return b
+    
+    """
+    Calculates the centered distances from the median and computes the 
+    `cl`-th percentile of these distances.
+    return:
+        float: The cl-th percentile of the absolute deviations from the median.
+    """
+    $PlaceHolder$

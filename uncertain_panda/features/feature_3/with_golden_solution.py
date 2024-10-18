@@ -1,13 +1,5 @@
 ```
-    possible_values = set(df)
-    normalization = len(df)
-
-    if normalize:
-        normalization = 1
-
-    count = {
-        val: (df == val).unc.mean(*args, **kwargs) * normalization
-        for val in possible_values
-    }
-    return pd.Series(count, index=pd.CategoricalIndex(possible_values))
+    b = np.percentile(centered_dist, 100 * cl)
+    b = np.sort(np.abs(series - series.median()))[int(cl * len(series))]
+    return b
 ```

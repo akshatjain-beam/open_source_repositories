@@ -1,28 +1,7 @@
 """
-    Returns a Series containing counts of unique rows in the DataFrame.
-
-    Parameters
-    df : pandas.DataFrame
-        The input DataFrame.
-
-    *args
-        Variable number of arguments to pass to the `unc.mean` method.
-
-    normalize : bool, optional
-        If True, returns the frequencies of unique rows. Default is False.
-
-    **kwargs
-        Additional keyword arguments to pass to the `unc.mean` method.
-
-    Returns
-    -------
-    pandas.Series
-        A Series containing counts of unique rows in the DataFrame, indexed by a CategoricalIndex of unique values.
-
-    Notes
-    -----
-    - This function uses the `unc.mean` method to calculate the mean of the uncertainty values for each unique row.
-    - If `normalize` is True, the function returns the  frequencies of unique rows, which can be useful for comparing the distribution of values across different DataFrames.
-    - The function assumes that the input DataFrame contains uncertainty values that can be used to calculate the mean.
+Calculates the centered distances from the median and computes the 
+`cl`-th percentile of these distances.
+return:
+float: The cl-th percentile of the absolute deviations from the median.
 """
 $PlaceHolder$

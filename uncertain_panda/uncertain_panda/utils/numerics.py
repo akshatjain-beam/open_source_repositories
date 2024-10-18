@@ -25,6 +25,7 @@ def value_counts(df, *args, normalize=False, **kwargs):
         for val in possible_values
     }
     return pd.Series(count, index=pd.CategoricalIndex(possible_values))
+    
 
 
 def coverage(series, cl=0.68):
