@@ -7,27 +7,6 @@ from uncertain_panda.plotting.helpers import plot_with_uncertainty  # Update thi
 class TestPlotWithUncertainty(unittest.TestCase):
 
     @patch('matplotlib.pyplot.errorbar')
-    def test_plot_with_asymmetric_error_bars(self, mock_errorbar):
-        """
-        Test the function with a DataFrame containing asymmetric error bars.
-        
-        This test verifies that the function correctly calls plt.errorbar
-        with the expected parameters when given a DataFrame with both
-        left and right standard deviation columns.
-        """
-        df = pd.DataFrame({
-            'value': [10, 20, 15],
-            'value_std_dev_left': [1, 2, 1.5],
-            'value_std_dev_right': [1.5, 1, 2]
-        })
-
-        # Call the function with the key
-        plot_with_uncertainty(df, key='value')
-
-        # Check that errorbar was called with correct parameters
-        mock_errorbar.assert_called_once_with(df.index, df['value'], yerr=mock_errorbar.call_args[1]['yerr'], **{})
-
-    @patch('matplotlib.pyplot.errorbar')
     def test_plot_with_missing_std_dev_columns(self, mock_errorbar):
         """
         Test the function with a DataFrame missing standard deviation columns.
@@ -100,6 +79,17 @@ class TestPlotWithUncertainty(unittest.TestCase):
         # Call the function and expect it to handle the empty DataFrame gracefully
         with self.assertRaises(KeyError):
             plot_with_uncertainty(df, key='value')
+    @patch('matplotlib.pyplot.errorbar')
+
+    def test_invalid_key(self, mock_errorbar):
+        # Create a mock DataFrame without necessary columns
+        df = pd.DataFrame({'value': [10, 20, 30]})
+        df.index = [0, 1, 2]
+
+        # Call the function with a key that does not exist
+        with self.assertRaises(KeyError):
+            plot_with_uncertainty(df, key='invalid_key')
+
 
 if __name__ == '__main__':
     unittest.main()

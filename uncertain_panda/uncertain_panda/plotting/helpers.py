@@ -12,4 +12,3 @@ def plot_with_uncertainty(df, key=None, **kwargs):
             df.nominal_value.plot(yerr=df.std_dev, **kwargs)
         else:
             df.plot(**kwargs)
-
