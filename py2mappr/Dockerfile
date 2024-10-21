@@ -14,7 +14,7 @@ RUN pip install pytest
 RUN pip install -r _requirements.txt
 
 # Run tests using pytest
-RUN python -m pytest 
+RUN python -m pytest tests/
 
 # Set the working directory to the root
 WORKDIR /
