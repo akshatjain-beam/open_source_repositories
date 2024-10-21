@@ -1,9 +1,10 @@
-"""Returns a class method from bottle.HTTPError.status_line attribute.
+"""
+Returns a class method from bottle.HTTPError.status_line attribute.
 Useful for patching `bottle.HTTPError` for web services.
 
 The status_line input should be converted to lowercase, 
 with only alphabetic characters considered, and spaces 
-replaced with underscores.
+replaced with underscores. Numeric status code should be excluded
 
 Args:
     status_line (str):  bottle.HTTPError.status_line text.
