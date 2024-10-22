@@ -1,5 +1,3 @@
-
-
 from .metadata import REGIONS
 
 
@@ -7,11 +5,11 @@ def relative_change(dataset, years, start, end):
     """
     Calculate fractional change values from year start to year end.
     The change is calculated as (value at end - value at start) / value at start.
-    Assumes years are the last axis of the array.
+    Assumes years are the last axis of the array. Code should handle both numpy array and list datatypes for `years`.
 
     Parameters:
     - dataset (numpy.ndarray): A NumPy array where the last axis represents different years.
-    - years (iterable): An iterable containing the years corresponding to the last axis of `dataset`.
+    - years (iterable): An iterable (like numpy array or list) containing the years corresponding to the last axis of `dataset`.
     - start (int or float): The starting year for calculating the relative change.
     - end (int or float): The ending year for calculating the relative change.
 
