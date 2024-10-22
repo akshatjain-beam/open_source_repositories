@@ -14,6 +14,7 @@ STROKE_REGEX = re.compile(r'''
     $
     ''', re.VERBOSE)
 
+
 STENO_DASH = '-'
 
 

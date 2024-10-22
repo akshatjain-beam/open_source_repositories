@@ -3,8 +3,7 @@ Write a Regular expression pattern to match Korean consonant-vowel pairs.
 
 This pattern is designed to match the structure of Korean characters, 
 which consist of an initial consonant, a medial vowel, and a final consonant.
-
-The pattern is divided into five groups:
+The pattern is divided into five groups (each group can contain multiple characters):
 
 * `number_start`: Matches any of the digits 1-5 (optional)
 * `initial`: Matches any of the Korean consonants ㅎ, ㅁ, ㄱ, ㅈ, ㄴ, ㄷ, ㅇ, ㅅ, ㅂ, ㄹ (optional)
