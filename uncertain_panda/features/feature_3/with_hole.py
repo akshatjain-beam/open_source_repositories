@@ -34,7 +34,7 @@ def coverage(series, cl=0.68):
         return np.NAN  # pragma: no cover
     
     """
-    Calculates the centered distances from the median and computes the 
+    Calculates the centered distances from the median of the input `series` of type numpy and computes the 
     `cl`-th percentile of these distances.
     return:
         float: The cl-th percentile of the absolute deviations from the median.
