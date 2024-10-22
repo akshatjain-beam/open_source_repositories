@@ -1,4 +1,4 @@
-from .metadata import REGIONS
+from . import REGIONS
 
 
 def relative_change(dataset, years, start, end):
@@ -9,6 +9,7 @@ def relative_change(dataset, years, start, end):
     return (
         dataset[..., years.index(end)] - dataset[..., years.index(start)]
     ) / dataset[..., years.index(start)]
+    
 
 
 def convert_to_location_dictionary(array, locations=REGIONS):
