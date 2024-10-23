@@ -1,132 +1,122 @@
-import csv
-from functools import lru_cache
-
+import datetime
 from pathlib import Path
+from urllib.parse import urlencode
 
-from rows.fields import slug
+import scrapy
+from rows.utils.date import date_range, today
 
-
-CITY_DATA_FILENAME = Path(__file__).parent / "data" / "municipios.csv"
-STATE_NAMES = {
-    "acre": "AC",
-    "alagoas": "AL",
-    "amapa": "AP",
-    "amazonas": "AM",
-    "bahia": "BA",
-    "ceara": "CE",
-    "distrito_federal": "DF",
-    "espirito_santo": "ES",
-    "goias": "GO",
-    "maranhao": "MA",
-    "mato_grosso": "MT",
-    "mato_grosso_do_sul": "MS",
-    "minas_gerais": "MG",
-    "para": "PA",
-    "pernambuco": "PE",
-    "parana": "PR",
-    "paraiba": "PB",
-    "piaui": "PI",
-    "rio_de_janeiro": "RJ",
-    "rio_grande_do_norte": "RN",
-    "rio_grande_do_sul": "RS",
-    "rondonia": "RO",
-    "roraima": "RR",
-    "santa_catarina": "SC",
-    "sao_paulo": "SP",
-    "sergipe": "SE",
-    "tocantins": "TO",
-}
-BLOCK_WORDS = ("da", "das", "de", "do", "dos", "e")
-WORD_MAP = {
-    "thome": "tome",
-    "thome": "tome",
-}
-CITY_SPELL_MAP = {
-    ("CE", "itapage"): "itapaje",
-    ("MA", "governador_edson_lobao"): "governador_edison_lobao",
-    ("MG", "brasopolis"): "brazopolis",
-    ("MG", "dona_eusebia"): "dona_euzebia",
-    ("MT", "poxoreo"): "poxoreu",
-    ("PA", "santa_isabel_do_para"): "santa_izabel_do_para",
-    ("PB", "serido"): "junco_do_serido",
-    ("PE", "iguaraci"): "iguaracy",
-    ("RJ", "parati"): "paraty",
-    ("RJ", "trajano_de_morais"): "trajano_de_moraes",
-    ("RN", "assu"): "acu",  # Açu
-    ("SC", "passos_de_torres"): "passo_de_torres",
-    ("SC", "picarras"): "balneario_picarras",
-    ("SC", "presidente_castelo_branco"): "presidente_castello_branco",
-    ("SE", "gracho_cardoso"): "graccho_cardoso",
-    ("SP", "florinia"): "florinea",
-    ("SP", "moji_mirim"): "mogi_mirim",
-    ("SP", "sao_luis_do_paraitinga"): "sao_luiz_do_paraitinga",
-    ("TO", "fortaleza_do_tabocao"): "tabocao",
-    ("TO", "sao_valerio_da_natividade"): "sao_valerio",
-}
+from .cities import STATE_CODES
+from .parser import IbamaPdfExtractor
 
 
-@lru_cache(maxsize=1)
-def read_state_codes():
-    with CITY_DATA_FILENAME.open() as fobj:
-        return {row["city_ibge_code"][:2]: row["state"] for row in csv.DictReader(fobj)}
+def define_years(start_year, end_year):
+    start_date = datetime.date(start_year, 1, 1)
+    end_date = datetime.date(end_year, 12, 31)
+    if end_date > today():
+        end_date = today()
+    return start_date, end_date
 
 
-@lru_cache(maxsize=5570 * 2)
-def city_key(state, city):
-    state, city = state.upper().strip(), slug(city).replace("sant_ana", "santana")
-    city = CITY_SPELL_MAP.get((state, city), city)
-    city = " ".join(
-        WORD_MAP.get(word, word)
-        for word in city.split("_")
-        if word not in BLOCK_WORDS
+class AutuacoesSpider(scrapy.Spider):
+    name = "autuacoes"
+    start_year = 1980
+    end_year = datetime.datetime.now().year
+    base_url = "https://servicos.ibama.gov.br/ctf/publico/areasembargadas/ConsultaPublicaAreasEmbargadas.php"
+
+    def __init__(self, download_path, start_year=None, end_year=None):
+        super().__init__()
+
+        self.download_path = Path(download_path)
+        if not self.download_path.exists():
+            self.download_path.mkdir(parents=True)
+        self.start_date, self.end_date = define_years(
+            int(start_year) if start_year else self.start_year,
+            int(end_year) if end_year else self.end_year,
+        )
+
+    def start_requests(self):
+        """
+        Iterates over a range of dates from `self.start_date` to one year beyond `self.end_date`,
+        with a yearly step. For each year in this range, it creates a date object `end_date` corresponding to
+        December 31st of that year.
+        """
+        $PlaceHolder$
+            for code in STATE_CODES.keys():
+                request = self.make_request(code, date, end_date)
+                if request is not None:  # if it's cached, it's None
+                    yield request
+
+    def make_request(self, state_code, start_date, end_date):
+        # Since `start_date` will be always `{some_year}-01-01` and `end_date`
+        # will be always `{some_year}-12-31` (same year), then the PDF being
+        # downloaded is for the whole year, thus the filename contains only the
+        # year (and not the complete start/end dates).
+        state = STATE_CODES[state_code]
+        filename = self.download_path / f"{state}-{start_date.year}.pdf"
+        meta = {"row": {"filename": filename}}
+
+        # If the file was downloaded already, use the downloaded version, but
+        # download again and overwrite the file if it's for the current year
+        # (could be changed since last download).
+        # TODO: add an option to force re-downloading all the files
+        if filename.exists() and start_date.year != today().year:
+            url = "file://" + str(filename.absolute())
+        else:
+            start = start_date.strftime("%d/%m/%Y")
+            end = end_date.strftime("%d/%m/%Y")
+            query = {
+                "modulo": "publico/areasembargadas/ConsultaPublicaAutuacoesAmbientais_pdf.php",
+                "$bvars": f",,,{state_code},,{start},{end}",
+                "ajax": "1",
+                "fpdf": "1",
+            }
+            url = self.base_url + "?" + urlencode(query)
+        return scrapy.Request(url, meta=meta)
+
+    def parse(self, response):
+        if b"foi encontrado registros para esse" in response.body:
+            return
+
+        filename = response.meta["row"]["filename"]
+        if not filename.exists():
+            with filename.open(mode="wb") as fobj:
+                fobj.write(response.body)
+
+        # TODO: add option to download-only (do not parse)
+        for row in IbamaPdfExtractor(filename, logger=self.logger):
+            yield row
+
+
+if __name__ == "__main__":
+    import argparse
+
+    from rows.utils import CsvLazyDictWriter
+    from scrapy import signals
+    from scrapy.crawler import CrawlerProcess
+    from scrapy.signalmanager import dispatcher
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--log-level", default="INFO")
+    parser.add_argument("--start-year", type=int)
+    parser.add_argument("--end-year", type=int)
+    parser.add_argument("download_path")
+    parser.add_argument("output_filename")
+    args = parser.parse_args()
+
+    output_filename = Path(args.output_filename)
+    if not output_filename.parent.exists():
+        output_filename.parent.mkdir(parents=True)
+    writer = CsvLazyDictWriter(output_filename)
+    def receive_item(signal, sender, item, response, spider):
+        writer.writerow(item)
+    dispatcher.connect(receive_item, signal=signals.item_passed)
+
+    process = CrawlerProcess(settings={"LOG_LEVEL": args.log_level})
+    process.crawl(
+        AutuacoesSpider,
+        download_path=args.download_path,
+        start_year=args.start_year,
+        end_year=args.end_year,
     )
-    return slug(state + " " + city)
-
-
-@lru_cache(maxsize=5570 * 2)
-def split_state_city(text):
-    words = text.split()
-    if len(words[0]) == 2:  # State acronym
-        return words[0], " ".join(words[1:])
-
-    else:  # This row has full state name
-        for index, _ in enumerate(words, start=1):
-            key = slug(" ".join(words[:index]))
-            if key in STATE_NAMES:
-                return STATE_NAMES[key], " ".join(words[index:])
-        raise ValueError(f"Cannot recognize state/city: {text}")
-
-
-@lru_cache(maxsize=1)
-def city_map():
-    with CITY_DATA_FILENAME.open() as fobj:
-        reader = csv.DictReader(fobj)
-        return {city_key(row["state"], row["city"]): row for row in reader}
-
-
-@lru_cache(maxsize=5570 * 2)
-def get_city(state, city):
-    """
-    Retrieve city information based on the provided state and city name.
-
-    This function allows the input of city names either as a simple city name
-    or in the format `city/state`. If the input city contains a state, 
-    it will validate that it matches the provided state argument. 
-
-    The function will return its state, name, and IBGE code. 
-
-    Parameters:
-        state (str): The state abbreviation / The state of the city. (e.g., 'CA' for California).
-        city (str): The city name. Can be in the format "City/State" or just "City".
-
-    Returns:
-        tuple: containing the state, city, and city IBGE code.
-
-    Raises:
-        ValueError: If the city contains a state that conflicts 
-                     with the provided state argument.
-        ValueError: If the city/state combination is not found.
-    """
-    $PlaceHolder$
-
-STATE_CODES = read_state_codes()
+    process.start()
+    writer.close()

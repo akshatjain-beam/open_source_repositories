@@ -1,22 +1,6 @@
 """
-    Retrieve city information based on the provided state and city name.
-
-    This function allows the input of city names either as a simple city name
-    or in the format `city/state`. If the input city contains a state, 
-    it will validate that it matches the provided state argument. 
-
-    The function will return its state, name, and IBGE code. 
-
-    Parameters:
-        state (str): The state abbreviation / The state of the city. (e.g., 'CA' for California).
-        city (str): The city name. Can be in the format "City/State" or just "City".
-
-    Returns:
-        tuple: containing the state, city, and city IBGE code.
-
-    Raises:
-        ValueError: If the city contains a state that conflicts 
-                     with the provided state argument.
-        ValueError: If the city/state combination is not found.
+Iterates over a range of dates from `self.start_date` to one year beyond `self.end_date`,
+with a yearly step. For each year in this range, it creates a date object `end_date` corresponding to
+December 31st of that year.
 """
-$PlaceHolder$
+$PlaceHolder
