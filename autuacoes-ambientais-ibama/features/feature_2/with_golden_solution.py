@@ -1,5 +1,4 @@
 ```
-@lru_cache(maxsize=5570 * 2)
 def split_state_city(text):
     words = text.split()
     if len(words[0]) == 2:  # State acronym
