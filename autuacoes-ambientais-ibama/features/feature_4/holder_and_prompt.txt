@@ -1,6 +1,6 @@
 """
 Iterates over a range of dates from `self.start_date` to one year beyond `self.end_date`,
-with a yearly step. For each year in this range, it creates a date object `end_date` corresponding to
+with a 'yearly' step using `date_range` function. For each year in this range, it creates a date object `end_date` corresponding to
 December 31st of that year.
 """
-$PlaceHolder
+$PlaceHolder$

@@ -1,3 +1,7 @@
+# FILE TO BE UPDATED
+
+path: /autuacoes-ambientais-ibama/autuacoes/spider.py
+```
 import datetime
 from pathlib import Path
 from urllib.parse import urlencode
@@ -37,7 +41,7 @@ class AutuacoesSpider(scrapy.Spider):
     def start_requests(self):
         """
         Iterates over a range of dates from `self.start_date` to one year beyond `self.end_date`,
-        with a yearly step. For each year in this range, it creates a date object `end_date` corresponding to
+        with a 'yearly' step using `date_range` function. For each year in this range, it creates a date object `end_date` corresponding to
         December 31st of that year.
         """
         $PlaceHolder$
@@ -120,3 +124,5 @@ if __name__ == "__main__":
     )
     process.start()
     writer.close()
+
+```
