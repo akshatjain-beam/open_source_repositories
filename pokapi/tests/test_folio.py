@@ -105,3 +105,40 @@ def test_raw_json_field():
     r1 = folio.record(raw_json = raw_json)
     r2 = folio.record(raw_json = r1._raw_data)
     assert r1 == r2
+
+
+import unittest
+from pokapi.folio import cleaned
+class TestCleanedFunction(unittest.TestCase):
+    
+    def test_cleaned_with_normal_text(self):
+        """Test with normal text."""
+        self.assertEqual(cleaned("  Hello World!  "), "Hello World!")
+
+    def test_cleaned_with_trailing_periods(self):
+        """Test with trailing periods."""
+        self.assertEqual(cleaned("File name..."), "File name")
+    
+    def test_cleaned_with_trailing_slashes(self):
+        """Test with trailing slashes."""
+        self.assertEqual(cleaned("path/to/directory//"), "path/to/directory")
+    
+    
+    def test_cleaned_with_only_spaces(self):
+        """Test with a string that only has spaces."""
+        self.assertEqual(cleaned("    "), "")
+    
+    def test_cleaned_with_empty_string(self):
+        """Test with an empty string."""
+        self.assertEqual(cleaned(""), "")
+    
+    def test_cleaned_with_none(self):
+        """Test with None as input."""
+        self.assertEqual(cleaned(None), None)
+
+    def test_cleaned_with_text_with_no_trailing_chars(self):
+        """Test with text that has no trailing characters."""
+        self.assertEqual(cleaned("No trailing characters"), "No trailing characters")
+
+if __name__ == "__main__":
+    unittest.main()
