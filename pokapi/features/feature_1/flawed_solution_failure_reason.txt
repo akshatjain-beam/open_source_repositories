@@ -1,0 +1,3 @@
+Test cases failed- test_arabic_name, test_chinese_name, test_russian_name
+Relevant prompt section- "It uses a regular expression to match the sequence of leading characters that includes any combination of hyphens, periods, commas, letters      [in any language] and spaces from the name."
+Reason- The LLM Generated solution's regex only matches Latin and extended Latin characters, failing to recognize characters from language like Arabic, Chinese, and Russian scripts, resulting in test case failure.
