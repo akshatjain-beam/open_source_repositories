@@ -1,22 +1,22 @@
 """
-    Mark the task as done or undone and update its status accordingly.
+Mark the task as done or undone and update its status accordingly.
 
-    If the task is already in the desired state (i.e., done or not done), this method does nothing.
-    If the task is being marked as done, it:
-    - Removes its priority.
-    - Updates the task's raw string to include the completion marker (`x `), the current date[iso format], and the existing raw string..
-    - Adjusts the due date if the task has a recurrence interval by-
-        - The recurrence interval is parsed into its prefix, value, and interval type using a regular expression.
-        - The prefix determines whether to add the recurrence interval to the current due date ("+")[BY using get_due()] or today's date.
-        - The Util.date_add_interval function is used to calculate the new due date.
+This method modifies the task's state based on the provided `done` parameter. If the task is already in the desired state, no action is taken.
 
-    If the task is being marked as undone, it removes the completion marker from the task's raw string.
+When marking the task as done:
+- The task's priority is removed.
+- The task's raw string is updated to include a completion marker (`x `), the current date in ISO format, and the existing raw string.
+- If the task has a recurrence interval, the due date is adjusted:
+- The recurrence interval is parsed into its prefix, value, and interval type using a regular expression `_rec_int_parts_regex`.
+- The prefix determines whether to add the recurrence interval to the current due date (if `prefix` is "+") or to today's date.
+- The new due date is calculated using the `date_add_interval` method from the `Util` class.
 
-    Args:
-        done (bool, optional): Whether to mark the task as done. Defaults to True.
+When marking the task as undone, the completion marker is removed from the task's raw string using `_done_regex`.
 
-    Returns:
-        None or datetime: If the task is marked as done and has a recurrence interval, returns the new due date. Otherwise, returns None.
+Args:
+    done (bool): If True, marks the task as done; if False, marks it as undone.
 
+Returns:
+    datetime or None: Returns the new due date if the task is marked as done and has a recurrence interval; otherwise, returns None.
 """
 $PlaceHolder$

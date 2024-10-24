@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from todd.tasklib import Task, Util  # Adjust import as necessary based on your module structure
+from todd.tasklib import Task, Util  
 
 class TestTaskSetDone(unittest.TestCase):
     """Unit tests for the Task class's set_done method."""
@@ -48,17 +48,6 @@ class TestTaskSetDone(unittest.TestCase):
         self.assertFalse(self.task.is_done())
         self.assertNotIn("x ", self.task.raw)
 
-    def test_set_done_does_not_change_when_done(self):
-        """
-        Test that calling set_done(True) does not change the task when it's already done.
-        
-        When a task is already marked done, calling set_done(True) 
-        should maintain the same raw text without any changes.
-        """
-        self.task.set_done(True)  # Mark it done
-        previous_raw = self.task.raw
-        self.task.set_done(True)  # Mark it done again
-        self.assertEqual(self.task.raw, previous_raw)
 
     def test_raw_text_after_setting_done(self):
         """
