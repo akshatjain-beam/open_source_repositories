@@ -1,0 +1,30 @@
+ """
+    Create a function `__repr__` that returns a string representation of the FolioRecord instance.
+
+    The representation is formatted with the class name followed by
+    each field and its corresponding value in the instance. Fields are sorted alphabetically in the output  
+    and their values are formatted as follows:
+    - If the value is a list, it is represented as is.
+    - If the value is not a list, it is enclosed in double quotes.
+    If the attribute does not exist, handle missing attributes by None
+
+    Returns:
+        str: A string representation of the FolioRecord instance.
+              If an instance has the following values:
+        
+    Example:    
+        - id: '123'
+        - accession_number: 'A001'
+        - title: 'The Great Book'
+        - author: 'John Doe'
+        - publisher: 'Big Publisher'
+        - edition: 'First'
+        - year: '2020'
+        - isbn_issn: '123-456-789'
+
+        The output of this method would be:
+        'FolioRecord(accession_number="A001", author="John Doe", edition="First",
+        id="123", isbn_issn="123-456-789", publisher="Big Publisher",
+        title="The Great Book", year="2020")'
+"""
+$PlaceHolder$ 
