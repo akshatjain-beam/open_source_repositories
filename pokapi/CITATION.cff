@@ -1,0 +1,19 @@
+# YAML 1.2
+---
+authors: 
+  -
+    affiliation: "Caltech Library"
+    family-names: Hucka
+    given-names: Michael
+    orcid: "https://orcid.org/0000-0001-9105-5960"
+cff-version: "1.1.0"
+date-released: 2021-08-20
+doi: 
+keywords: 
+  - Folio
+  - Library Services Platforms
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/caltechlibrary/pokapi"
+title: "Python Okapi Interface"
+version: "0.3.0"
+...

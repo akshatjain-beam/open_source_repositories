@@ -1,0 +1,15 @@
+# =============================================================================
+# @file    requirements.txt
+# @brief   Python dependencies for Pokapi
+# @created 2021-08-20
+# @license Please see the file named LICENSE in the project directory
+# @website https://github.com/caltechlibrary/pokapi
+# =============================================================================
+
+commonpy        >= 1.3.10
+lxml            >= 4.6.3
+python-decouple >= 3.4
+sidetrack       >= 1.4.0
+uritemplate     >= 3.0.0
+validators      >= 0.18.2
+python-decouple
