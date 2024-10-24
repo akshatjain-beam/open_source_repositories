@@ -5,6 +5,8 @@ Py2Mappr is a python library to generate [openmappr player](https://github.com/v
 
 It provides a simple API to generate a map from a set of nodes and links. The API is designed to be flexible and extensible. It is also designed to be used in a pipeline. The output of the library is a self contained folder with all the resources necessary to render a map.
 
+commit hash - 81ff350e4e98199e00f465a113c646565d5bd4e7
+
 ## Installing
 At the moment the library is not available on pypi. There are two ways to install the library:
 
