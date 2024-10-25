@@ -3,4 +3,4 @@
 set -euo pipefail
 
 cd /rivr
-python -m pytest
+python -m pytest tests/
