@@ -1,3 +1,5 @@
 ```
-    return np.min(np.where(np.cumsum(readlengths) >= 0.5 * np.sum(readlengths)))
+    cumsum = np.cumsum(readlengths)
+    n50_pos = int(np.searchsorted(cumsum, 0.5*cumsum[-1]) + 1)
+    return readlengths[n50_pos]
 ```
