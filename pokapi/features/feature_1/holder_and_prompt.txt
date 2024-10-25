@@ -1,10 +1,10 @@
 """
 Extracts and cleans the name from a given field dictionary.
 
-This function takes a dictionary containing a name and removes any trailing characters or additional
+This function(`extracted_name`) takes a dictionary containing a name and removes any trailing characters or additional
 unwanted text using a regular expression. It returns the cleaned name. 
 It uses a regular expression to match the sequence of leading characters that includes any combination 
-of hyphens, periods, commas, letters [in any language] and spaces from the name, and then strips unwanted characters [spaces and comma]
+of hyphens, periods, commas, letters [in any language - This should support a wide range of unicode characters] and spaces from the name, and then strips unwanted characters [spaces and comma]
 from the matched result.
 
 If no valid characters are found at the beginning of the name, the original name is returned unmodified.
