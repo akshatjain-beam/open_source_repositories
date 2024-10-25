@@ -8,6 +8,7 @@ Pokapi (_Python Okapi Interface_)  is a Python package for getting basic data fr
 [![Python](https://img.shields.io/badge/Python-3.6+-brightgreen.svg?style=flat-square)](http://shields.io)
 [![PyPI](https://img.shields.io/pypi/v/pokapi.svg?style=flat-square&color=orange)](https://pypi.org/project/pokapi/)
 
+commit hash - 1eca1f1de006b0fbc0cc3d0909c4b590c14c5a4a
 
 ## Table of contents
 
