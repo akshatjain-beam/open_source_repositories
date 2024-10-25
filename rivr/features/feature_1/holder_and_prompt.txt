@@ -1,0 +1,7 @@
+"""
+check if the provided `expires` parameter is not None. 
+If `expires` is a `datetime.datetime` object, it converts it to a 
+formatted string resembling the RFC 1123 format, but without timezone 
+information.
+"""
+%PlaceHolder%

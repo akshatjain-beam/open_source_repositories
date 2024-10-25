@@ -135,3 +135,67 @@ class ResponseNotAllowedTest(unittest.TestCase):
     def test_permitted_methods(self) -> None:
         response = ResponseNotAllowed(['GET', 'HEAD', 'OPTIONS'])
         assert response.headers['Allow'] == 'GET, HEAD, OPTIONS'
+
+
+#--------------------------
+
+import unittest
+
+from http.cookies import SimpleCookie
+
+# Assuming Response class and other classes are already imported or defined above
+
+class TestResponseSetCookie(unittest.TestCase):
+    
+    def setUp(self):
+        """Create a Response object for testing."""
+        self.response = Response()
+
+    def test_set_cookie_with_datetime_expires(self):
+        """Test setting a cookie with a datetime expires."""
+        # Create a datetime object for expiration
+        expires_date = datetime.datetime(2024, 10, 25, 15, 30, 0)
+        
+        # Set the cookie
+        self.response.set_cookie('test_cookie', 'test_value', expires=expires_date)
+
+        # Check if the cookie is set correctly
+        cookie = self.response.cookies['test_cookie']
+        expected_expires = 'Fri, 25 Oct 2024 15:30:00'  # Expected formatted expires date
+
+        # Assert that the cookie expires value matches the expected format
+        self.assertEqual(cookie['expires'], expected_expires)
+    def test_set_cookie_with_datetime_expires_1(self):
+        """Test setting a cookie with a datetime expires for a future date."""
+        expires_date = datetime.datetime(2025, 1, 1, 12, 0, 0)
+        self.response.set_cookie('test_cookie_1', 'test_value', expires=expires_date)
+        cookie = self.response.cookies['test_cookie_1']
+        expected_expires = 'Wed, 01 Jan 2025 12:00:00'
+        self.assertEqual(cookie['expires'], expected_expires)
+
+
+    def test_set_cookie_with_datetime_expires_2(self):
+        """Test setting a cookie with a datetime expires for a different future date."""
+        expires_date = datetime.datetime(2023, 12, 31, 23, 59, 59)
+        self.response.set_cookie('test_cookie_2', 'test_value', expires=expires_date)
+        cookie = self.response.cookies['test_cookie_2']
+        expected_expires = 'Sun, 31 Dec 2023 23:59:59'
+        self.assertEqual(cookie['expires'], expected_expires)
+
+
+    def test_set_cookie_with_datetime_expires_3(self):
+        """Test setting a cookie with a datetime expires for another future date."""
+        expires_date = datetime.datetime(2024, 7, 4, 9, 30, 0)
+        self.response.set_cookie('test_cookie_3', 'test_value', expires=expires_date)
+        cookie = self.response.cookies['test_cookie_3']
+        expected_expires = 'Thu, 04 Jul 2024 09:30:00'
+        self.assertEqual(cookie['expires'], expected_expires)
+
+
+    def test_set_cookie_with_datetime_expires_4(self):
+        """Test setting a cookie with a datetime expires for yet another future date."""
+        expires_date = datetime.datetime(2026, 5, 15, 18, 0, 0)
+        self.response.set_cookie('test_cookie_4', 'test_value', expires=expires_date)
+        cookie = self.response.cookies['test_cookie_4']
+        expected_expires = 'Fri, 15 May 2026 18:00:00'
+        self.assertEqual(cookie['expires'], expected_expires)

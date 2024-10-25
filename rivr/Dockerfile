@@ -7,11 +7,11 @@ WORKDIR /rivr
 # Copy the project files into the container
 COPY . /rivr
 
-# Install Poetry and pytest globally
-RUN pip install poetry pytest
+# Install pytest globally
+RUN pip install pytest
 
-# Install all dependencies using Poetry
-RUN pip install -r requirements 
+# Install all dependencies 
+# RUN poetry install .  
 
 # Run tests using pytest
 RUN python -m pytest tests/
