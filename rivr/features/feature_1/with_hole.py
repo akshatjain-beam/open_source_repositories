@@ -68,7 +68,7 @@ class Response(HTTPMessage):
         formatted string resembling the RFC 1123 format, but without timezone 
         information.
         """
-        %PlaceHolder%
+        $PlaceHolder$
         
 
             self.cookies[key]['expires'] = expires
