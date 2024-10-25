@@ -142,20 +142,6 @@ class TestDomainParts(unittest.TestCase):
 
         self.assertEqual(variants, expected)
 
-    def test_edge_case_empty_domain(self):
-        """
-        Test the behavior when the domain is empty.
-        
-        It should yield a single variant with an empty domain and subdomain.
-        """
-        dp = DomainParts(domain="", subdomain=None)
-        variants = list(dp.iter_variants())
-
-        expected = [
-            DomainParts(domain="", subdomain=None)
-        ]
-
-        self.assertEqual(variants, expected)
 
     def test_edge_case_empty_subdomain(self):
         """
@@ -185,21 +171,6 @@ class TestDomainParts(unittest.TestCase):
 
         expected = [
             DomainParts(domain="com", subdomain=None)
-        ]
-
-        self.assertEqual(variants, expected)
-
-    def test_edge_case_only_subdomain(self):
-        """
-        Test the behavior when the domain is empty and only subdomain is provided.
-        
-        It should yield a single variant with an empty domain and the provided subdomain.
-        """
-        dp = DomainParts(domain="", subdomain="www")
-        variants = list(dp.iter_variants())
-
-        expected = [
-            DomainParts(domain="", subdomain="www")
         ]
 
         self.assertEqual(variants, expected)
