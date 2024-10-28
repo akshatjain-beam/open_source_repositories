@@ -111,7 +111,12 @@ def F0(x, y, z):
     return x ^ y ^ z
 
 def F1(x, y, z):
-    return (x & y) | (((~x) % 0x100000000) & z)
+
+    """
+    This line of code first applies the AND operation to combine ( x ) and ( y ), then modifies ( x ) by taking its complement (NOT) and converting it to its positive 32-bit equivalent using modulo ( 0x100000000 ). Next, it performs an AND operation with ( z ) and finally merges both results using OR, returning the final outcome. 
+    """
+    $PlaceHolder$
+    
 
 def F2(x, y, z):
     return (x | ((~y) % 0x100000000)) ^ z
