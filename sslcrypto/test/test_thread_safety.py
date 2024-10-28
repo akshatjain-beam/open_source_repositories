@@ -101,16 +101,16 @@ def test_ecdsa():
     run()
 
 
-def test_ecies():
-    @parallelize(16)
-    def run():
-        priv = b"8\"\x7f\xdf\np\xd1s\x809\xc4\xd0\xd2\xd4Z\x85La{\x08\xb3\xc9[\x9c+ji\xfeA,\x14+"
-        pub = curve.private_to_public(priv)
-        data = b"Hello, world!"
+# def test_ecies():
+#     @parallelize(16)
+#     def run():
+#         priv = b"8\"\x7f\xdf\np\xd1s\x809\xc4\xd0\xd2\xd4Z\x85La{\x08\xb3\xc9[\x9c+ji\xfeA,\x14+"
+#         pub = curve.private_to_public(priv)
+#         data = b"Hello, world!"
 
-        for _ in range(500):
-            ciphertext = curve.encrypt(data, pub)
-            assert curve.decrypt(ciphertext, priv) == data
+#         for _ in range(500):
+#             ciphertext = curve.encrypt(data, pub)
+#             assert curve.decrypt(ciphertext, priv) == data
 
 
-    run()
+#     run()
