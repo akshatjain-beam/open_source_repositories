@@ -1,0 +1,80 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+    strategy:
+      max-parallel: 16
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
+        openssl-version: [0.9.8, 1.0.0, 1.0.1, 1.0.2, 1.1.0, 1.1.1]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Download & install OpenSSL ${{ matrix.openssl-version }}
+      if: matrix.openssl-version != '1.1.1'
+      run: |
+        wget https://www.openssl.org/source/old/$(echo ${{ matrix.openssl-version }} | sed s/^0\\.9\\.8$/0.9.x/g)/openssl-${{ matrix.openssl-version }}.tar.gz
+        mkdir openssl
+        tar -xzf openssl-${{ matrix.openssl-version }}.tar.gz
+        cd openssl-${{ matrix.openssl-version }}
+        if [ "${{ matrix.openssl-version }}" == "0.9.8" ]; then
+          ./config shared no-asm
+        else
+          ./config shared
+        fi
+        make depend
+        make all
+        sudo ln -sf "$(readlink -f libcrypto.so)" /usr/lib/x86_64-linux-gnu/libcrypto.so
+        sudo ln -sf "$(readlink -f libssl.so)" /usr/lib/x86_64-linux-gnu/libssl.so
+        sudo ldconfig -X
+        cd ..
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install
+      run: |
+        mkdir output
+        sudo python3 -m pip install setuptools
+        sudo python3 -m pip install --upgrade pip
+        sudo python3 -m pip install .
+
+    - name: Test
+      run: |
+        sudo python3 -m pip install pytest coverage
+        coverage run -m pytest test
+        coverage report | tail -n 1 | tr -s " " | cut -d " " -f4 | head -c -2 >output/coverage.txt
+
+    - name: Lint
+      run: |
+        sudo python3 -m pip install pylint
+        pylint --output-format=parseable --exit-zero sslcrypto >output/lint-out.txt
+
+    - name: Upload results
+      if: github.event_name == "push"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git checkout gh-action
+
+        quality=$(cat output/lint-out.txt | grep "Your code has been rated at" | cut -d " " -f7 | cut -d/ -f1 | python3 -c "print(round(float(input()) * 10))")
+        curl https://img.shields.io/badge/quality-$quality%25-brightgreen.svg >quality.svg
+
+        coverage=$(cat output/coverage.txt)
+        curl https://img.shields.io/badge/coverage-$coverage%25-brightgreen.svg >coverage.svg
+
+        git add quality.svg coverage.svg
+        git commit -m "Update shields" || true
+
+    - uses: ad-m/github-push-action@master
+      if: matrix.python-version == '3.7' && github.event_name == 'push'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-action
