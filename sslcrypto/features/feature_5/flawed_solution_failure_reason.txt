@@ -1,0 +1,4 @@
+Unit tets failed-test_case_4_prime_mod_3
+Prompt section -Use repeated squaring to find the smallest integer i such that t^{(2^i)} ≡ 1 mod p.
+    - If no such i is found, raise a ValueError.
+Reason -The prompt does not specify any condition for raising an error when i equals m. However, the LLM Generated solution introduces this condition arbitrarily. This additional check is not only unnecessary but also detrimental, as it causes the function to fail prematurely. Instead of allowing the algorithm to continue searching for a valid modular square root, this erroneous condition interrupts the process and prevents the function from returning a valid result when one exists.
