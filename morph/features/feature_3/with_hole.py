@@ -328,6 +328,9 @@ def pick(source, *keys, **kws):
         -The code iterates over the attributes of the source object.
         -It checks if each attribute name starts with the prefix.
         -If it does, it creates a new dictionary where the key is the attribute name with the prefix removed.
+
+    Note:
+    -Consider the potential for non-string keys and handle them accordingly.
     """
     $PlaceHolder$
     if items is not None:

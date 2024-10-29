@@ -1,13 +1,16 @@
 """
-    Write line of codes that processes key-value pairs or attributes from a source, filtering and modifying keys based on a specified prefix.
-    It handles two cases depending on whether `items` is provided or not:
-    - If `items` is provided- 
-        -The code iterates over the items (which is expected to be a list of key-value pairs).
-        -For each key-value pair, it checks if the key starts with the given prefix.
-        -If it does, it constructs a new dictionary where the key is the original key with the prefix removed.
-    - If `items` is not provided-
-        -The code iterates over the attributes of the source object.
-        -It checks if each attribute name starts with the prefix.
-        -If it does, it creates a new dictionary where the key is the attribute name with the prefix removed.
+Write line of codes that processes key-value pairs or attributes from a source, filtering and modifying keys based on a specified prefix.
+It handles two cases depending on whether `items` is provided or not:
+- If `items` is provided- 
+    -The code iterates over the items (which is expected to be a list of key-value pairs).
+    -For each key-value pair, it checks if the key starts with the given prefix.
+    -If it does, it constructs a new dictionary where the key is the original key with the prefix removed.
+- If `items` is not provided-
+    -The code iterates over the attributes of the source object.
+    -It checks if each attribute name starts with the prefix.
+    -If it does, it creates a new dictionary where the key is the attribute name with the prefix removed.
+
+Note:
+-Consider the potential for non-string keys and handle them accordingly.
 """
 $PlaceHolder$
