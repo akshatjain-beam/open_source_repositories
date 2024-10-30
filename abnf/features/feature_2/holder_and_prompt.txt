@@ -1,0 +1,9 @@
+"""
+Define an `extended-language-range` using ABNF (Augmented Backus-Naur Form) syntax.
+
+The `extended-language-range` consists of:
+- One or more (`1*`) sequences of 8-bit alphabetic characters (ALPHA) or a single asterisk ("*").
+- Optionally followed by zero or more repetitions (`*`) of a hyphen ("-") followed by one or more (`1*`) 
+alphanumeric characters (alphanum) or another asterisk ("*").
+"""
+$PlaceHolder$
