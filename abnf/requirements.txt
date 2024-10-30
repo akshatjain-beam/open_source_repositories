@@ -1,0 +1,19 @@
+# This requirements file is for development virtual environments.
+
+
+# -e .
+pip
+setuptools 
+wheel
+black
+check-manifest
+mypy
+pep517
+pytest
+pytest-cov
+pytest-mypy
+setuptools_scm
+tox
+tox-pyenv
+twine
+wheel
