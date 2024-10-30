@@ -135,7 +135,7 @@ def get_N50(readlengths):
 def remove_length_outliers(df, columnname):
     """
     Remove records in the dataframe of specified columnanme where length-outliers 
-    are above 3 standard deviations from the median.
+    are above 3 standard deviations[Use direct comparison] from the median.
     Parameters:
         df (pandas.DataFrame): The DataFrame from which to remove outliers.
         columnname (str): The name of the column in the DataFrame to analyze for outliers.
