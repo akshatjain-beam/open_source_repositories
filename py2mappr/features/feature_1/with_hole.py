@@ -3,6 +3,22 @@ import pandas as pd
 import numpy as np
 from .attr_types import ATTR_TYPE, RENDER_TYPE
 
+def _detect_number_column(df: pd.DataFrame, column: str) -> ATTR_TYPE:
+    if df[column].min() >= 1800 and df[column].max() <= 2100:
+        return "year"
+    if df[column].min() >= 1000000000 and df[column].max() <= 9999999999:
+        return "timestamp"
+
+    min = df[column].min()
+    max = df[column].max()
+
+    if max - min == 1:
+        return "float"
+
+    if float(min).is_integer() and float(max).is_integer():
+        return "integer"
+
+    return "float"
 
 """
 Create a function `calculate_attr_types` that's calculates the attribute types of the columns of the given data frame.
@@ -32,26 +48,6 @@ Returns
 attribute types as values.
 """
 $PlaceHolder$
-
-
-
-def _detect_number_column(df: pd.DataFrame, column: str) -> ATTR_TYPE:
-    if df[column].min() >= 1800 and df[column].max() <= 2100:
-        return "year"
-    if df[column].min() >= 1000000000 and df[column].max() <= 9999999999:
-        return "timestamp"
-
-    min = df[column].min()
-    max = df[column].max()
-
-    if max - min == 1:
-        return "float"
-
-    if float(min).is_integer() and float(max).is_integer():
-        return "integer"
-
-    return "float"
-
 
 def calculate_render_type(
     df: pd.DataFrame, attr_types: Dict[str, ATTR_TYPE]
