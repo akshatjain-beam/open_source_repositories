@@ -11,7 +11,7 @@ COPY . /abnf
 RUN pip install pytest
 
 # Install all dependencies using Poetry
-RUN pip install requirements.txt 
+RUN pip install -r requirements.txt 
 
 # Run tests using pytest
 RUN python -m pytest tests/
