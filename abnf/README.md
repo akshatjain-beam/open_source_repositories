@@ -13,6 +13,7 @@ grammar.
 ABNF was originally written a few years ago for parsing HTTP headers in a web framework.
 The code herein has been in use in production here and there on the internet since then.
 
+commit hash- 6c6fb911360fccd3eec5e1c9af151e08aa5e1a01
 
 ## Requirements
 
