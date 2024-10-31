@@ -1,0 +1,7 @@
+//Write lines of code that processes the `value`` based on the kind of the field 'm'.
+// It performs specific actions depending on whether the field is an unsigned integer or a boolean.
+// After processing the value, the function creates a bitmask with `m.length` bits set to 1. This bitmask is then shifted left by `m.offset` positions, aligning it within the specified segment of the value. A bitwise AND operation is then performed between the original value and the shifted bitmask, isolating the relevant bits defined by `m.length` and effectively setting all other bits to zero.
+// The function modifies the 'value' variable based on the field type:
+// - For unsigned integers (Uint8, Uint16, Uint32, Uint64, Uint), it extracts the unsigned integer value.
+// - For booleans, it sets 'value' to 1 if the boolean is true
+$PlaceHolder$
