@@ -43,101 +43,147 @@ func TestBitFieldOfUnsupportedTypeError(t *testing.T) {
 	)
 }
 
-func TestBitFieldOfLengthOverflowingTypeError(t *testing.T) {
+// TestBitFieldOfUnsupportedTypeErrorMap tests the error message generation for a bit field of unsupported type "map".
+func TestBitFieldOfUnsupportedTypeErrorMap(t *testing.T) {
 	const (
-		bitFieldLength = 32
-		bitFieldType   = "uint8"
+		bitFieldType = "map"
 
-		errorMessage = "" +
-			"The number of unique values a bit field can contain " +
-			"must not exceed the size of its type. " +
-			"Argument to Marshal points to a format-struct \"Format\" " +
-			"nesting a word-struct \"Word\" " +
-			"that has a bit field \"BitField\" " +
-			"of length 32 exceeding the size of type \"uint8\"."
-	)
-
-	var (
-		e BitFieldError
-	)
-
-	e = NewBitFieldOfLengthOverflowingTypeError(bitFieldLength, bitFieldType)
-
-	e.SetFunctionName(functionName)
-
-	e.SetFormatName(formatName)
-
-	e.SetWordName(wordName)
-
-	e.SetBitFieldName(bitFieldName)
-
-	assert.Equal(t,
-		errorMessage, e.Error(),
-	)
-}
-
-func TestBitFieldWithMalformedTagError(t *testing.T) {
-	const (
 		errorMessage = "" +
 			"A bit field is represented " +
 			"by an exported field of a word-struct " +
-			"tagged with a key \"bitfield\" and a value " +
-			"indicating the length of the bit field in number of bits " +
-			"(e.g. `bitfield:\"1\"`). " +
+			"of type uintN or bool. " +
 			"Argument to Marshal points to a format-struct \"Format\" " +
 			"nesting a word-struct \"Word\" " +
 			"that has a bit field \"BitField\" " +
-			"with a malformed struct tag."
+			"of unsupported type \"map\"."
 	)
 
 	var (
 		e BitFieldError
 	)
 
-	e = NewBitFieldWithMalformedTagError()
+	e = NewBitFieldOfUnsupportedTypeError(bitFieldType)
 
 	e.SetFunctionName(functionName)
-
 	e.SetFormatName(formatName)
-
 	e.SetWordName(wordName)
-
 	e.SetBitFieldName(bitFieldName)
 
-	assert.Equal(t,
-		errorMessage, e.Error(),
-	)
+	assert.Equal(t, errorMessage, e.Error())
 }
 
-func TestBitFieldWithNoStructTagError(t *testing.T) {
+// TestBitFieldOfUnsupportedTypeError tests the error message generation for a bit field of unsupported type "int".
+func TestBitFieldOfUnsupportedType_Error(t *testing.T) {
 	const (
+		bitFieldType = "int"
+
 		errorMessage = "" +
 			"A bit field is represented " +
 			"by an exported field of a word-struct " +
-			"tagged with a key \"bitfield\" and a value " +
-			"indicating the length of the bit field in number of bits " +
-			"(e.g. `bitfield:\"1\"`). " +
+			"of type uintN or bool. " +
 			"Argument to Marshal points to a format-struct \"Format\" " +
 			"nesting a word-struct \"Word\" " +
 			"that has a bit field \"BitField\" " +
-			"with no struct tag."
+			"of unsupported type \"int\"."
 	)
 
 	var (
 		e BitFieldError
 	)
 
-	e = NewBitFieldWithNoStructTagError()
+	e = NewBitFieldOfUnsupportedTypeError(bitFieldType)
 
 	e.SetFunctionName(functionName)
-
 	e.SetFormatName(formatName)
-
 	e.SetWordName(wordName)
-
 	e.SetBitFieldName(bitFieldName)
 
-	assert.Equal(t,
-		errorMessage, e.Error(),
+	assert.Equal(t, errorMessage, e.Error())
+}
+
+// TestBitFieldOfUnsupportedTypeErrorBool tests the error message generation for a bit field of unsupported type "float".
+func TestBitFieldOfUnsupportedTypeErrorBool(t *testing.T) {
+	const (
+		bitFieldType = "float"
+
+		errorMessage = "" +
+			"A bit field is represented " +
+			"by an exported field of a word-struct " +
+			"of type uintN or bool. " +
+			"Argument to Marshal points to a format-struct \"Format\" " +
+			"nesting a word-struct \"Word\" " +
+			"that has a bit field \"BitField\" " +
+			"of unsupported type \"float\"."
 	)
+
+	var (
+		e BitFieldError
+	)
+
+	e = NewBitFieldOfUnsupportedTypeError(bitFieldType)
+
+	e.SetFunctionName(functionName)
+	e.SetFormatName(formatName)
+	e.SetWordName(wordName)
+	e.SetBitFieldName(bitFieldName)
+
+	assert.Equal(t, errorMessage, e.Error())
+}
+
+// TestBitFieldOfUnsupportedTypeErrorString tests the error message generation for a bit field of unsupported type "string".
+func TestBitFieldOfUnsupportedTypeErrorString(t *testing.T) {
+	const (
+		bitFieldType = "string"
+
+		errorMessage = "" +
+			"A bit field is represented " +
+			"by an exported field of a word-struct " +
+			"of type uintN or bool. " +
+			"Argument to Marshal points to a format-struct \"Format\" " +
+			"nesting a word-struct \"Word\" " +
+			"that has a bit field \"BitField\" " +
+			"of unsupported type \"string\"."
+	)
+
+	var (
+		e BitFieldError
+	)
+
+	e = NewBitFieldOfUnsupportedTypeError(bitFieldType)
+
+	e.SetFunctionName(functionName)
+	e.SetFormatName(formatName)
+	e.SetWordName(wordName)
+	e.SetBitFieldName(bitFieldName)
+
+	assert.Equal(t, errorMessage, e.Error())
+}
+
+// TestBitFieldOfUnsupportedTypeErrorSlice tests the error message generation for a bit field of unsupported type "slice".
+func TestBitFieldOfUnsupportedTypeErrorSlice(t *testing.T) {
+	const (
+		bitFieldType = "slice"
+
+		errorMessage = "" +
+			"A bit field is represented " +
+			"by an exported field of a word-struct " +
+			"of type uintN or bool. " +
+			"Argument to Marshal points to a format-struct \"Format\" " +
+			"nesting a word-struct \"Word\" " +
+			"that has a bit field \"BitField\" " +
+			"of unsupported type \"slice\"."
+	)
+
+	var (
+		e BitFieldError
+	)
+
+	e = NewBitFieldOfUnsupportedTypeError(bitFieldType)
+
+	e.SetFunctionName(functionName)
+	e.SetFormatName(formatName)
+	e.SetWordName(wordName)
+	e.SetBitFieldName(bitFieldName)
+
+	assert.Equal(t, errorMessage, e.Error())
 }

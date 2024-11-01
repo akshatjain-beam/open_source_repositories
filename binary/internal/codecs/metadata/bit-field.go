@@ -118,6 +118,22 @@ func (m bitFieldMetadata) unmarshal(bytes []byte, reflection reflect.Value) {
 
 	value = binary.BigEndian.Uint64(bytes) >> m.offset & (1<<m.length - 1)
 
+	// The switch statement determines the action to take based on the kind 
+	// of the bit field metadata (m.kind). It handles different types as follows:
+	//
+	// - For unsigned integer types (Uint8, Uint16, Uint32, Uint64):
+	//   The `fallthrough` statement allows execution to continue into the 
+	//   next case for the generic `Uint` type. The reflection object is 
+	//   set to the extracted bit field value as an unsigned integer.
+	//
+	// - For the unsigned integer type (Uint):
+	//   The reflection value is set using the extracted bit field value.
+	//
+	// - For the boolean type (Bool):
+	//   A nested switch checks the extracted value. If the value is 1, 
+	//   the reflection object is set to true; otherwise, it is set to false.
+
+
 	switch m.kind {
 	case reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		fallthrough
