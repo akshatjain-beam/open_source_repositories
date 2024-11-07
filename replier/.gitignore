@@ -1,2 +1,5 @@
-*.env
-tmp/
+# remove DS_Store files
+**.DS_Store
+
+# remove tar files
+**.tar 

@@ -38,3 +38,44 @@ func TestIsInArray(t *testing.T) {
 func TestTransformUserReply(t *testing.T) {
 	assert.Equal(t, "Howdy, <@U12345678>! :wave:", TransformUserReply("Howdy, @person! :wave:", "U12345678"))
 }
+func TestTransformUserReply_BasicReplacement(t *testing.T) {
+    // Test Case 1: Basic replacement of "@person" with a formatted user mention.
+    // Input: "Howdy, @person! :wave:"
+    // Expected Output: "Howdy, <@U12345678>! :wave:"
+    assert.Equal(t, "Howdy, <@U12345678>! :wave:", TransformUserReply("Howdy, @person! :wave:", "U12345678"))
+}
+
+func TestTransformUserReply_MixedCasePlaceholder(t *testing.T) {
+    // Test Case 2: Placeholder with mixed case ("@Person") should not be replaced.
+    // Input: "Hello, @person! How are you?"
+    // Expected Output: "Hello, <@U12345678>! How are you?"
+    assert.Equal(t, "Hello, <@U12345678>! How are you?", TransformUserReply("Hello, @person! How are you?", "U12345678"))
+}
+
+func TestTransformUserReply_MultiplePlaceholders(t *testing.T) {
+    // Test Case 3: Multiple occurrences of "@person" in the string should all be replaced with "<@U12345678>".
+    // Input: "hi, @person! How is @person123?"
+    // Expected Output: "hi, <@U12345678>! How is <@U12345678>123?"
+    assert.Equal(t, "hi, <@U12345678>! How is <@U12345678>123?", TransformUserReply("hi, @person! How is @person123?", "U12345678"))
+}
+
+func TestTransformUserReply_PlaceholderWithNumbers(t *testing.T) {
+    // Test Case 4: Placeholder with numbers (e.g., "@person123") should be replaced leaving 123.
+    // Input: "Good morning, @person! Have a nice day @person123."
+    // Expected Output: "Good morning, <@U12345678>! Have a nice day <@U12345678>123."
+    assert.Equal(t, "Good morning, <@U12345678>! Have a nice day <@U12345678>123.", TransformUserReply("Good morning, @person! Have a nice day @person123.", "U12345678"))
+}
+
+func TestTransformUserReply_PunctuationAroundPlaceholder(t *testing.T) {
+    // Test Case 5: Placeholder with punctuation (e.g., "@person!") should be replaced, leaving punctuation unchanged.
+    // Input: "Welcome! @person! is here!"
+    // Expected Output: "Welcome! <@U12345678>! is here!"
+    assert.Equal(t, "Welcome! <@U12345678>! is here!", TransformUserReply("Welcome! @person! is here!", "U12345678"))
+}
+
+func TestTransformUserReply_EmptyInput(t *testing.T) {
+    // Test Case 6: Empty input string should return an empty string, as no transformation is needed.
+    // Input: ""
+    // Expected Output: ""
+    assert.Equal(t, "", TransformUserReply("", "U12345678"))
+}

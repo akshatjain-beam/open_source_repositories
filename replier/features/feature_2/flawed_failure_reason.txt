@@ -1,0 +1,1 @@
+The LLM-generated solution erroneously converts the entire string to lowercase using strings.ToLower(reply) before performing the placeholder replacement (@person → <@userID>). However, this behavior is not specified anywhere in the prompt, which explicitly requires the placeholder to be not case-insensitive. Thus, causing test case to fail.
