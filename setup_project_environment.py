@@ -95,9 +95,6 @@ COPY . .
 # Todo: add the name of the folder to run -> ./<folder-name or folder-path>
 RUN go test -v 
 
-# Set the working directory to the root
-WORKDIR /
-
 # DO NOT CHANGE ANY BELOW CODE
 WORKDIR /
 COPY run_tests.sh ./
