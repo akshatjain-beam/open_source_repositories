@@ -93,7 +93,7 @@ COPY . .
 
 # Run tests
 # Todo: add the name of the folder to run -> ./<folder-name or folder-path>
-RUN go test
+RUN go test -v 
 
 # Set the working directory to the root
 WORKDIR /
