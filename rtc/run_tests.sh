@@ -1,5 +1,5 @@
 #!/bin/bash
 
 set -euo pipefail
-cd /binary
-go test
+cd /rtc
+go test ./schema -v

@@ -29,7 +29,7 @@
 FROM golang:1.20
 
 # Set the Current Working Directory inside the container
-WORKDIR /binary
+WORKDIR /rtc
 
 # Copy go.mod and go.sum files to the container
 COPY go.mod go.sum ./
@@ -39,6 +39,9 @@ RUN go mod download
 
 # Copy the source code into the container
 COPY . .
+
+# Run tests
+RUN go test ./schema -v
 
 # Set the working directory to the root
 WORKDIR /
