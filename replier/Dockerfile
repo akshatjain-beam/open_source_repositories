@@ -13,6 +13,9 @@ RUN go mod download
 # Copy the source code into the container
 COPY . .
 
+# Run tests
+RUN go test -v ./util
+
 # Set the working directory to the root
 WORKDIR /
 

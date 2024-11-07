@@ -1,5 +1,5 @@
 #!/bin/bash
 
- set -euo pipefail
- cd /binary
- go test
+set -euo pipefail
+cd /replier
+go test -v ./util
