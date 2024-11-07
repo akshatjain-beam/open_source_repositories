@@ -202,6 +202,3 @@ go.work.sum
 # ----------------------------------------------------------------------------------------
 
 # SPECIFIC TO LOCAL
-
-# Ignore the entire feature folder with all nested data
-features/
