@@ -163,9 +163,6 @@ cython_debug/
 # remove DS_Store files
 **.DS_Store
 
-# remove tar files
-**.tar
-
 # remove vscode settings
 **.vscode
 
@@ -202,3 +199,6 @@ go.work.sum
 # ----------------------------------------------------------------------------------------
 
 # SPECIFIC TO LOCAL
+
+# remove tar files
+**.tar
