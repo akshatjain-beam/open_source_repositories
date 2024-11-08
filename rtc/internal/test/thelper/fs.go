@@ -31,7 +31,7 @@ func AddFileToFsByName(t *testing.T, filename, subset string, baseFs afero.Fs) {
 	ext := filepath.Ext(filename)
 	var err error
 	switch ext {
-	case ".jsonnet":
+	case ".jsonnet" , ".JSONNET":
 		content = ReadJsonnet(t, strings.TrimSuffix(filename, ext))
 	default:
 		content, err = ioutil.ReadFile(fmt.Sprintf("testdata/%s", filename))
@@ -46,7 +46,7 @@ func AddFileToFsByName(t *testing.T, filename, subset string, baseFs afero.Fs) {
 
 	var set map[string]interface{}
 	switch ext {
-	case ".jsonnet", ".json":
+	case ".jsonnet", ".json", ".JSONNET":
 		err = json.Unmarshal(content, &set)
 	default:
 		err = errors.New("extension unmarshaller isn't provided")
