@@ -1,0 +1,17 @@
+//  This block handles how delimiters are added to the string depending on the case of the current letter.
+//
+// - When a case transition is detected (i.e., from uppercase to lowercase or vice versa),
+//   a delimiter is inserted to separate the words. This transition is determined by comparing
+//   the current letter with the next letter 
+	// - If the current letter is uppercase and a case transition is detected,
+	//   the delimiter is inserted before the current letter, then the uppercase letter is added to the result.
+	// - If the current letter is lowercase  and a case transition is detected,
+	//   the lowercase letter is added first, followed by the delimiter. 
+// - Ensures that delimiters are not added at the start 
+//   of the string or consecutively after another delimiter, maintaining clean word boundaries.
+//
+// - If the character is a delimiter (space, underscore, etc.), it is replaced by the 
+//   specified delimiter.
+// - Otherwise, the character is added as-is to the result.
+// Note- isUpper(), isLower() and isDelimiter() functions are used to find whether the character is uppercase, lowercase or delimiter respectively.
+$PlaceHolder$
