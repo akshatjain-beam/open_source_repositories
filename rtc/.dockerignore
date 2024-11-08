@@ -1,0 +1,116 @@
+
+
+# PYTHON
+
+# Ignore Python cache files and directories
+__pycache__
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Ignore test and coverage results
+coverage/
+.coverage
+*.cover
+*.py,cover
+htmlcov/
+*.log
+
+# Ignore temporary files and directories
+*.swp
+*.swo
+*.DS_Store
+**/.DS_Store
+*.egg-info/
+.eggs/
+*.bak
+*.tmp
+*.old
+*~
+
+# Ignore build artifacts
+build/
+dist/
+*.o
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Ignore package manager files
+pip-log.txt
+pip-delete-this-directory.txt
+poetry.lock
+
+# Ignore IDE and editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Docker related files
+# Dockerfile
+# .dockerignore
+
+# Ignore other config files
+.env
+.env.local
+.env.production
+.env.test
+
+# Ignore node_modules if using Node.js (e.g., for React projects)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore local SQLite database files
+*.db
+*.sqlite3
+
+# Ignore .DS_Store files in any folder
+**.DS_Store
+
+# Ignore pytest_cache files
+**.pytest_cache/
+
+# ----------------------------------------------------------------------------------------
+
+# GOLANG
+
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
+
+# ----------------------------------------------------------------------------------------
+
+# SPECIFIC TO LOCAL
+
+# Ignore the entire feature folder with all nested data
+features/

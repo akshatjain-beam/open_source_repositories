@@ -1,26 +1,24 @@
-FROM golang:1
+# Start from the official Go image
+FROM golang:1.20
 
-LABEL maintainer="Sebastián Chamena <sebachamena@gmail.com>"
+# Set the Current Working Directory inside the container
+WORKDIR /rtc
 
-ARG env=development
- 
-ENV ENV $env
-ENV WORKDIR /rtc
+# Copy go.mod and go.sum files to the container
+COPY go.mod go.sum ./
 
-WORKDIR ${WORKDIR}
-
-COPY go.* ./
-
+# Download all dependencies
 RUN go mod download
 
+# Copy the source code into the container
 COPY . .
 
-RUN go build .
+# Run tests
+# Todo: add the name of the folder to run -> ./<folder-name or folder-path>
+RUN go test -v 
 
-CMD if [ ${ENV} = development ]; \
-	then \
-    go get github.com/pilu/fresh && \
-	fresh; \
-	fi
-
-EXPOSE 8888
+# DO NOT CHANGE ANY BELOW CODE
+WORKDIR /
+COPY run_tests.sh ./
+RUN chmod +x /run_tests.sh
+ENTRYPOINT ["/bin/bash", "-s"]
