@@ -1,0 +1,16 @@
+// create a function `ToCamelCase` converts a given string to CamelCase format.
+//
+// This function takes a string and converts it to CamelCase. It first applies the 
+// `addWordBoundariesToNumbers` function to ensure numbers and letters are properly 
+// separated. Then, it processes the string, capitalizing the first letter of each word 
+// (after non-alphanumeric characters like spaces, underscores, and hyphens) while 
+// keeping the rest of the letters in lowercase. The result is returned in CamelCase format, 
+// where the first letter of each word is capitalized, and there are no spaces, underscores, 
+// or hyphens between words.
+//
+// Parameters:
+//   - s: A string containing words and/or numbers to be converted to CamelCase.
+//
+// Returns:
+//   - A string in CamelCase format.
+$PlaceHolder$
