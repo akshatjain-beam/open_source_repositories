@@ -1,0 +1,5 @@
+The issues with the LLM Generated solution are:
+
+1. Ignores the prompt requirement of capturing characters in groups
+2. Uses non-capturing pattern .*? instead of capturing pattern (.*)
+3. Results in no captured groups, making test case to fail.
