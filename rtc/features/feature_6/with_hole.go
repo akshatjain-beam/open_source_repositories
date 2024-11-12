@@ -26,6 +26,7 @@ func (vErr ValidationError) Error() string {
 	}
 	return strings.TrimSpace(base)
 }
+
 // Create a `fullVErrRegex` which is the regular expression, which matches strings with validation error: , followed by any number of characters (which are captured in groups), and ending with At.
 //Create a `tinyVErrRegex` which is the regular expression, which matches strings with validation error: , followed by any number of characters (which are captured in groups)
 $PlaceHolder$
