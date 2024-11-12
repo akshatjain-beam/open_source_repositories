@@ -1,15 +1,15 @@
 ```
 func (errs MultiErr) Error() string {
-	var sb strings.Builder
-	for i, err := range errs {
+	var str string
+	for _, err := range errs {
 		if err == nil {
 			continue
 		}
-		if i > 0 {
-			sb.WriteString(ErrorsSeparator)
+		if str != "" {
+			str += ErrorsSeparator
 		}
-		sb.WriteString(err.Error())
+		str += err.Error()
 	}
-	return sb.String()
+	return str
 }
 ```

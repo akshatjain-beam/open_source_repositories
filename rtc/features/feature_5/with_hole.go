@@ -1,7 +1,5 @@
 package xerrors
 
-// import "strings"
-
 // ErrorsSeparator is the expected string to use when stringifiying multiple errors to one
 const ErrorsSeparator = "; "
 
@@ -35,16 +33,15 @@ func NewMultiErrFromCh(errCh chan error) (mErr MultiErr) {
 	return
 }
 
-
 // create a function `Error` that implements the error interface for the MultiErr type.
 //
 // The Error method iterates over all errors in the MultiErr slice, concatenating their
 // string representations into a single string. Each error message is separated by a
-// predefined separator (`ErrorsSeparator`). If any element in the MultiErr is nil, 
+// predefined separator (`ErrorsSeparator`). If any element in the MultiErr is nil,
 // it is skipped.
 //
 // The resulting string provides a summary of all non-nil errors contained within the
-// MultiErr, which can be useful for logging or reporting multiple errors in a single 
+// MultiErr, which can be useful for logging or reporting multiple errors in a single
 // message.
 //
 // Returns:
