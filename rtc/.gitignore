@@ -223,3 +223,6 @@ go.work.sum
 
 # remove tar files
 **.tar
+
+# Ignore all GZIP files
+*.tar.gz

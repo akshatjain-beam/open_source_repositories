@@ -15,7 +15,7 @@ import (
 // FromFilename retrieves a schema with the decoded data of the given filename
 // Notice that the filename can be a remote url
 //Create a function `FromFilename` that loads a schema from a given filename, which can be either a local file path or a remote URL. If the filename starts with "https", it fetches the schema from the URL using readRemoteFileByHTTPS. Otherwise, it reads the schema from the local filesystem using readFsFileByName and the provided afero.Fs.
-//The file content is read into an io.Reader and then decoded based on the file extension using decodeFromReader. The decoded schema is validated using applyBuiltinValidators before being returned. Any errors during file access, decoding, or validation are returned to the caller.
+//The file content is read into an io.Reader and then decoded based on the file extension using decodeFromReader. The decoded schema is validated using applyBuiltinValidators before being returned. Any errors during file access, decoding, or validation are returned to the caller. Case of file extension must be preserved.
 //
 // Parameters:
 //  - filename: A string representing the file name or URL of the schema to be loaded.
@@ -25,6 +25,7 @@ import (
 //  - *Schema: A pointer to the decoded Schema object if successful.
 //  - error: An error if there was an issue reading the file, decoding the content, or applying the validators.
 $PlaceHolder$
+
 
 func readFsFileByName(filename string, Fs afero.Fs) (io.Reader, error) {
 	body, err := afero.ReadFile(Fs, filename)

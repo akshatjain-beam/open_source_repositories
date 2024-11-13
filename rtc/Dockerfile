@@ -2,7 +2,7 @@
 FROM golang:1.20
 
 # Set the Current Working Directory inside the container
-WORKDIR /rtc
+WORKDIR /app
 
 # Copy go.mod and go.sum files to the container
 COPY go.mod go.sum ./
