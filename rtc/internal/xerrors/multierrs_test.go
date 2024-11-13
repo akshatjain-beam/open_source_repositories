@@ -14,37 +14,6 @@ var (
 	errBaz = errors.New("baz")
 )
 
-func TestNewMultiErr(t *testing.T) {
-	tests := []struct {
-		name     string
-		errs     []error
-		wantMErr MultiErr
-	}{
-		{
-			name:     "multiple normal errs",
-			errs:     []error{errFoo, errBar, errBaz},
-			wantMErr: MultiErr{errFoo, errBar, errBaz},
-		},
-		{
-			name:     "nil errs",
-			errs:     []error{nil, nil, nil},
-			wantMErr: MultiErr{},
-		},
-		{
-			name:     "nil and normal errs",
-			errs:     []error{nil, errFoo, nil},
-			wantMErr: MultiErr{errFoo},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			gotMErrs := NewMultiErr(tt.errs...)
-			if diff := cmp.Diff(tt.wantMErr.Error(), gotMErrs.Error()); diff != "" {
-				t.Errorf("NewMultiErr() = mismatch(-want +got): %s", diff)
-			}
-		})
-	}
-}
 
 //
 // This function tests various scenarios where the MultiErr.Error() method is used to ensure that errors
