@@ -65,14 +65,13 @@ func ToDelimitedLowerCase(s string, del rune) string {
 	return newString
 }
 
-// create a function `ToCamelCase` converts a given string to CamelCase format.
+// create a function ToCamelCase converts a given string to CamelCase format.
 //
-// This function takes a string and converts it to CamelCase. It first applies the 
-// `addWordBoundariesToNumbers` function to ensure numbers and letters are properly 
-// separated. Then, it processes the string, capitalizing the first letter of each word 
-// (after non-alphanumeric characters like spaces, underscores, and hyphens) while 
-// keeping the rest of the letters in lowercase. The result is returned in CamelCase format, 
-// where the first letter of each word is capitalized, and there are no spaces, underscores, 
+// This function takes a string and converts it to CamelCase. It first ensures that numbers and letters are properly
+// separated. Then, it processes the string, capitalizing the first letter of each word
+// (after non-alphanumeric characters like spaces, underscores, and hyphens) while
+// keeping the rest of the letters in lowercase. The result is returned in CamelCase format,
+// where the first letter of each word is capitalized, and there are no spaces, underscores,
 // or hyphens between words.
 //
 // Parameters:
