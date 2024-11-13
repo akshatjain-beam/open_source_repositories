@@ -14,8 +14,8 @@ import (
 
 // FromFilename retrieves a schema with the decoded data of the given filename
 // Notice that the filename can be a remote url
-//Create a function `FromFilename` that loads a schema from a given filename, which can be either a local file path or a remote URL. If the filename starts with "https", it fetches the schema from the URL using readRemoteFileByHTTPS. Otherwise, it reads the schema from the local filesystem using readFsFileByName and the provided afero.Fs.
-//The file content is read into an io.Reader and then decoded based on the file extension using decodeFromReader. The decoded schema is validated using applyBuiltinValidators before being returned. Any errors during file access, decoding, or validation are returned to the caller. Case of file extension must be preserved.
+//Create a function `FromFilename` that loads a schema from a given filename, which can be either a local file path or a remote URL. If the filename starts with "https", it fetches the schema from the URL. Otherwise, it reads the schema from the local filesystem and the provided input parameters.
+//The file content is read and then decoded based on the file extension. The decoded schema is validated before being returned. Any errors during file access, decoding, or validation are returned to the caller. Case of file extension must be preserved.
 //
 // Parameters:
 //  - filename: A string representing the file name or URL of the schema to be loaded.
