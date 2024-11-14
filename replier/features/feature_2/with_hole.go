@@ -64,16 +64,6 @@ func VerifySlackRequest(r *http.Request, body []byte) bool {
 	return hmac.Equal([]byte("v0="+hex.EncodeToString(mac.Sum(nil))), []byte(r.Header.Get("X-Slack-Signature")))
 }
 
-// IsInArray checks if the value is in the array
-func IsInArray(array []string, value string) bool {
-	for _, v := range array {
-		if v == value {
-			return true
-		}
-	}
-	return false
-}
-
 // GetUserTimezone gets a Slack user's timezone.
 func GetUserTimezone(userID string) (string, error) {
 	user, err := db.GetUser(userID)
@@ -89,14 +79,24 @@ func GetUserTimezone(userID string) (string, error) {
 
 	return slackUser.TZ, nil
 }
-
-// TransformUserReply transforms a user's reply
-func TransformUserReply(reply, userID string) string {
-	
-	//Construct a code snippet that dynamically processes a text input where a placeholder (e.g., @person) needs to be replaced with a properly formatted mention string (<@userID>) for a messaging platform.
+// First Create `IsInArray` function that checks if a given value is present in the provided array of strings.
+//
+// Parameters:
+//   - array ([]string): The array of strings to search through.
+//   - value (string): The value to look for in the array.
+//
+// Returns:
+//   - bool: Returns true if the value is found in the array, otherwise false.
+//
+// Then create `TransformUserReply` that dynamically processes a text input where a placeholder (e.g., @person) needs to be replaced with a properly formatted mention string (<@userID>) for a messaging platform.
 	//Note-
 	// 1. The placeholder is assumed to be in the exact form @person (not case-insensitive, and no extra characters or numbers).
 	// 2. The code must handle multiple instances of the placeholder in the same string replacing them all.
-	$PlaceHolder$
-	
-}
+//
+// Parameters:
+//   reply   string - The input string containing the text to be modified 
+//   userID  string - The Slack user ID to be inserted into the user mention format.
+//
+// Returns:
+//   string - The modified string s.
+$PlaceHolder$

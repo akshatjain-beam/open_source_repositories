@@ -64,16 +64,6 @@ func VerifySlackRequest(r *http.Request, body []byte) bool {
 	return hmac.Equal([]byte("v0="+hex.EncodeToString(mac.Sum(nil))), []byte(r.Header.Get("X-Slack-Signature")))
 }
 
-// IsInArray checks if the value is in the array
-func IsInArray(array []string, value string) bool {
-	for _, v := range array {
-		if v == value {
-			return true
-		}
-	}
-	return false
-}
-
 // GetUserTimezone gets a Slack user's timezone.
 func GetUserTimezone(userID string) (string, error) {
 	user, err := db.GetUser(userID)
@@ -89,8 +79,17 @@ func GetUserTimezone(userID string) (string, error) {
 
 	return slackUser.TZ, nil
 }
+// IsInArray checks if the value is in the array
+func IsInArray(array []string, value string) bool {
+	for _, v := range array {
+		if v == value {
+			return true
+		}
+	}
+	return false
+}
 
-// TransformUserReply transforms a user's reply
+// // TransformUserReply transforms a user's reply
 func TransformUserReply(reply, userID string) string {
 	return strings.ReplaceAll(reply, "@person", fmt.Sprintf("<@%s>", userID))
 }
