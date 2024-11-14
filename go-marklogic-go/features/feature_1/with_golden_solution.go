@@ -1,11 +1,4 @@
-package text
-
-import (
-	"regexp"
-	"strings"
-)
-
-//NormalizeSpace is a function that takes whitespace out of the equation for comparing strings
+```
 func NormalizeSpace(str string) string {
 	reSpace := regexp.MustCompile("\\s+")
 	normalizedSpace := string(reSpace.ReplaceAllString(str, ` `))
@@ -15,3 +8,4 @@ func NormalizeSpace(str string) string {
 	adjustProperties := string(reProp.ReplaceAllString(adjustBrackets, `$1$2`))
 	return strings.TrimSpace(adjustProperties)
 }
+```
