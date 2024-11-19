@@ -24,3 +24,6 @@ rtc
 
 # remove tar files
 **.tar 
+
+# Ignore all GZIP files
+*.tar.gz
