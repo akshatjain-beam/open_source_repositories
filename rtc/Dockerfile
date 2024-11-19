@@ -1,6 +1,12 @@
 # Start from the official Go image
 FROM golang:1.20
 
+# Set environment variables for Go cache and XDG base directories
+ENV GOCACHE=/tmp/go-cache
+ENV GOPATH=/go
+ENV GO111MODULE=on
+ENV XDG_CACHE_HOME=/tmp/cache
+
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
