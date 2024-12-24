@@ -1,7 +1,7 @@
 import os
 import shutil
 
-def create_feature_structure(parent_folder_name):
+def create_feature_structure(parent_folder_name, language):
     # Define the parent folder path
     parent_folder_path = os.path.join(os.getcwd(), parent_folder_name)
 
@@ -22,11 +22,20 @@ def create_feature_structure(parent_folder_name):
             break
         feature_number += 1
 
-    # List of files to create
+    # Determine file extensions based on the selected language
+    if language.lower() == 'python':
+        file_extension = '.py'
+    elif language.lower() == 'go':
+        file_extension = '.go'
+    else:
+        print(f"Unsupported language '{language}'. Defaulting to Python (.py).")
+        file_extension = '.py'
+
+    # List of files to create with the appropriate extension
     files_to_create = [
-        'with_hole.py',
-        'with_golden_solution.py',
-        'with_flawed_solution.py',
+        f'with_hole{file_extension}',
+        f'with_golden_solution{file_extension}',
+        f'with_flawed_solution{file_extension}',
         'holder_and_prompt.txt',
         'flawed_solution_failure_reason.txt'
     ]
@@ -37,7 +46,7 @@ def create_feature_structure(parent_folder_name):
     try:
         os.makedirs(test_images_path)
 
-        # Create specified files without content
+        # Create specified files with the correct extensions
         for file_name in files_to_create:
             file_path = os.path.join(feature_folder_path, file_name)
             open(file_path, 'w').close()  # Create an empty file
@@ -51,4 +60,5 @@ def create_feature_structure(parent_folder_name):
 
 # Example usage
 nested_folder_name = input("Enter the name of the nested folder: ")
-create_feature_structure(nested_folder_name)
+language = input("Enter the programming language (python/go): ").strip()
+create_feature_structure(nested_folder_name, language)
