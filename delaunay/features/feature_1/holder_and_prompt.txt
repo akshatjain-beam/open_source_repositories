@@ -1,0 +1,19 @@
+"""
+Color a graph of triangles using a gradient.
+
+1. First, the function figures out the diagonal length of the image. This helps it understand the overall size of the image.
+2. Next, for each triangle, it finds the center point (centroid) by averaging the positions of the triangle’s corners.
+3. Then, it checks that this center point is within the image’s edges to make sure it doesn’t go out of bounds.
+4. After that, it calculates how far this center point is from the image’s starting corner, and expresses this distance as a fraction of the image’s diagonal length.
+5. Finally, the function uses this fraction to pick a color from the gradient, giving each triangle its corresponding color based on where its center is located in the image.
+
+Arguments:
+gradient is a Gradient object
+image_size is a tuple of the output dimensions, i.e. (width, height)
+triangles is a list of vertex-defined Triangle objects
+
+Returns:
+A list of Color objects, one per triangle such that colors[i] is the color
+of triangle[i]
+"""
+$PlaceHolder$
