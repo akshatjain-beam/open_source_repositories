@@ -15,7 +15,7 @@ COPY . .
 
 # Run tests
 # Todo: add the name of the folder to run -> ./<folder-name or folder-path>
-RUN go test -v ./... 
+RUN go test -v ./test/text
 
 # DO NOT CHANGE ANY BELOW CODE
 WORKDIR /
