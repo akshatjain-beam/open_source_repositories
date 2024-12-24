@@ -1,0 +1,10 @@
+"""
+Regular expressions to match LinkedIn profile URLs for both private individuals and companies.
+For private profiles, regular expressions cover both the old and new formats of LinkedIn URLs.
+    - Pattern for old private profile URLs (e.g., http://linkedin.com/pub/jane_doe/ab/cd/efg/)
+    - Pattern for new private profile URLs (e.g., https://www.linkedin.com/in/john-doe)
+
+Pattern for company profile URLs (e.g., https://www.linkedin.com/company/linkedin)
+For profiles url, the pattern allows for optional trailing slashes.
+"""
+$PlaceHolder$
