@@ -1,0 +1,12 @@
+"""
+Determine whether two triangles (vertex or edge defined) are equal.
+
+Arguments:
+a is a Triangle or 3-tuple defining a triangle by its vertices or edges
+b is a Triangle or 3-tuple defining a triangle by its vertices or edges
+
+Returns:
+True if both triangles have the same vertices and False otherwise
+Also returns False for invalid input
+"""
+$PlaceHolder$
