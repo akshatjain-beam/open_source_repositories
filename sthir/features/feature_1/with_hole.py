@@ -173,19 +173,27 @@ HTML_TEMPLATE = {
         """
 }
 
-def process_documents(documents):
-    base2p15_arrs = list()
-    for document in documents:
-        bit_arr = bitarray()
-        with open(document[0], "rb") as f:
-            bit_arr.fromfile(f)
-        base2p15_arrs.append([base2p15_encode(bit_arr.to01()), 
-                              document[1], 
-                              document[2], 
-                              document[3], 
-                              document[0]])
-    
-    return base2p15_arrs
+"""
+Make a function process_documents which do the following:
+
+Processes a list of documents by encoding their binary content and preserving metadata.
+
+1. Iterate over each document in the dataset.
+2. For each document, initialize a storage mechanism for the binary data.
+3. Read the binary file from the document index 0, which contains the file path and extract its binary content.
+4. Convert the binary content into a binary string format.
+5. Encode this binary string using the `base2p15_encode` function to compress the data.
+6. Collect the encoded data along with relevant document metadata, excluding the first item in the list.
+7. Merge the initial item with the rest of the collected metadata and encoded data.
+8. Append the resulting data structure to the base2p15_arrs collection for further processing or storage.
+
+Args:
+documents (list): A list of documents where each document is represented as a list
+of elements
+Returns:
+base2p15_arrs (list): A list of lists
+"""
+$PlaceHolder$
 
 if __name__ == "__main__":
     base2p15_arrs = list()
