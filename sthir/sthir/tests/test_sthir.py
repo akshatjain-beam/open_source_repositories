@@ -1,4 +1,5 @@
 import unittest
+from sthir.generate_search import gen_chunks
 from unittest.mock import mock_open, patch, MagicMock
 from bitarray import bitarray
 from sthir.convert_2p15 import process_documents
@@ -48,6 +49,42 @@ class Test_SBF(unittest.TestCase):
         self.assertEqual(expected,  actual)
 
 
+class TestGenChunks(unittest.TestCase):
+    def test_standard_chunks(self):
+        self.assertEqual(list(gen_chunks('123456789A', 4)),
+                         ['1234', '5678', '9A'])
+
+    def test_standard_chunks_with_remainder_dropped(self):
+        self.assertEqual(
+            list(gen_chunks('123456789A', 4, drop_remaining=True)), ['1234', '5678'])
+
+    def test_exact_chunks(self):
+        self.assertEqual(list(gen_chunks('12345678', 4)), ['1234', '5678'])
+
+    def test_exact_chunks_with_remainder_dropped(self):
+        self.assertEqual(
+            list(gen_chunks('12345678', 4, drop_remaining=True)), ['1234', '5678'])
+
+    def test_chunk_size_larger_than_string(self):
+        self.assertEqual(list(gen_chunks('123', 5)), ['123'])
+
+    def test_chunk_size_larger_than_string_with_remainder_dropped(self):
+        self.assertEqual(list(gen_chunks('123', 5, drop_remaining=True)), [])
+
+    def test_chunk_size_one(self):
+        self.assertEqual(list(gen_chunks('123456789A', 1)), [
+                         '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A'])
+
+    def test_empty_string(self):
+        self.assertEqual(list(gen_chunks('', 4)), [])
+
+    def test_chunk_size_zero(self):
+        with self.assertRaises(ValueError):
+            list(gen_chunks('123456789A', 0))
+
+    def test_non_string_input(self):
+        with self.assertRaises(TypeError):
+            list(gen_chunks(123456789, 4))
 class TestDocumentProcessing(unittest.TestCase):
 
     @patch('sthir.convert_2p15.open', new_callable=mock_open, read_data=b'\x01\x02\x03\x04')
