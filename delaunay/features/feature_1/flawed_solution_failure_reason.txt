@@ -1,0 +1,2 @@
+1. The LLM-generated solution subtracts one from the `image_size`, potentially introducing an off-by-one error. 
+2. This occurs because the image boundary is being incorrectly set to `image_size - 1`, which may exclude valid boundary pixels, leading to incorrect results.
