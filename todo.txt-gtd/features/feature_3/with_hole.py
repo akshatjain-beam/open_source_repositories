@@ -99,21 +99,30 @@ def write_proj(path, projs):
 
 
 def save_selected_projs(tdpath, editpath, terms, exact):
-    pdict = read_proj(tdpath)
+    """
+    Filters and updates a list of projects based on specified criteria and saves the updated list to a file.
 
-    for project in list(pdict):
-        if terms and not any(x in project for x in terms):
-            del pdict[project]
-        elif exact and terms and not any(x == project for x in terms):
-            del pdict[project]
+    Args:
+        tdpath (str): The path to the file from which the current list of projects is read.
+        editpath (str): The path to the file where the updated list of projects will be saved.
+        terms (list of str): A list of terms used to filter projects. Projects must either contain any of these terms
+                                (if `exact` is False) or match exactly one of these terms (if `exact` is True).
+        exact (bool): Indicates whether the project names should match exactly with the terms provided.
 
-    if len(pdict) == 0 and terms and terms[0]:
-        proj = Project(terms[0])
-        pdict[terms[0]] = proj
+    Returns:
+        set: A set of project names from the updated list, excluding any entry that is "_None".
 
-    write_proj(editpath, pdict)
-
-    return {x for x in pdict if x != "_None"}
+    Description:
+        - Reads the current list of projects from the file at `tdpath`.
+        - Filters the projects based on the provided `terms` and `exact` criteria:
+            - If `terms` is provided and a project does not contain any of these terms, it is removed.
+            - If `exact`, only projects that exactly match any term in `terms` are kept.
+        - If no projects remain after filtering and `terms` is provided with at least one term, a new project
+            is created using the first term in `terms` and added to the list.
+        - Writes the updated list of projects to the file at `editpath`.
+        - Returns a set of project names from the updated list, excluding any entry that is "_None".
+    """
+    $PlaceHolder$
 
 
 def edit_proj(tdpath, terms, exact):

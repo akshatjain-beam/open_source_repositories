@@ -5,6 +5,8 @@
 My recipe for customizing a [**todo.txt**](http://todotxt.org/) environment for
 [**Getting Things Done**](https://gettingthingsdone.com/).
 
+commit hash - c1dc3c6ebf2d9aadf020ea4d2de300092a284385
+
 [Installing](#Installing)
 
 # Scripts
