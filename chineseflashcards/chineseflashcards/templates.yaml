@@ -1,0 +1,188 @@
+- name: English
+  qfmt: |
+    <div class="english_wrapper">
+      {{English}}
+    </div>
+  afmt: |
+    {{FrontSide}}
+
+    <hr id=answer>
+    <div class="character">
+      CHARACTER
+    </div>
+
+    <div class="pinyin">
+      PINYIN
+    </div>
+
+    {{#Classifier}}
+    <div class="classifier">
+      CL: {{Classifier}}
+    </div>
+    {{/Classifier}}
+
+    {{#Example Sentences}}
+    <div class="example_sentences_wrapper">
+      {{Example Sentences}}
+    </div>
+    {{/Example Sentences}}
+
+    <script>
+      SCRIPT
+    </script>
+- name: HanziSimp
+  qfmt: |
+    {{#Generate HanziSimp Card}}
+    <div class="character">
+      {{Simplified}}
+    </div>
+    {{/Generate HanziSimp Card}}
+  afmt: |
+    {{FrontSide}}
+
+    <hr id=answer>
+
+    <div class="pinyin">
+      PINYIN
+    </div>
+
+    <div class="character_wrapper">
+      <span class="character">{{Traditional}}</span>
+      <span class="character_type">&nbsp;&nbsp;Trad</span>
+    </div>
+
+    {{#Classifier}}
+    <div class="classifier">
+      CL: {{Classifier}}
+    </div>
+    {{/Classifier}}
+
+    <div class="english_wrapper">
+      {{English}}
+    </div>
+
+    {{#Example Sentences}}
+    <div class="example_sentences_wrapper">
+      {{Example Sentences}}
+    </div>
+    {{/Example Sentences}}
+
+    <script>
+      SCRIPT
+    </script>
+- name: HanziTrad
+  qfmt: |
+    {{#Generate HanziTrad Card}}
+    <div class="character">
+      {{Traditional}}
+    </div>
+    {{/Generate HanziTrad Card}}
+  afmt: |
+    {{FrontSide}}
+
+    <hr id=answer>
+
+    <div class="pinyin">
+      PINYIN
+    </div>
+
+    <div class="character_wrapper">
+      <span class="character">{{Simplified}}</span>
+      <span class="character_type">&nbsp;&nbsp;Simp</span>
+    </div>
+
+    {{#Classifier}}
+    <div class="classifier">
+      CL: {{Classifier}}
+    </div>
+    {{/Classifier}}
+
+    <div class="english_wrapper">
+      {{English}}
+    </div>
+
+    {{#Example Sentences}}
+    <div class="example_sentences_wrapper">
+      {{Example Sentences}}
+    </div>
+    {{/Example Sentences}}
+
+    <script>
+      SCRIPT
+    </script>
+- name: HanziBoth
+  qfmt: |
+    {{#Generate HanziBoth Card}}
+    <div class="character">
+      {{Traditional}}
+    </div>
+    {{/Generate HanziBoth Card}}
+  afmt: |
+    {{FrontSide}}
+
+    <hr id=answer>
+
+    <div class="pinyin">
+      PINYIN
+    </div>
+
+    {{#Classifier}}
+    <div class="classifier">
+      CL: {{Classifier}}
+    </div>
+    {{/Classifier}}
+
+    <div class="english_wrapper">
+      {{English}}
+    </div>
+
+    {{#Example Sentences}}
+    <div class="example_sentences_wrapper">
+      {{Example Sentences}}
+    </div>
+    {{/Example Sentences}}
+
+    <script>
+      SCRIPT
+    </script>
+- name: Pinyin
+  qfmt: |
+    <div class="pinyin">
+      PINYIN
+    </div>
+    {{#Words With Same Pinyin}}
+      <div class="words_with_same_pinyin">
+        Not:&ensp;{{Words With Same Pinyin}}
+      </div>
+    {{/Words With Same Pinyin}}
+
+    <script>
+      SCRIPT
+    </script>
+  afmt: |
+    {{FrontSide}}
+
+    <hr id=answer>
+
+    <div class="english_wrapper">
+      {{English}}
+    </div>
+
+    <div class="character">
+      CHARACTER
+    </div>
+
+    {{#Classifier}}
+    <div class="classifier">
+      CL: {{Classifier}}
+    </div>
+    {{/Classifier}}
+
+    {{#Example Sentences}}
+    <div class="example_sentences_wrapper">
+      {{Example Sentences}}
+    </div>
+    {{/Example Sentences}}
+    <script>
+      SCRIPT
+    </script>
