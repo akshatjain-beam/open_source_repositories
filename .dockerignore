@@ -74,6 +74,9 @@ yarn-error.log
 # Ignore .DS_Store files in any folder
 **.DS_Store
 
+# Ignore the entire feature folder with all nested data
+features/
+
 # Ignore pytest_cache files
 **.pytest_cache/
 
