@@ -1,0 +1,12 @@
+# - Override the inbuilt `enter` function:
+#  - First, it saves the current request environment so that it can be accessed by other methods later.
+#  - Then, it replaces the current request environment with a new environment.
+#  - It goes through each key-value pair in the `extras` dictionary. For each pair, if the request object already has the same attribute, it saves the original value and then sets the new value from `extras`.
+#  - Finally, it adds an `app` attribute to the `BaseRequest` and sets this to `True`.
+# - Override the inbuilt `exit` function:
+# - First, it restores the original request environment that was saved earlier.
+# - Then, for each key-value pair in the `extras` dictionary:
+#     - If the key exists in the saved original values, it sets the attribute back to the original value.
+#     - Else, delete the attribute from the request object. If error is thrown, handle it without doing anything.
+# - Finally, set the `app` attribute to its original state.
+$PlaceHolder$
