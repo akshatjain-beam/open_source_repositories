@@ -36,6 +36,15 @@ class FakeCallable:
     def __init__(self, *args, **kwargs):
         pass
 
+    def test_args(a, b, *args):
+        pass
+
+    def test_kwargs(self, a, **kwargs):
+        pass
+
+    def test_mixed(a, b, *args, **kwargs):
+        pass
+    
     def test_args(self, a, **kwargs):
         pass
 
@@ -137,6 +146,19 @@ class TestInspectSignatureParameters(unittest.TestCase):
         params = [p.name for p in params]
         self.assertListEqual(params, expected)
 
+
+class TestFindSignatureParameters(unittest.TestCase):
+    """Unit tests for find_signature_parameters."""
+
+    def test_find_parameters(self):
+        """
+        Test if a list of parameters is generated correctly from the callable.
+
+        This test checks if the expected parameters are correctly retrieved from 
+        the callable `FakeCallable.test` when provided with a dictionary of 
+        candidate parameters. It verifies that extraneous parameters do not affect 
+        the result.
+        """
     def test_inspect_no_parameters(self):
         """
         Test a callable with no parameters.
@@ -244,11 +266,31 @@ class TestFindSignatureParameters(unittest.TestCase):
 
         expected = {'a': 1, 'b': 2}
         params = {'a': 1, 'b': 2}
+        found = find_signature_parameters(FakeCallable.test_kwargs, params)
+        self.assertDictEqual(found, expected)
+    
+    def test_find_parameters_with_args(self):
+        """
+        Test if *args are correctly ignored when finding parameters.
+
+        This test verifies that parameters defined with *args in 
+        `FakeCallable.test_args` do not appear in the retrieved 
+        parameters, ensuring that the function only considers named parameters.
+        """
+        expected = {'a': 1, 'b': 2}
+        params = {'a': 1, 'b': 2}
         found = find_signature_parameters(FakeCallable.test_args, params)
         self.assertDictEqual(found, expected)
 
     def test_find_excluding_parameters(self):
-        """Test if a list of parameters is generated excluding some."""
+        """
+        Test if a list of parameters is generated excluding specified ones.
+
+        This test checks the functionality of excluding certain parameters, 
+        such as 'self' and 'a', when retrieving parameters from 
+        `FakeCallable.test`. The test verifies that the expected parameters 
+        remain after exclusion.
+        """
 
         expected = {'b': 2, 'c': 3}
         params = {'a': 1, 'b': 2, 'c': 3}
@@ -258,13 +300,49 @@ class TestFindSignatureParameters(unittest.TestCase):
         self.assertDictEqual(found, expected)
 
     def test_attribute_error(self):
-        """Test if it raises an exception for not found parameters."""
+        """
+        Test if it raises an exception for parameters that are not found.
+
+        This test ensures that the function correctly raises an 
+        AttributeError when one or more required parameters are missing 
+        from the provided candidates. The test checks that the error message 
+        contains the name of the missing parameter.
+        """
 
         with self.assertRaises(AttributeError) as e:
             params = {'a': 1, 'd': 3}
             _ = find_signature_parameters(FakeCallable.test, params)
 
         self.assertEqual(e.exception.args[1], 'b')
+    
+    def test_excluding_self_cls(self):
+        """
+        Test excluding default parameters 'self' and 'cls'.
+
+        This test verifies that when a method of a class is inspected, 
+        the parameters 'self' and 'cls' are correctly excluded from 
+        the results. The test checks if only the expected parameters remain.
+        """
+        class TestClass:
+            def method(self, cls, a, b):
+                pass
+        expected = {'a': 1, 'b': 2}
+        params = {'self': None, 'cls': None, 'a': 1, 'b': 2}
+        found = find_signature_parameters(TestClass().method, params)
+        self.assertDictEqual(found, expected)
+    
+    def test_mixed_args_kwargs(self):
+        """
+        Test if mixed *args and **kwargs are handled correctly.
+
+        This test checks that the function can properly process a callable 
+        (`FakeCallable.test_mixed`) that utilizes both *args and **kwargs, 
+        confirming that all relevant parameters are included in the result.
+        """
+        expected = {'a': 1, 'b': 2, 'd': 4, 'e': 5}
+        params = {'a': 1, 'b': 2, 'd': 4, 'e': 5}
+        found = find_signature_parameters(FakeCallable.test_mixed, params)
+        self.assertDictEqual(found, expected)
 
 
 class PropertiesClass:
