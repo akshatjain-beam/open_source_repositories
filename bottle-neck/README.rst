@@ -7,6 +7,8 @@
 **bottle-neck**:  Utilities suite for developing web services with *bottle.py*
 framework.
 
+commit hash - ebc670a4b178255473d68e9b4122ba04e38f4810
+
 
 *Features*:
    - Class-Based views.
