@@ -1,0 +1,2 @@
+The llm generated solution fails for the reason:
+1. Incorrect Condition for next_page: The condition to determine whether the next_page should be set is incomplete. The LLM-generated code checks if (offset + limit) < record_count, which omits the possibility of there being enough records for a next page when the current page is full. The prompt specifies that the next_page link should be provided if there are remaining records, including when the current page is full, which this check fails to account for i.e the prompt says for (offset + limit) <= record_count.

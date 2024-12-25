@@ -241,3 +241,6 @@ class TestWSResponse:
         assert result['status_code'] == 503
         assert result['status_text'] == 'Service Unavailable'
         assert result['errors'] == ['Service is down.']
+    """Test `bottle_neck.response.WSResponse.not_modified` method.
+    """
+    assert response.WSResponse.not_modified()
