@@ -31,6 +31,7 @@ import sys
 
 import dateutil.tz
 import dateutil.parser
+import dateutil
 
 from grimoirelab_toolkit.datetime import (InvalidDateError,
                                           datetime_to_utc,
@@ -117,7 +118,19 @@ class TestStrToDatetime(unittest.TestCase):
     """Unit tests for str_to_datetime function."""
 
     def test_dates(self):
-        """Check if it converts some dates to datetime objects."""
+        """
+        Check if it converts valid date strings to datetime objects.
+        
+        This test verifies multiple date formats including:
+        - Standard date (YYYY-MM-DD)
+        - European date format (DD-MM-YYYY)
+        - Two-digit year (YY-MM-DD)
+        - Date with time (YYYY-MM-DD HH:MM:SS)
+        - Date with various timezone formats including UTC (Z) and offsets (-0600).
+        
+        The expected outcome is that each date string correctly converts
+        to a datetime object with the appropriate timezone information.
+        """
 
         date = str_to_datetime('2001-12-01')
         expected = datetime.datetime(2001, 12, 1, tzinfo=dateutil.tz.tzutc())
@@ -203,18 +216,40 @@ class TestStrToDatetime(unittest.TestCase):
         self.assertEqual(date, expected)
 
     def test_invalid_unixtime_to_datetime(self):
-        """Check whether it fails with an invalid unixtime."""
+        """
+        Check whether it fails with an invalid unixtime.
+        
+        This test verifies that the `str_to_datetime` function raises an
+        `InvalidDateError` when an invalid unixtime string is provided.
+        The specific input tested is '2017-07-24', which is not a valid
+        unixtime format. The expectation is that the error is raised.
+        """
 
         self.assertRaises(InvalidDateError, unixtime_to_datetime, '2017-07-24')
 
     def test_invalid_date(self):
-        """Check whether it fails with an invalid date."""
+        """
+        Check whether it fails with invalid date strings.
+        
+        This test verifies that the `str_to_datetime` function raises an
+        `InvalidDateError` when provided with invalid date strings, such
+        as '2001-13-01' (invalid month) and '2001-04-31' (invalid day).
+        The expectation is that the appropriate error is raised in both cases.
+        """
 
         self.assertRaises(InvalidDateError, str_to_datetime, '2001-13-01')
         self.assertRaises(InvalidDateError, str_to_datetime, '2001-04-31')
 
     def test_invalid_format(self):
-        """Check whether it fails with invalid formats."""
+        """
+        Check whether it fails with invalid date formats.
+        
+        This test verifies that the `str_to_datetime` function raises an
+        `InvalidDateError` when provided with invalid date format strings,
+        such as '2001-12-01mm', 'nodate', or None. The expectation is
+        that the function raises the appropriate error for each invalid
+        input.
+        """
 
         self.assertRaises(InvalidDateError, str_to_datetime, '2001-12-01mm')
         self.assertRaises(InvalidDateError, str_to_datetime, 'nodate')
@@ -222,7 +257,14 @@ class TestStrToDatetime(unittest.TestCase):
         self.assertRaises(InvalidDateError, str_to_datetime, '')
 
     def test_datetime_utcnow(self):
-        """Check whether timezone information is added"""
+        """
+        Check whether timezone information is added to the current time.
+        
+        This test checks that the `datetime_utcnow` function returns the
+        current time with the correct timezone information set to UTC.
+        The expected timezone format is "UTC+00:00". The test ensures that
+        the timezone returned matches this expectation.
+        """
 
         now = datetime_utcnow()
         timezone = str(now.tzinfo)
@@ -231,14 +273,31 @@ class TestStrToDatetime(unittest.TestCase):
         self.assertTrue(timezone, expected)
     
     def test_iso_format_with_timezone(self):
-        """Test ISO 8601 format with timezone."""
+        """
+        Test ISO 8601 format with timezone.
+        
+        This test checks the `str_to_datetime` function with an ISO 8601
+        formatted date string that includes a timezone ('2024-09-18T14:23:45Z').
+        The expected output is a datetime object that matches the specified
+        date and time in UTC. The expectation is that the conversion is
+        performed accurately and the resulting datetime matches the expected
+        value.
+        """
         date = str_to_datetime('2024-09-18T14:23:45Z')
         expected = datetime.datetime(2024, 9, 18, 14, 23, 45, tzinfo=dateutil.tz.tzutc())
         self.assertIsInstance(date, datetime.datetime)
         self.assertEqual(date, expected)
     
     def test_extreme_future_date(self):
-        """Test handling of extreme future dates."""
+        """
+        Test handling of extreme future dates.
+        
+        This test verifies that the `str_to_datetime` function can correctly
+        handle extreme future dates, such as '3000-01-01T00:00:00Z'. The
+        expected output is a datetime object corresponding to this date and
+        time in UTC. The expectation is that the conversion is successful,
+        and the resulting datetime matches the expected value.
+        """
         date = str_to_datetime('3000-01-01T00:00:00Z')
         expected = datetime.datetime(3000, 1, 1, 0, 0, 0, tzinfo=dateutil.tz.tzutc())
         self.assertIsInstance(date, datetime.datetime)
@@ -366,6 +425,44 @@ class TestParseDatetime(unittest.TestCase):
         result = helper_nested_parse_datetime(ts)
         
         self.assert_datetime_equal(result, expected_dt)
+    def test_invalid_timezone_format(self):
+        """
+        Test handling of dates with invalid timezone formats.
+        
+        This test checks that the `str_to_datetime` function can handle dates
+        with invalid timezone formats, such as '2024-09-18T14:23:45 +9999'.
+        In this case, the function should ignore the invalid timezone and
+        default to UTC. The expectation is that the resulting datetime object
+        matches the expected value in UTC.
+        """
+        date = str_to_datetime('2024-09-18T14:23:45 +9999')
+        expected = datetime.datetime(2024, 9, 18, 14, 23, 45, tzinfo=dateutil.tz.tzutc())
+        self.assertIsInstance(date, datetime.datetime)
+        self.assertEqual(date, expected)
+    
+    def test_empty_string(self):
+        """
+        Test handling of empty string input.
+        
+        This test verifies that the `str_to_datetime` function raises an
+        `InvalidDateError` when provided with an empty string as input.
+        The expectation is that the function does not accept empty strings
+        and raises the appropriate error.
+        """
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('')
+
+    def test_whitespace_string(self):
+        """
+        Test handling of strings containing only whitespace.
+        
+        This test checks that the `str_to_datetime` function raises an
+        `InvalidDateError` when provided with a string that consists only
+        of whitespace. The expectation is that such inputs are considered
+        invalid, and the function raises the appropriate error.
+        """
+        with self.assertRaises(InvalidDateError):
+            str_to_datetime('    ')
 
 
 class TestUnixTimeToDatetime(unittest.TestCase):
