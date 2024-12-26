@@ -1,10 +1,12 @@
 """Unit tests for the base dictionary."""
 
 import pytest
-
+import unittest
 from plover_korean.system.cas.dictionaries.ko_cas_base import (
     lookup,
-    OPERATOR_ATTACH
+    OPERATOR_ATTACH,
+    INITIAL,
+    MEDIAL
 )
 
 
@@ -609,3 +611,37 @@ class TestLookupParticles(object):
         strokes = ('ㅁㅏㅓㅎㄷㅂ',)
         text = lookup(strokes)
         assert text == f'므부터{OPERATOR_ATTACH}'
+
+class TestKoreanConversion(unittest.TestCase):
+
+    def test_initial_conversion(self):
+        """Test cases for converting initial consonants using the INITIAL dictionary.
+
+        This method checks various input keys and verifies that the corresponding values
+        returned from the INITIAL dictionary are as expected. It includes tests for valid 
+        inputs as well as a case for an empty string.
+        """
+
+        self.assertEqual(INITIAL['ㄱ'], 'ㄱ')
+        self.assertEqual(INITIAL['ㄱㅇ'], 'ㄲ')
+        self.assertEqual(INITIAL['ㄷ'], 'ㄷ')
+        self.assertEqual(INITIAL['ㅇㅂ'], 'ㅃ')
+        self.assertEqual(INITIAL['ㅎㅈ'], 'ㅊ')
+        self.assertEqual(INITIAL[''], 'ㅇ')  # Test empty input
+
+    def test_medial_conversion(self):
+        """Test cases for converting medial vowels using the MEDIAL dictionary.
+
+        This method checks various input keys and verifies that the corresponding values
+        returned from the MEDIAL dictionary are as expected. It includes tests for valid 
+        inputs to ensure proper conversion of medial vowel combinations.
+        """
+
+        self.assertEqual(MEDIAL['ㅏ'], 'ㅏ')
+        self.assertEqual(MEDIAL['ㅏㅣ'], 'ㅐ')
+        self.assertEqual(MEDIAL['ㅓ'], 'ㅓ')
+        self.assertEqual(MEDIAL['ㅗㅏ'], 'ㅘ')
+        self.assertEqual(MEDIAL['ㅜㅓ'], 'ㅝ')
+        self.assertEqual(MEDIAL['ㅏ*'], 'ㅑ')
+        self.assertEqual(MEDIAL['ㅏ*ㅓ'], 'ㅒ')
+
