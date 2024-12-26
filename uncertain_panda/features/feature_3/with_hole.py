@@ -25,7 +25,6 @@ def value_counts(df, *args, normalize=False, **kwargs):
         for val in possible_values
     }
     return pd.Series(count, index=pd.CategoricalIndex(possible_values))
-    
 
 
 def coverage(series, cl=0.68):
@@ -33,8 +32,11 @@ def coverage(series, cl=0.68):
 
     if len(series) == 0:
         return np.NAN  # pragma: no cover
-
-    # centered_dist = np.abs(series - np.median(series))
-    # b = np.percentile(centered_dist, 100 * cl)
-    # return b
-    return np.nanpercentile(np.abs(series - np.median(series)), cl * 100)
+    
+    """
+    Calculates the centered distances from the median of the input `series` of type numpy and computes the 
+    `cl`-th percentile of these distances.
+    return:
+        float: The cl-th percentile of the absolute deviations from the median.
+    """
+    $PlaceHolder$
