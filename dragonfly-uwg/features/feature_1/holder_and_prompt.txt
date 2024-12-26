@@ -1,0 +1,9 @@
+"""
+This Attempts to infer the UWG building program from the honeybee-energy program.
+The inferring will happen by first finding the most common energy ProgramType
+among the assigned Room2Ds. If the identifier of this most common program
+contains the name of an acceptable UWG building program, it will be assigned
+as this object's building program. If no match is found or there's no
+honeybee-energy extension installed, this object's program will remain unchanged.
+"""
+$PlaceHolder$
