@@ -2,4 +2,5 @@
 
 set -euo pipefail
 cd /rtc
-go test ./schema -v
+# Todo: Add the test command to run the tests. Copy the run test command from Dockerfile
+go test -v ./internal/name

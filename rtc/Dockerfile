@@ -20,7 +20,8 @@ RUN go mod download
 COPY . .
 
 # Run tests
-RUN go test ./schema -v
+# Todo: add the name of the folder to run -> ./<folder-name or folder-path>
+RUN go test -v ./internal/name
 
 # Set the working directory to the root
 WORKDIR /
