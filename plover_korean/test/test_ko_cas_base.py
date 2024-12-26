@@ -11,34 +11,60 @@ from plover_korean.system.cas.dictionaries.ko_cas_base import (
 
 
 class TestLookup(object):
-    """Tests the base cases of lookup."""
+    """Tests the functionality of the lookup function.
+
+    This class contains unit tests that validate the behavior of the `lookup` function
+    under various scenarios, including edge cases and error conditions. Each test case
+    checks for specific inputs and asserts the expected outcomes, ensuring that the
+    function behaves correctly according to its specifications."""
 
     def test_length_zero(self):
+        """Tests that a KeyError is raised when no strokes are provided."""
         strokes = ()
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_length_one(self):
+        """Tests the lookup function with a single valid stroke.
+
+        Asserts that the output matches the expected composed text for the given stroke.
+        """
         strokes = ('ㄴㅣㄱ',)
         text = lookup(strokes)
         assert text == f'닉{OPERATOR_ATTACH}'
 
     def test_length_two(self):
+        """Tests that a KeyError is raised when two strokes are provided.
+
+        This test validates that the lookup function enforces the expected stroke length.
+        """
         strokes = ('ㄴㅣㄱ', 'ㄴㅣㄱ')
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_steno_order_wrong(self):
+        """Tests that a KeyError is raised when the stroke order is incorrect.
+
+        This test checks if the lookup function correctly handles invalid stroke sequences.
+        """
         strokes = ('ㅈㅎㅏ',)
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_contains_english(self):
+        """Tests that a KeyError is raised when the stroke contains English letters.
+
+        This test ensures that the lookup function does not accept strokes with English characters.
+        """
         strokes = ('HR',)
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_contains_numbers(self):
+        """Tests that a KeyError is raised when the stroke includes numeric characters.
+
+        This test verifies that the lookup function correctly rejects inputs containing numbers.
+        """
         strokes = ('ㅎㅏ8',)
         with pytest.raises(KeyError):
             lookup(strokes)
