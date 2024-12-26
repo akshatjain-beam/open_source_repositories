@@ -1,0 +1,2 @@
+The LLM Generated solution fails as- 
+ 1. If no match is found, it appends the first pronunciation in its raw form. This violates the requirement since the prompt explicitly states to use .split(u' ') to split pronunciation strings into lists of phonemes.

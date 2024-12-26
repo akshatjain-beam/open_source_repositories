@@ -1,0 +1,11 @@
+"""
+write line of code that performs as follows-
+- If the pronunciation for the word consonants is a list,`done` is set to False and  it iterates through the list to find a matching pronunciation based on the last letter.
+- If a match is found, the pronunciation is added to the `pronunciations` list and `done` is changed  to True. This needs to be done for pronounciations in the list.
+- If no match is found, the first pronunciation in the list is added to the `pronunciations` list.
+- If the pronunciation for the word consonants is not a list, the function simply adds the pronunciation to the `pronunciations` list.
+
+Note:
+    -The `.split(u' ')` method is used to split the pronunciation strings into lists of phonemes while adding to the `pronouncians` list.
+"""
+$PlaceHolder$
