@@ -20,11 +20,14 @@ RUN go mod download
 COPY . .
 
 # Run tests
-# Todo: add the name of the folder to run -> ./<folder-name or folder-path>
-RUN go test -v ./schema
+RUN go test ./schema -v
 
-# DO NOT CHANGE ANY BELOW CODE
+# Set the working directory to the root
 WORKDIR /
+
+# Copy the run_tests.sh script into the container
 COPY run_tests.sh ./
 RUN chmod +x /run_tests.sh
+
+# Default command to run bash
 ENTRYPOINT ["/bin/bash", "-s"]
