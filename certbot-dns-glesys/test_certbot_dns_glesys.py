@@ -1,5 +1,6 @@
 import pytest
 from certbot_dns_glesys import DomainParts, GlesysAuthenticator, GlesysRecord
+import unittest
 from unittest.mock import MagicMock
 
 
@@ -20,6 +21,7 @@ class GlesysTestAuthenticator(GlesysAuthenticator):
     def __init__(self, client):
         super().__init__(config=PluginConfig, name="dns-glesys")
         self._test_client = client
+
     def _get_glesys_client(self):
         return self._test_client
 
@@ -62,6 +64,7 @@ def test_perform_cleanup_cycle():
     validation_key = "thisgoesinthetetxtrecord"
 
     glesys_mock = MagicMock()
+
     def split_domain(d):
         assert d == validation_domain
         return DomainParts("runfalk.se", "_acme-challenge")
@@ -79,7 +82,95 @@ def test_perform_cleanup_cycle():
 
     record_id = 20200411
     glesys_mock.list_records.return_value = [
-        GlesysRecord(record_id, "runfalk.se", "_acme-challenge", "TXT", validation_key, auth.ttl),
+        GlesysRecord(record_id, "runfalk.se", "_acme-challenge",
+                     "TXT", validation_key, auth.ttl),
     ]
     auth._cleanup(domain, validation_domain, validation_key)
     glesys_mock.remove_record.assert_called_with(record_id)
+
+
+class TestDomainParts(unittest.TestCase):
+
+    def test_no_subdomain(self):
+        """
+        Test the behavior when there is no subdomain.
+        
+        It should yield the original domain with subdomain as None and
+        the domain part after the last '.' as the second variant.
+        """
+        dp = DomainParts(domain="example.com")
+        variants = list(dp.iter_variants())
+
+        expected = [
+            DomainParts(domain="example.com", subdomain=None),
+            DomainParts(domain="com", subdomain="example"),
+        ]
+
+        self.assertEqual(variants, expected)
+
+    def test_with_subdomain(self):
+        """
+        Test the behavior when a single subdomain is provided.
+        
+        It should yield the original domain with the subdomain, as well as 
+        a variant that includes the subdomain and the main domain parts.
+        """
+        dp = DomainParts(domain="example.com", subdomain="www")
+        variants = list(dp.iter_variants())
+
+        expected = [
+            DomainParts(domain="example.com", subdomain="www"),
+            DomainParts(domain="com", subdomain="www.example"),
+        ]
+
+        self.assertEqual(variants, expected)
+
+    def test_subdomain_with_multiple_parts(self):
+        """
+        Test the behavior when the subdomain consists of multiple parts.
+        
+        It should yield variants including all combinations of the subdomain 
+        and domain parts.
+        """
+        dp = DomainParts(domain="example.com", subdomain="sub.www")
+        variants = list(dp.iter_variants())
+
+        expected = [
+            DomainParts(domain="example.com", subdomain="sub.www"),
+            DomainParts(domain="com", subdomain="sub.www.example"),
+        ]
+
+        self.assertEqual(variants, expected)
+
+
+    def test_edge_case_empty_subdomain(self):
+        """
+        Test the behavior when the subdomain is an empty string.
+        
+        It should yield the original domain with the empty subdomain, 
+        along with a variant containing the domain part after the last '.'.
+        """
+        dp = DomainParts(domain="example.com", subdomain="")
+        variants = list(dp.iter_variants())
+
+        expected = [
+            DomainParts(domain="example.com", subdomain=None),
+            DomainParts(domain="com", subdomain=".example"),
+        ]
+
+        self.assertEqual(variants, expected)
+
+    def test_edge_case_no_parts(self):
+        """
+        Test the behavior when the domain consists of a single part.
+        
+        It should yield a single variant with that part and no subdomain.
+        """
+        dp = DomainParts(domain="com", subdomain=None)
+        variants = list(dp.iter_variants())
+
+        expected = [
+            DomainParts(domain="com", subdomain=None)
+        ]
+
+        self.assertEqual(variants, expected)

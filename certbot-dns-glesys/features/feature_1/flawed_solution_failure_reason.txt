@@ -1,0 +1,19 @@
+test_edge_case_empty_subdomain
+Relevant Prompt Portion: "The subdomain name, if any. Defaults to None."
+Reason: Returns an empty string for the subdomain when it should yield None, violating the expected behavior.
+
+test_edge_case_no_parts
+Relevant Prompt Portion: "The subdomain name, if any. Defaults to None."
+Reason: Returns an empty string for the subdomain instead of None when the domain consists of a single part.
+
+test_no_subdomain
+Relevant Prompt Portion: "The subdomain name, if any. Defaults to None."
+Reason: Incorrectly yields an empty string for the subdomain instead of None when no subdomain is provided.
+
+test_subdomain_with_multiple_parts
+Relevant Prompt Portion: "combining them with the subdomain parts"
+Reason: The logic for combining multiple subdomain parts with domain parts is flawed, leading to incorrect output.
+
+test_with_subdomain
+Relevant Prompt Portion: "combining them with the subdomain parts (if subdomain is not None, split by '.')"
+Reason: Incorrectly constructs the relationship between the domain and subdomain, failing to yield the expected combinations.
