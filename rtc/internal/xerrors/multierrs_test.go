@@ -2,10 +2,7 @@ package xerrors
 
 import (
 	"errors"
-	"fmt"
-	"testing"
 
-	"github.com/google/go-cmp/cmp"
 )
 
 var (
