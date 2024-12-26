@@ -104,8 +104,22 @@ KK2 = 0x6D703EF3
 KK3 = 0x7A6D76E9
 KK4 = 0x00000000
 
-def ROL(n, x):
-    return ((x << n) & 0xffffffff) | (x >> (32 - n))
+"""  
+Create a function `ROL` that Performs a left rotation (circular shift) on a 32-bit integer, `x`, by `n` bits.
+
+A left rotation shifts all bits of `x` to the left by `n` positions, with the bits that 
+overflow on the left end wrapping around to the right end. This function ensures that 
+the left-shifted result remains within a 32-bit range by applying a bitwise AND operation with 0xFFFFFFFF
+before combining it with the right-shifted portion.
+
+Parameters:
+    n (int): The number of positions to rotate `x` to the left.
+    x (int): The 32-bit integer to be rotated.
+
+Returns:
+    int: The result of rotating `x` to the left by `n` bits, masked to fit within 32 bits.
+"""   
+$PlaceHolder$
 
 def F0(x, y, z):
     return x ^ y ^ z
@@ -370,6 +384,6 @@ def RMD160Final(ctx):
     return struct.pack("<5L", *ctx.state)
 
 
-# assert "37f332f68db77bd9d7edd4969571ad671cf9dd3b" == new("The quick brown fox jumps over the lazy dog").hexdigest()
-# assert "132072df690933835eb8b6ad0b77e7b6f14acad7" == new("The quick brown fox jumps over the lazy cog").hexdigest()
-# assert "9c1185a5c5e9fc54612808977ee8f548b2258d31" == new("").hexdigest()
+assert "37f332f68db77bd9d7edd4969571ad671cf9dd3b" == new("The quick brown fox jumps over the lazy dog").hexdigest()
+assert "132072df690933835eb8b6ad0b77e7b6f14acad7" == new("The quick brown fox jumps over the lazy cog").hexdigest()
+assert "9c1185a5c5e9fc54612808977ee8f548b2258d31" == new("").hexdigest()

@@ -153,8 +153,12 @@ class JacobianCurve:
     def is_on_curve(self, a):
         x, y = a
         # Simple arithmetic check
-        if (pow(x, 3, self.p) + self.a * x + self.b) % self.p != y * y % self.p:
-            return False
+        """
+        Write `if` condition  that Verifies if point (x, y) is valid on the elliptic curve given by:
+        y^2 = x^3 + ax + b  
+        it calculates both sides of the equation modulo `p`. False is returned if there is no match
+        """
+        $PlaceHolder$
         # nP = point-at-infinity
         else:
             return self.isinf(self.jacobian_multiply(self.to_jacobian(a), self.n))

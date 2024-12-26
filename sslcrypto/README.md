@@ -9,6 +9,8 @@
 
 License: MIT + BSD-2 for ripemd implementation (see `_ripemd.py`).
 
+commit hash- 22c3bb311c291b2d1398b0b68d9e638f2ba81f59
+
 
 ## Why?
 
