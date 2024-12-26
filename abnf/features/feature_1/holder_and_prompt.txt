@@ -1,0 +1,14 @@
+"""
+  Defines a `token` using ABNF (Augmented Backus-Naur Form) syntax.
+
+    The token is composed of one or more characters from the following set:
+    - `!` (U+0021)
+    - `#` to `'` (U+0023 to U+0027): `#`, `$`, `%`, `&`, `'`
+    - `*` to `+` (U+002A to U+002B): `*`, `+`
+    - `-` to `.` (U+002D to U+002E): `-`, `.`
+    - `0` to `9` (U+0030 to U+0039)
+    - `A` to `Z` (U+0041 to U+005A)
+    - `^` to `z` (U+005E to U+007A): `^`, `_`, `` ` ``, `a` to `z`
+    - `|` (U+007C)
+"""
+$PlaceHolder$
