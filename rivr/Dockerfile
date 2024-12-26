@@ -10,9 +10,6 @@ COPY . /rivr
 # Install pytest globally
 RUN pip install pytest
 
-# Install all dependencies 
-# RUN poetry install .  
-
 # Run tests using pytest
 RUN python -m pytest tests/
 

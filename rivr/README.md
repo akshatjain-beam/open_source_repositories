@@ -2,6 +2,8 @@
 
 rivr is a Python WSGI Compatible microweb framework. Following a design similar to Django.
 
+commit hash-b4f7eb481cc28ae48169f1d3982b896b7cfd5c91
+
 ## Examples
 
 ### Simple views
