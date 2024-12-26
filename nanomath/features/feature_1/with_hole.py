@@ -125,17 +125,18 @@ class Stats(object):
 
 
 def get_N50(readlengths):
-    """Calculate read length N50.
-
-    Based on https://github.com/PapenfussLab/Mungo/blob/master/bin/fasta_stats.py
     """
-    return readlengths[np.where(np.cumsum(readlengths) >= 0.5 * np.sum(readlengths))[0][0]]
-     
+    Calculate the N50 length of a set of read lengths.
+    This code snippet returns the first element in the readlengths array at which the cumulative sum exceeds half of the total sum of all readlengths.
+    """
+    $PlaceHolder$
 
+
+@deprecated
 def remove_length_outliers(df, columnname):
     """Remove records with length-outliers above 3 standard deviations from the median."""
     return df[df[columnname] < (np.median(df[columnname]) + 3 * np.std(df[columnname]))]
-    
+
 
 def errs_tab(n):
     """Generate list of error rates for qualities less than equal than n."""

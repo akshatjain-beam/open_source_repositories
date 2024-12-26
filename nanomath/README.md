@@ -7,6 +7,7 @@ This module provides a few simple math and statistics functions for other script
 [![Build Status](https://travis-ci.org/wdecoster/nanomath.svg?branch=master)](https://travis-ci.org/wdecoster/nanomath)
 [![Code Health](https://landscape.io/github/wdecoster/nanomath/master/landscape.svg?style=flat)](https://landscape.io/github/wdecoster/nanomath/master)
 
+comit hash - 79b7f85d004763a07c56b9eb594713ae7349ff93
 
 ## FUNCTIONS
 * Calculate read N50 from a set of lengths `get_N50(readlenghts)`  

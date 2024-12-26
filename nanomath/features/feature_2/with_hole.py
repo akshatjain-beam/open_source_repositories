@@ -130,12 +130,22 @@ def get_N50(readlengths):
     Based on https://github.com/PapenfussLab/Mungo/blob/master/bin/fasta_stats.py
     """
     return readlengths[np.where(np.cumsum(readlengths) >= 0.5 * np.sum(readlengths))[0][0]]
-     
+
 
 def remove_length_outliers(df, columnname):
-    """Remove records with length-outliers above 3 standard deviations from the median."""
-    return df[df[columnname] < (np.median(df[columnname]) + 3 * np.std(df[columnname]))]
+    """
+    Remove records in the dataframe of specified columnanme where length-outliers 
+    are above 3 standard deviations[Use direct comparison] from the median.
+    Parameters:
+        df (pandas.DataFrame): The DataFrame from which to remove outliers.
+        columnname (str): The name of the column in the DataFrame to analyze for outliers.
+
+    Returns:
+        pandas.DataFrame: resultant Dataframe
+    """
+    $PlaceHolder$
     
+
 
 def errs_tab(n):
     """Generate list of error rates for qualities less than equal than n."""

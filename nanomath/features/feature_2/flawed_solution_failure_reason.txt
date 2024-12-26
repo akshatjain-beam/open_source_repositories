@@ -1,0 +1,1 @@
+The LLM Generated solution fails as- The prompt explicilty mentions to remove records that are above 3 standard deviations from the median whereas the LLM generated solution is also removing the values that are below 3 standard deviation from the median.
