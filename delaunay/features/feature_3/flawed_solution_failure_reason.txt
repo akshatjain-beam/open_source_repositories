@@ -1,0 +1,2 @@
+1. The use of 1/2 in the llm generated solution is incorrect as it mistakenly tries to compute the area of the triangles formed with the point p and the sides of the main triangle. This incorrect computation results in wrong barycentric coordinates.
+2. The use of epsilon directly in the range check (0 - epsilon <= ... <= 1 + epsilon), which might not handle precision issues as effectively in the llm generated code.

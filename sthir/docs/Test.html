@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test module &#8212; Sthir 0.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="convert_2p15 module" href="convert_2p15.html" />
+    <link rel="prev" title="CLI module" href="CLI.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Test">
+<span id="test-module"></span><h1>Test module<a class="headerlink" href="#module-Test" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Test.Tester">
+<em class="property">class </em><code class="sig-prename descclassname">Test.</code><code class="sig-name descname">Tester</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">doc_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">fp_rate</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Test.Tester" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for testing the spectal bloom filters</p>
+<dl class="py method">
+<dt id="Test.Tester.generate_Filter">
+<code class="sig-name descname">generate_Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remove_stopwords</span></em>, <em class="sig-param"><span class="n">lemmetize</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Test.Tester.generate_Filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the counter and params for the specified document in Testing Folder</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Test.Tester.read_dict_words">
+<code class="sig-name descname">read_dict_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Test.Tester.read_dict_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads and returns a list of words in the english_dict.txt file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Test.Tester.test_filter_for_FP">
+<code class="sig-name descname">test_filter_for_FP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Test.Tester.test_filter_for_FP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests and logs the stats after testing the provided file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="Test.create_logger">
+<code class="sig-prename descclassname">Test.</code><code class="sig-name descname">create_logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Test.create_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a logger object</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Sthir</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">static_site_search</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CLI.html">CLI module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convert_2p15.html">convert_2p15 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convert_byte.html">convert_byte module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_search.html">generate_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mmh3.html">mmh3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parse.html">parse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scan.html">scan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spectral_bloom_filter.html">spectral_bloom_filter module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">static_site_search</a><ul>
+      <li>Previous: <a href="CLI.html" title="previous chapter">CLI module</a></li>
+      <li>Next: <a href="convert_2p15.html" title="next chapter">convert_2p15 module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Parth Parikh, Mrunank Mistry, Dhruvam Kothari.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

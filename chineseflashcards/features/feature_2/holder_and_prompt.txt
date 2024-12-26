@@ -1,0 +1,23 @@
+"""
+Parses a line of text representing a dictionary entry and extracts structured information.
+
+This function processes a text line formatted to include a term, pinyin transcription, 
+a category or additional descriptor in brackets, and definitions separated by slashes. 
+The definitions may include classifiers and Taiwanese pronunciation.
+
+Input Format:
+The line should follow this structure:
+`<term> <pinyin> [<category>] /<definitions>/`
+
+Definitions Breakdown:
+- Classifiers are indicated by `CL:` followed by a comma-separated list of classifier names.
+- Taiwanese pronunciation is indicated by `Taiwan pr.` followed by the pronunciation in square brackets.
+- Other parts of the definition are considered standard definitions.
+
+Parameters:
+- `line` (str): The input line of text to be parsed. It should adhere to the format described above.
+
+Returns:
+- `CedictWord`: An instance of the `CedictWord` class
+"""
+$PlaceHolder$

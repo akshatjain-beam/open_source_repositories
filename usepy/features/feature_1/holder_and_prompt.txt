@@ -1,0 +1,4 @@
+# - Create a static method `get_middle_batch` to extract substrings from `original_str` that are enclosed between `start_str` and `end_str`.
+# - Optionally, limit the number of extracted substrings.
+# - The parameters `start_str` and `end_str` are optional.
+$PlaceHolder$

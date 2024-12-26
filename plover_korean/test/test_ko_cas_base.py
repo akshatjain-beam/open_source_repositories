@@ -1,42 +1,70 @@
 """Unit tests for the base dictionary."""
 
 import pytest
-
+import unittest
 from plover_korean.system.cas.dictionaries.ko_cas_base import (
     lookup,
-    OPERATOR_ATTACH
+    OPERATOR_ATTACH,
+    INITIAL,
+    MEDIAL
 )
 
 
 class TestLookup(object):
-    """Tests the base cases of lookup."""
+    """Tests the functionality of the lookup function.
+
+    This class contains unit tests that validate the behavior of the `lookup` function
+    under various scenarios, including edge cases and error conditions. Each test case
+    checks for specific inputs and asserts the expected outcomes, ensuring that the
+    function behaves correctly according to its specifications."""
 
     def test_length_zero(self):
+        """Tests that a KeyError is raised when no strokes are provided."""
         strokes = ()
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_length_one(self):
+        """Tests the lookup function with a single valid stroke.
+
+        Asserts that the output matches the expected composed text for the given stroke.
+        """
         strokes = ('ㄴㅣㄱ',)
         text = lookup(strokes)
         assert text == f'닉{OPERATOR_ATTACH}'
 
     def test_length_two(self):
+        """Tests that a KeyError is raised when two strokes are provided.
+
+        This test validates that the lookup function enforces the expected stroke length.
+        """
         strokes = ('ㄴㅣㄱ', 'ㄴㅣㄱ')
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_steno_order_wrong(self):
+        """Tests that a KeyError is raised when the stroke order is incorrect.
+
+        This test checks if the lookup function correctly handles invalid stroke sequences.
+        """
         strokes = ('ㅈㅎㅏ',)
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_contains_english(self):
+        """Tests that a KeyError is raised when the stroke contains English letters.
+
+        This test ensures that the lookup function does not accept strokes with English characters.
+        """
         strokes = ('HR',)
         with pytest.raises(KeyError):
             lookup(strokes)
 
     def test_contains_numbers(self):
+        """Tests that a KeyError is raised when the stroke includes numeric characters.
+
+        This test verifies that the lookup function correctly rejects inputs containing numbers.
+        """
         strokes = ('ㅎㅏ8',)
         with pytest.raises(KeyError):
             lookup(strokes)
@@ -609,3 +637,37 @@ class TestLookupParticles(object):
         strokes = ('ㅁㅏㅓㅎㄷㅂ',)
         text = lookup(strokes)
         assert text == f'므부터{OPERATOR_ATTACH}'
+
+class TestKoreanConversion(unittest.TestCase):
+
+    def test_initial_conversion(self):
+        """Test cases for converting initial consonants using the INITIAL dictionary.
+
+        This method checks various input keys and verifies that the corresponding values
+        returned from the INITIAL dictionary are as expected. It includes tests for valid 
+        inputs as well as a case for an empty string.
+        """
+
+        self.assertEqual(INITIAL['ㄱ'], 'ㄱ')
+        self.assertEqual(INITIAL['ㄱㅇ'], 'ㄲ')
+        self.assertEqual(INITIAL['ㄷ'], 'ㄷ')
+        self.assertEqual(INITIAL['ㅇㅂ'], 'ㅃ')
+        self.assertEqual(INITIAL['ㅎㅈ'], 'ㅊ')
+        self.assertEqual(INITIAL[''], 'ㅇ')  # Test empty input
+
+    def test_medial_conversion(self):
+        """Test cases for converting medial vowels using the MEDIAL dictionary.
+
+        This method checks various input keys and verifies that the corresponding values
+        returned from the MEDIAL dictionary are as expected. It includes tests for valid 
+        inputs to ensure proper conversion of medial vowel combinations.
+        """
+
+        self.assertEqual(MEDIAL['ㅏ'], 'ㅏ')
+        self.assertEqual(MEDIAL['ㅏㅣ'], 'ㅐ')
+        self.assertEqual(MEDIAL['ㅓ'], 'ㅓ')
+        self.assertEqual(MEDIAL['ㅗㅏ'], 'ㅘ')
+        self.assertEqual(MEDIAL['ㅜㅓ'], 'ㅝ')
+        self.assertEqual(MEDIAL['ㅏ*'], 'ㅑ')
+        self.assertEqual(MEDIAL['ㅏ*ㅓ'], 'ㅒ')
+

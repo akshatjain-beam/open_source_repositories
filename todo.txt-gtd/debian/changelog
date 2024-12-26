@@ -1,0 +1,64 @@
+todo.txt-gtd (0.8) unstable; urgency=medium
+
+  * Speed-up application launch.
+
+ -- David Steele <steele@debian.org>  Fri, 19 Feb 2021 21:50:47 -0500
+
+todo.txt-gtd (0.7) unstable; urgency=medium
+
+  * Declare conflict with turnin-ng (Closes: #981145).
+
+ -- David Steele <steele@debian.org>  Thu, 18 Feb 2021 09:37:37 -0500
+
+todo.txt-gtd (0.6) unstable; urgency=medium
+
+  * New version to comply with debci's source-only mandate.
+
+ -- David Steele <steele@debian.org>  Tue, 26 Jan 2021 10:16:01 -0500
+
+todo.txt-gtd (0.5) unstable; urgency=medium
+
+  * Replace links in todo.txt-base hooks dir with scripts.
+  * Install gtdcleanup as a user script.
+
+ -- David Steele <steele@debian.org>  Mon, 25 Jan 2021 12:22:35 -0500
+
+todo.txt-gtd (0.4) unstable; urgency=medium
+
+  * Changed name to todo.txt-gtd.
+  * Initial Debian release (Closes: #979842).
+
+ -- David Steele <steele@debian.org>  Tue, 12 Jan 2021 13:50:03 -0500
+
+tdtgtd (0.3) tdtgtd; urgency=medium
+
+  * tdtproj
+    - -x option for exact match only.
+  * tdtcleanup
+    - Preserve project ordering on older Pythons.
+    - Better Project Header detection.
+  * tdtlist
+    - Improved formatting of odt file.
+  * tdtproj
+    - Fixed a bug causing _None to be deleted.
+
+ -- David Steele <steele@debian.org>  Tue, 16 Apr 2019 11:57:09 -0400
+
+tdtgtd (0.2) tdtgtd; urgency=low
+
+  * Add completions to tdtlist.
+  * Get autopkgtest working with lxc.
+  * tdtlist
+    - Move odt context list creation to Python.
+    - Add more formatting to odt.
+    - Add capability to create to a tempdir and open on the fly.
+  * tdtproj
+    - Add capability to create a new project.
+
+ -- David Steele <steele@debian.org>  Mon, 24 Dec 2018 16:51:00 -0500
+
+tdtgtd (0.1) tdtgtd; urgency=low
+
+  * Initial release.
+
+ -- David Steele <steele@debian.org>  Thu, 13 Dec 2018 21:26:34 -0500

@@ -1,0 +1,22 @@
+"""
+Determines the syllable's diacritic and tone number from the given syllable string.
+
+It processes a syllable string to extract its diacritic and tone number.
+It identifies tones based on the presence of numeric characters and vowel groups.
+
+Parameters:
+- syl (str): Either an ASCII representation of a pinyin syllable, like ni3, ge5, or lu:4, or a diacritic-based
+      representation like nǐ, ge, or lǜ.
+
+Returns:
+- return (str, int): The syllable with a diacritic added and its tone. For example, both syl='ni3' and syl='nǐ' return
+      ('nǐ', 3), both syl='ge5' and syl='ge' return ('ge', 5), and both syl='lu:4' and syl='lǜ' return ('lǜ', 4).
+
+Raises:
+- ValueError: If the syllable string does not conform to expected patterns
+
+Notes:
+- The function handles edge cases, such as the syllable "r" which is a special case in CC-CEDICT.
+- The `DIACRITIC_VOWELS` variable is used to match and identify diacritic vowels in the syllable.
+"""
+$PlaceHolder$

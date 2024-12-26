@@ -1,0 +1,19 @@
+# Develop a SupplyCurve class to model and manage supply data points, including validation of input data and calculation of supply quantities based on price.
+#
+# 1. Define the SupplyCurve class that will manage supply data.
+# 2. constructor
+#	1. Implement the constructor to accept a list of dictionaries, each containing `price` and `supply` keys.
+# 	2. Ensure that the data is sorted by price in ascending order.
+# 	3. Validate the data:
+#		1. Raise a ValueError if any price in the data is zero.
+#		2. Raise a SupplyMonotonicityError if the supply values are not non-decreasing as prices increase.
+# 	4. Store the prices and supply as quantity as NumPy arrays for efficient processing.
+# 	5. Determine the minimum price from the data and store it.
+# 3. Equality Method (`__eq__`):
+# 	1. Implement a method to compare two SupplyCurve objects. The method should return True if both the price and quantity data are identical, otherwise False.
+#	2. Hava a input parameter for comparing
+# 4. Quantity Method 
+#	1. Implement a method that accepts a price and returns the corresponding supply quantity.
+#	2. If the provided price is below the minimum price in the data, return a quantity of 0.
+#	3. If the current price is below the provided price, return the quantity corresponding to the highest price less than or equal to the given price.
+$PlaceHolder$

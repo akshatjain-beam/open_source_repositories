@@ -1,0 +1,34 @@
+"""
+Return the confidence interval based on bootstrapped results.
+
+This method calculates the confidence interval [left, right] such that
+a fraction ``a`` of the bootstrapped results falls below ``left`` and
+a fraction ``b`` of the results falls above ``right``. 
+
+If `b` is None, the symmetric interval is calculated as follows:
+    - left = (1 - a) / 2
+    - right = (1 + a) / 2
+Else, provide
+    - `a` to left
+    - `b` to right
+
+Parameters:
+a : float, optional
+    The fraction of results to be excluded from the lower tail. 
+    Default is ONE_SIGMA / 100.
+b : float, optional
+    The fraction of results to be excluded from the upper tail. 
+    If None, it defaults to the same value as ``a`` for a symmetric interval.
+
+Returns:
+pd.Series
+    A pandas Series containing three elements:
+    - 'value': the nominal value of the statistic.
+    - 'left': the lower bound of the confidence interval.
+    - 'right': the upper bound of the confidence interval.
+
+Notes:
+- The method utilizes bootstrapping to generate the quantiles.
+- Ensure that the bootstrapped results are available via the `bs` method before calling `ci`.
+"""
+$PlaceHolder$
