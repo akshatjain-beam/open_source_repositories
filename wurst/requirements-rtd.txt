@@ -2,3 +2,4 @@ constructive_geometries
 toolz
 python-json-logger
 appdirs
+pyarrow
