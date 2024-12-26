@@ -1,0 +1,3 @@
+Test Case Failed - TestRelativeChange::test_year_iterable
+Relevant prompt Section -  Code should handle both numpy array and list datatypes for `years`.
+Reason - This test case failed because the generated solution attempts to use the index() function on years, which can be list or numpy array. While it works for List However, the index() method is not supported by numpy array.The usuage of index() leads to incorrect functional implementation ultimately leading to failure of test case.
