@@ -1,3 +1,4 @@
+```
 ArabicScript = {  # mapping from Buckwalter to Arabic script
     u'b': u'\u0628', u'*': u'\u0630', u'T': u'\u0637', u'm': u'\u0645',
     u't': u'\u062a', u'r': u'\u0631', u'Z': u'\u0638', u'n': u'\u0646',
@@ -11,13 +12,4 @@ ArabicScript = {  # mapping from Buckwalter to Arabic script
     u'F': u'\u064b', u'N': u'\u064c', u'K': u'\u064d', u'a': u'\u064e',
     u'u': u'\u064f', u'i': u'\u0650', u'~': u'\u0651', u'o': u'\u0652'
 }
-
-# Convert input string to Arabic
-def buckwalterToArabic(word):
-    result = u''
-    for letter in word:
-        if letter in ArabicScript:
-            result += ArabicScript[letter]
-        else:
-            result += letter
-    return result
+```
