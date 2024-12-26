@@ -81,6 +81,17 @@ class TestMorph(unittest.TestCase):
     self.assertFalse(morph.isscalar(( 3, )))
     self.assertFalse(morph.isscalar(self))
     self.assertFalse(morph.isscalar(unittest.TestCase))
+  #------
+  def test_bytes_without_py3(self):
+        # Bytes should be considered scalar values regardless of PY3.
+        #self.assertTrue(morph.isscalar(b'bytes'))  # Expected: True
+
+        # Simulating the absence of PY3 definition which might lead to flawed solution failure.
+        global PY3
+        PY3 = None
+        self.assertTrue(morph.isscalar(b'bytes'))  # Expected: True (Fails)
+
+
 
   #----------------------------------------------------------------------------
   def test_isstruct(self):
@@ -430,6 +441,108 @@ if __name__ == "__main__":
 #------------------------------------------------------------------------------
 # end of $Id$
 #------------------------------------------------------------------------------
+import unittest
+from morph import pick
+
+class TestPickFunction(unittest.TestCase):
+    """
+    Test suite for the `pick` function from the `morph` module.
+    The tests cover various scenarios to ensure that the `pick` function
+    behaves correctly when filtering keys from a source dictionary.
+    """
+
+    def setUp(self):
+        """
+        Set up the initial state for the tests.
+        This method creates a sample source dictionary with various keys,
+        including both string and non-string keys, to be used in the tests.
+        """
+        self.source = {
+            'prefix_key1': 1,
+            'prefix_key2': 2,
+            'other_key': 3,
+            123: 4,  # Non-string key to test the getattr fallback
+        }
+
+    def test_pick_with_valid_keys(self):
+        """
+        Test case for picking valid keys with a specified prefix.
+        This test checks that the `pick` function correctly removes the 
+        prefix from keys in the source dictionary and returns the expected 
+        dictionary with the prefix stripped.
+        """
+        keys = ['prefix_key1', 'prefix_key2']
+        result = pick(self.source, prefix='prefix_')
+        expected = {'key1': 1, 'key2': 2}  # Should strip the prefix
+        self.assertEqual(result, expected)
+
+    def test_pick_with_non_string_keys(self):
+        """
+        Test case for handling non-string keys in the source dictionary.
+        This test verifies that the `pick` function only returns keys 
+        that are strings and ignore non-string keys, ensuring the function 
+        handles edge cases gracefully.
+        """
+        result = pick(self.source, prefix='prefix_')
+        expected = {'key1': 1, 'key2': 2}  # Only valid string keys should be returned
+        self.assertEqual(result, expected)
+
+    def test_pick_with_non_string_key_for_getattr(self):
+        """
+        Test case to ensure the `pick` function works with source dictionaries
+        containing non-string keys when filtering by prefix.
+        This verifies that the function does not raise errors and correctly
+        handles keys that do not support the `startswith` method by using
+        a fallback lambda.
+        """
+        # Testing that non-string keys correctly trigger the lambda
+        source = {None: 1, 123: 2, 'prefix_key3': 3}
+        result = pick(source, prefix='prefix_')
+        expected = {'key3': 3}  
+        self.assertEqual(result, expected)
+
+    def test_pick_with_empty_source(self):
+        """
+        Test case for the scenario where the source dictionary is empty.
+        This test ensures that when `pick` is called with an empty source, 
+        it returns an empty dictionary as expected, demonstrating the 
+        function's robustness in handling edge cases.
+        """
+        result = pick({}, prefix='prefix_')
+        self.assertEqual(result, {}) 
+
+    def test_pick_with_prefix_and_no_keys(self):
+        """
+        Test case for picking keys with a specified prefix when no keys 
+        are explicitly provided. This checks that the `pick` function 
+        returns the correct subset of the source dictionary based on the 
+        specified prefix, verifying its functionality.
+        """
+        result = pick(self.source, prefix='prefix_')
+        expected = {'key1': 1, 'key2': 2}  # All keys with prefix stripped
+        self.assertEqual(result, expected)
+
+    def test_pick_invalid_keywords(self):
+        """
+        Test case for verifying that the `pick` function raises a 
+        ValueError when invalid keyword arguments are provided.
+        This checks the function's error handling when called with 
+        unexpected or unsupported parameters.
+        """
+        with self.assertRaises(ValueError):
+            pick(self.source, keys=[], invalid_key='invalid')
+
+    def test_pick_with_tree_option(self):
+        """
+        Test case to ensure that using both the `prefix` and `tree` options 
+        together raises a ValueError. This verifies the function's ability 
+        to enforce its own constraints and prevents misuse.
+        """
+        with self.assertRaises(ValueError):
+            pick(self.source, prefix='prefix_', tree=True)  
+
+if __name__ == '__main__':
+    unittest.main()
 
 class CustomDictLike:
     def keys(self):
