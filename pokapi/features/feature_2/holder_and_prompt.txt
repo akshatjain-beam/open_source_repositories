@@ -1,0 +1,18 @@
+"""
+This function `cleaned` takes a string as input and returns a cleaned version of
+the string.
+If there is no text, it return the text as it is.
+The cleaning process involves the following steps:
+
+1. Removing all trailing periods and slashes: If the string ends 
+    with a period ('.') or a slash ('/'), all these characters are removed.
+2. Removing whitespace: Any leading or trailing whitespace
+    characters (spaces, tabs, newlines) are removed from the string.
+
+Parameters:
+    text (str): The input string to be cleaned.
+
+Returns:
+    str: The cleaned string.
+"""
+$PlaceHolder$

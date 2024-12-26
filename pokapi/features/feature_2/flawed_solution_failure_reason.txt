@@ -1,0 +1,3 @@
+Test case failed- test_cleaned_with_trailing_periods, test_cleaned_with_trailing_slashes
+Relevant prompt section - "Removing all trailing periods and slashes: If the string ends with a period ('.') or a slash ('/'), all these characters are removed."
+Reason - The incorrect solution only checks if the text ends with a period or slash and removes only one character.  Instead of removing All characters it is removing only one resulting in failure of test case.
