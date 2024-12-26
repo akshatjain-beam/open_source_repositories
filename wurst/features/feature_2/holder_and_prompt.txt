@@ -1,0 +1,28 @@
+"""
+    Write lines of code to Link internal exchanges in a dataset based on specified fields.
+
+    1. This will iterates through the provided dataset of activities.
+    2. And links internal exchanges by creating an 'input' field for each exchange that matches the specified fields. 
+    
+
+    Args:
+    data (list[dict]): A list of activity datasets. Each dataset is expected to be a 
+    dictionary containing:
+    - database (str): The name of the database.
+    - code (str): A unique identifier for the activity.
+    - exchanges (list[dict]): A list of exchanges, where each exchange is expected to 
+    contain keys defined in the `fields` argument.  
+
+    fields (tuple): A tuple of strings representing the keys in the exchanges that will be 
+    used to create a unique identifier for linking. Defaults to ("name", "product", 
+    "location", "unit").
+
+    Returns:
+    list[dict]: The updated list of activity datasets, where each internal exchange has 
+    an 'input' field populated with a tuple containing the database and code of the linked activity.
+
+    Raises:
+    ValueError: If an exchange of type 'biosphere' is found that cannot be linked to any activity.
+    KeyError: If an exchange cannot be linked to an existing activity based on the specified fields.
+"""
+$PlaceHolder$
