@@ -1,0 +1,6 @@
+"""
+This function filters the datasets based on whether their "name" key is present in the
+`low_voltage_mix`, `medium_voltage_mix`, or `high_voltage_mix` values. For each filtered dataset,
+it updates the "exchanges" list by removing exchanges where the "name" key does not contains "electricity" and "import from". Finally, return the updated dataset
+"""
+$PlaceHolder$
