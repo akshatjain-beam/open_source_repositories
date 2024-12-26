@@ -1,0 +1,27 @@
+"""
+Create a function `get_stroke_groups` which parses a steno stroke into its logical components.
+
+This function extracts the components of a steno stroke using `STROKE_REGEX` regex, categorizing them into
+initial, medial, final, and numeric groups based on a predefined regex pattern.
+
+Args:
+    stroke: A string representing the steno stroke to be parsed.
+
+Returns:
+    A tuple containing the following components in steno order:
+    - initial: The keys in the 'initial' group of the stroke.
+    - medial: The keys in the 'medial' group of the stroke.
+    - final: The keys in the 'final' group of the stroke (empty string if not present).
+    - numbers: The keys in the 'number' group of the stroke (combined from both `number_start` and `number_end`).
+
+Raises:
+    KeyError: If the provided stroke is invalid or does not match the expected pattern.
+
+Note:
+    - Pull out the dash from the `medial` if it exists
+
+Example:
+    >>> get_stroke_groups('STKPWOR')
+    ('STKPW', 'OR', '', '')
+"""
+$PlaceHolder$
