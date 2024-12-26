@@ -1,14 +1,25 @@
-FROM golang:latest
+# Start from the official Go image
+FROM golang:1.20
 
-WORKDIR /usr/src/app
+# Set the Current Working Directory inside the container
+WORKDIR /app
 
+# Copy go.mod and go.sum files to the container
+COPY go.mod go.sum ./
+
+# Download all dependencies
+RUN go mod download
+
+# Copy the source code into the container
 COPY . .
 
-RUN go get .
+# Run tests
+RUN go test -v ./util
 
-RUN go get -u github.com/cosmtrek/air
-ENV air_wd /usr/src/app
+# Set the working directory to the root
+WORKDIR /
 
-EXPOSE 3000
-
-CMD [ "air" ]
+# DO NOT CHANGE ANY BELOW CODEWORKDIR /
+COPY run_tests.sh ./
+RUN chmod +x /run_tests.sh
+ENTRYPOINT ["/bin/bash", "-s"]

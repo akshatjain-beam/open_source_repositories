@@ -1,0 +1,7 @@
+features/
+
+#Ignore all GZIP files
+*.tar.gz
+
+# Ignore all GZIP files
+*.tar.gz
