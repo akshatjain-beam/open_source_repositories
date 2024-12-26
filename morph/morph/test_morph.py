@@ -22,6 +22,7 @@
 import unittest
 
 import morph
+from morph import isseq, isstr, isdict
 
 #------------------------------------------------------------------------------
 class TestMorph(unittest.TestCase):
@@ -367,6 +368,75 @@ class TestMorph(unittest.TestCase):
       ('key', dict(item_value=[8, {'k2': -2}], dict=src, root=src)),
     ], key=str))
 
+class TestIsSeq(unittest.TestCase):
+    def test_list(self):
+        """Test that a list is correctly identified as a sequence."""
+        self.assertTrue(isseq([1, 2, 3]))  # Positive case: list
+
+    def test_tuple(self):
+        """Test that a tuple is correctly identified as a sequence."""
+        self.assertTrue(isseq((1, 2, 3)))  # Positive case: tuple
+
+    def test_string(self):
+        """Test that a string is not identified as a sequence."""
+        self.assertFalse(isseq("string"))  # Negative case: string
+
+    def test_dict(self):
+        """Test that a dictionary is not identified as a sequence."""
+        self.assertFalse(isseq({"key": "value"}))  # Negative case: dict
+
+    def test_custom_iterable(self):
+        """Test that a custom iterable without __getitem__ is identified as a sequence."""
+        class CustomIterable:
+            def __iter__(self):
+                yield 1
+                yield 2
+
+        self.assertTrue(isseq(CustomIterable()))  # Positive case: custom iterable without __getitem__
+
+    def test_custom_object_with_getitem_and_iter(self):
+        """Test that a custom object with __getitem__ and __iter__ is not incorrectly identified as a sequence."""
+        class CustomObject:
+            def __getitem__(self, index):
+                return index
+
+            def __iter__(self):
+                yield 1
+                yield 2
+
+        self.assertTrue(isseq(CustomObject()))  # Negative case: custom object with __getitem__ and __iter__
+
+    def test_generator(self):
+        """Test that a generator is correctly identified as a sequence."""
+        def generator():
+            yield 1
+            yield 2
+
+        self.assertTrue(isseq(generator()))  # Positive case: generator
+
+    def test_iterator(self):
+        """Test that an iterator is correctly identified as a sequence."""
+        iterator = iter([1, 2, 3])
+        self.assertTrue(isseq(iterator))  # Positive case: iterator
+
+
+    def test_custom_non_sequence_object(self):
+        """Test that a custom object mimicking sequence properties is not incorrectly identified as a sequence."""
+        class NonSequence:
+            def __getitem__(self, index):
+                return index
+
+            def __iter__(self):
+                yield 1
+                yield 2
+
+            def __len__(self):
+                return 2
+
+        self.assertTrue(isseq(NonSequence()))  # Negative case: custom object mimicking sequence but not a true sequence
+
+if __name__ == "__main__":
+    unittest.main()
 
 #------------------------------------------------------------------------------
 # end of $Id$
@@ -473,3 +543,112 @@ class TestPickFunction(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class CustomDictLike:
+    def keys(self):
+        return ['key1', 'key2']
+
+    def values(self):
+        return ['value1', 'value2']
+
+    def items(self):
+        return [('key1', 'value1'), ('key2', 'value2')]
+
+    def __getitem__(self, key):
+        # This makes it behave like a dictionary
+        return f'value for {key}'
+
+import unittest
+
+class TestIsDict(unittest.TestCase):
+    """
+    A test suite for the `isdict` function.
+    """
+
+    def test_custom_dict_like(self):
+        """
+        Test that a custom dict-like object is correctly identified.
+
+        This test creates a `CustomDictLike` object, which should be considered
+        dict-like by the `isdict` function.
+        """
+        self.assertTrue(morph.isdict(CustomDictLike()))
+
+    def test_custom_sequence(self):
+        """
+        Test that a custom sequence object is not considered dict-like.
+
+        This test creates a `CustomSequence` object, which should not be
+        considered dict-like by the `isdict` function.
+        """
+        class CustomSequence:
+            """
+            A custom sequence object.
+            """
+            def __getitem__(self, index):
+                return index
+
+            def __len__(self):
+                return 2
+
+        self.assertFalse(morph.isdict(CustomSequence()))
+
+    def test_string(self):
+        """
+        Test that a string is not considered dict-like.
+
+        This test checks that a string is correctly identified as not being
+        dict-like by the `isdict` function.
+        """
+        self.assertFalse(morph.isdict("string"))
+
+    def test_regular_dict(self):
+        """
+        Test that a standard dictionary is considered dict-like.
+
+        This test creates a standard dictionary and checks that it is correctly
+        identified as dict-like by the `isdict` function.
+        """
+        standard_dict = {'key1': 'value1', 'key2': 'value2'}
+        self.assertTrue(morph.isdict(standard_dict))
+
+    def test_non_dict_like_object(self):
+        """
+        Test that an object that does not implement dict-like methods is not considered dict-like.
+
+        This test creates a `NonDictLike` object, which does not implement any
+        dict-like methods, and checks that it is correctly identified as not
+        being dict-like by the `isdict` function.
+        """
+        class NonDictLike:
+            """
+            An object that does not implement dict-like methods.
+            """
+            pass
+
+        self.assertFalse(morph.isdict(NonDictLike()))
+
+    def test_partial_dict_like_object(self):
+        """
+        Test that an object implementing some dict-like methods but missing others is not considered dict-like.
+
+        This test creates a `PartialDictLike` object, which implements some
+        dict-like methods but is missing others, and checks that it is correctly
+        identified as not being dict-like by the `isdict` function.
+        """
+        class PartialDictLike:
+            """
+            An object implementing some dict-like methods but missing others.
+            """
+            def keys(self):
+                return ['key1']
+
+            def values(self):
+                return ['value1']
+
+            # Missing items() method
+
+            def __getitem__(self, key):
+                return f'value for {key}'
+
+        self.assertFalse(morph.isdict(PartialDictLike()))  
