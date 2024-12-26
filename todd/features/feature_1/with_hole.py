@@ -78,7 +78,7 @@ class Task:
 
     @staticmethod
     def scan_priority(text):
-        match = Task._priority_regex.search(text)
+        match = Task._priority_regex.match(text)
         return match.group(1) if match else ""
 
     @staticmethod
@@ -101,20 +101,25 @@ class Task:
             }
         )
 
-    def set_priority(self, new_priority):
-        if self.priority == new_priority:
-            return
-        if new_priority:
-            new_priority = "({}) ".format(new_priority)
+    """
+    Create a function `set_priority` that sets a new priority for the task.
 
-        # Task
-        if re.search(self._priority_regex, self.raw):
-            self.raw = re.sub(self._priority_regex, "{}".format(new_priority), self.raw)
-        elif re.search(r"^x \d{4}-\d{2}-\d{2}", self.raw):
-            self.raw = re.sub(r"^(x \d{4}-\d{2}-\d{2}) ", r"\1 {}".format(new_priority), self.raw)
-        else:
-            self.raw = "{}{}".format(new_priority, self.raw)
-        self.update(self.raw)
+    Args:
+        new_priority (str): The new priority to be set. It should be a single uppercase letter.
+
+    Behavior:
+        - If the current priority matches the new priority, the function exits without making changes.
+        - If the task already has a priority, it replaces the existing priority with the new one.
+        - If the task does not have a priority but has a completion date at the start, it inserts the new priority after the completion date.
+        - If the task does not have a priority or a completion date, it prepends the new priority to the task string.
+
+    Note:
+        - The `raw` attribute contains the task string 
+        - The `update` method to update the task with the new string.
+        - The completion date format is "x YYYY-MM-DD"
+
+    """
+    $PlaceHolder$
 
     def is_done(self):
         return self.raw[0:2] == "x "
