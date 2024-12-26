@@ -21,7 +21,7 @@ COPY . .
 
 # Run tests
 # Todo: add the name of the folder to run -> ./<folder-name or folder-path>
-RUN go test -v ./internal/name
+RUN go test -v ./internal/xerrors
 
 # Set the working directory to the root
 WORKDIR /
