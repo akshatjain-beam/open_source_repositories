@@ -1,0 +1,8 @@
+"""
+Calculates the centered distances from the median of the input `series` of type numpy and computes the 
+`cl`-th percentile of these distance for the numpy series
+
+return:
+float: The cl-th percentile of the absolute deviations from the median.
+"""
+$PlaceHolder$
