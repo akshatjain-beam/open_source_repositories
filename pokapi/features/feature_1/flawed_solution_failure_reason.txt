@@ -1,0 +1,5 @@
+Test cases failed- test_arabic_name, test_chinese_name, test_russian_name, test_single_primary_author, test_single_primary_author_with_hyphens etc
+Relevant prompt section-   It uses a regular expression to match the sequence of leading characters that includes any combination 
+    of hyphens, periods, commas, letters [in any language - This should support a wide range of unicode characters] and spaces from the name, and then strips unwanted characters [spaces and comma]
+    from the matched result.
+Reason- The LLM Generated solution's regex is incorrect and fails to ensure that valid names are captured effectively after matching leading characters. When valid names are not captured or the structure leads to an empty match, the function returns an empty string instead of the expected cleaned name. Thus leading to failure of test case 
