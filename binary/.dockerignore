@@ -1,3 +1,4 @@
 features/
+
 # Ignore all GZIP files
 *.tar.gz
