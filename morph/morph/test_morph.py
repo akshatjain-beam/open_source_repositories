@@ -22,6 +22,7 @@
 import unittest
 
 import morph
+from morph import isseq, isstr, isdict
 
 #------------------------------------------------------------------------------
 class TestMorph(unittest.TestCase):
@@ -356,6 +357,75 @@ class TestMorph(unittest.TestCase):
       ('key', dict(item_value=[8, {'k2': -2}], dict=src, root=src)),
     ], key=str))
 
+class TestIsSeq(unittest.TestCase):
+    def test_list(self):
+        """Test that a list is correctly identified as a sequence."""
+        self.assertTrue(isseq([1, 2, 3]))  # Positive case: list
+
+    def test_tuple(self):
+        """Test that a tuple is correctly identified as a sequence."""
+        self.assertTrue(isseq((1, 2, 3)))  # Positive case: tuple
+
+    def test_string(self):
+        """Test that a string is not identified as a sequence."""
+        self.assertFalse(isseq("string"))  # Negative case: string
+
+    def test_dict(self):
+        """Test that a dictionary is not identified as a sequence."""
+        self.assertFalse(isseq({"key": "value"}))  # Negative case: dict
+
+    def test_custom_iterable(self):
+        """Test that a custom iterable without __getitem__ is identified as a sequence."""
+        class CustomIterable:
+            def __iter__(self):
+                yield 1
+                yield 2
+
+        self.assertTrue(isseq(CustomIterable()))  # Positive case: custom iterable without __getitem__
+
+    def test_custom_object_with_getitem_and_iter(self):
+        """Test that a custom object with __getitem__ and __iter__ is not incorrectly identified as a sequence."""
+        class CustomObject:
+            def __getitem__(self, index):
+                return index
+
+            def __iter__(self):
+                yield 1
+                yield 2
+
+        self.assertTrue(isseq(CustomObject()))  # Negative case: custom object with __getitem__ and __iter__
+
+    def test_generator(self):
+        """Test that a generator is correctly identified as a sequence."""
+        def generator():
+            yield 1
+            yield 2
+
+        self.assertTrue(isseq(generator()))  # Positive case: generator
+
+    def test_iterator(self):
+        """Test that an iterator is correctly identified as a sequence."""
+        iterator = iter([1, 2, 3])
+        self.assertTrue(isseq(iterator))  # Positive case: iterator
+
+
+    def test_custom_non_sequence_object(self):
+        """Test that a custom object mimicking sequence properties is not incorrectly identified as a sequence."""
+        class NonSequence:
+            def __getitem__(self, index):
+                return index
+
+            def __iter__(self):
+                yield 1
+                yield 2
+
+            def __len__(self):
+                return 2
+
+        self.assertTrue(isseq(NonSequence()))  # Negative case: custom object mimicking sequence but not a true sequence
+
+if __name__ == "__main__":
+    unittest.main()
 
 #------------------------------------------------------------------------------
 # end of $Id$
