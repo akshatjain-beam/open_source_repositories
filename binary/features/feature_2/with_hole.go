@@ -139,29 +139,26 @@ func (m wordMetadata) marshal(reflection reflect.Value) (bytes []byte) {
 	return
 }
 
-func (m wordMetadata) unmarshal(bytes []byte, reflection reflect.Value) {
-	var (
-		bitFieldBytes []byte
-		i             int
-	)
+/*
+Write a function `unmarshal` that decodes the provided byte slice into the fields of a struct.
 
-	for i = 0; i < len(m.bitFields); i++ {
-		if len(bytes) < wordLengthUpperLimitBytes {
-			bitFieldBytes = make([]byte, wordLengthUpperLimitBytes)
+This method takes a byte slice and a reflection value, processing the byte slice according to the bit field definitions in the wordMetadata receiver. It ensures that each bit field in the byte slice is properly copied and unmarshaled into the corresponding struct field.
 
-			copy(bitFieldBytes[wordLengthUpperLimitBytes-len(bytes):],
-				bytes,
-			)
+Parameters:
+- bytes: A byte slice containing the encoded data to be unmarshaled.
+- reflection: A reflection value representing the struct instance where the decoded data will be stored.
 
-		} else {
-			bitFieldBytes = bytes
-		}
+Implementation:
+For each bit field defined in wordMetadata:
+- If the length of the byte slice is less than the defined upper limit (wordLengthUpperLimitBytes), the function will pad the beginning of the byte slice to match this length.
+- If the length is equal to or greater than the upper limit, the byte slice will be used as is.
+- The function will then unmarshal the bit field bytes into the respective struct field using reflection.
 
-		m.bitFields[i].unmarshal(bitFieldBytes,
-			reflection.Field(i),
-		)
-	}
-	fmt.Printf("Debug: bitFieldBytes for field %d: %v\n", i, bitFieldBytes)
+Variables:
+- bitFieldBytes: A byte slice used to hold the processed byte data for each bit field.
+- i: An integer loop counter for iterating through the bit fields.
 
-	return
-}
+Returns:
+- This function does not return any values; the return statement is used only to exit the function.
+*/
+$PlaceHolder$
