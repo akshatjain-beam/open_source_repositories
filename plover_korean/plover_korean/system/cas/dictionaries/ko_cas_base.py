@@ -168,6 +168,7 @@ def lookup(strokes: Tuple[str]) -> str:
 
     return f'{output}{OPERATOR_ATTACH}'
 
+
 def reverse_lookup(text: str) -> List[Tuple[str]]:
     """Gets the possible strokes that would result in the provided text.
 

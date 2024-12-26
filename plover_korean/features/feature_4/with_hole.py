@@ -2,19 +2,25 @@
 
 from typing import Tuple, Callable
 import re
+"""
+Write a Regular expression pattern to match Korean consonant-vowel pairs.
 
+This pattern is designed to match the structure of Korean characters, 
+which consist of an initial consonant, a medial vowel, and a final consonant.
+The pattern is divided into five groups (each group can contain multiple characters):
 
-STROKE_REGEX = re.compile(r'''
-    ^
-    (?P<number_start> [12345]*)
-    (?P<initial> [ㅎㅁㄱㅈㄴㄷㅇㅅㅂㄹ]*)
-    (?P<medial> [ㅗㅏㅜ\-*ㅓㅣ]*)
-    (?P<number_end> [67890]*)
-    (?P<final> [ㅎㅇㄹㄱㄷㅂㄴㅅㅈㅁ]*)
-    $
-    ''', re.VERBOSE)
+* `number_start`: Matches any of the digits 1-5 (optional)
+* `initial`: Matches any of the Korean consonants ㅎ, ㅁ, ㄱ, ㅈ, ㄴ, ㄷ, ㅇ, ㅅ, ㅂ, ㄹ (optional)
+* `medial`: Matches any of the Korean vowels ㅗ, ㅏ, ㅜ, \-, *, ㅓ, ㅣ (optional)
+* `number_end`: Matches any of the digits 6-9, 0 (optional)
+* `final`: Matches any of the Korean consonants ㅎ, ㅇ, ㄹ, ㄱ, ㄷ, ㅂ, ㄴ, ㅅ, ㅈ, ㅁ (optional)
+Note:
+    The pattern must match the entire string, as indicated by the `^` and `$` anchors.
 
-
+Example:
+     "ㅈㅏ*" -> { 'number_start': '', 'initial': 'ㅈ', 'medial': 'ㅏ*', 'number_end': '', 'final': '' }
+"""
+$PlaceHolder$
 STENO_DASH = '-'
 
 
