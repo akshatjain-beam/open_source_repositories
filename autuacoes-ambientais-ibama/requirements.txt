@@ -1,0 +1,6 @@
+cached-property
+https://github.com/turicas/rows/archive/develop.zip
+pdfminer.six
+pymupdf
+scrapy
+tqdm
