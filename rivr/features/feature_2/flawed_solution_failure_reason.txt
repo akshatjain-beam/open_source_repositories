@@ -1,0 +1,37 @@
+Differences Between Wrong (llm generated) and Correct (golden) Solutions
+
+1. HTML Escaping in `request`:
+   - Wrong Solution: Uses `request.__str__().replace('>', '>').replace('<', '<')`, which does not escape HTML characters correctly
+   - Correct Solution: Uses `repr(request).replace('>', '&gt;').replace('<', '&lt;')`, properly escaping `>` and `<` to their HTML-safe equivalents
+
+2. Python Version Formatting:
+   - Wrong Solution: 
+     ```python
+     'python_version': f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}{"-" + sys.version_info.releaselevel[0] if len(sys.version_info) >= 4 and sys.version_info.releaselevel else ""}{"-" + str(sys.version_info.serial) if len(sys.version_info) >= 5 and sys.version_info.serial else ""}',
+     ```
+     - Constructs the version string using string interpolation with removing releaselevel-serial. Eg - `'python_version': '3.10.12-f'`
+   - Correct Solution:
+     ```python
+     'python_version': '{}.{}.{}-{}-{}'.format(sys.version_info),
+     ```
+     - Utilizes the `format` function for a clear and structured string format. Eg - `python_version': '3.10.12-final-0'`
+
+How the Wrong Solution Differs from the Prompt and Correct Solution
+
+- Prompt Specification for `request`: 
+  - The prompt requires that the `request` string representation replaces `<` and `>` with `&gt;` and `&lt;` to prevent HTML injection. The wrong solution fails to do this
+
+- Formatting of Python Version: 
+  - The prompt specifies the format for the `python_version` should be `major.minor.micro-releaselevel-serial`. The wrong solution’s complex construction leads to removal of serial number and printing only the first letter of the release level, while the prompt asks for release level and serial number.
+
+Test Case Failure Analysis
+
+Test case which the flawed solution fails
+- Test case name: `test_process_exception_invalid_html`, `test_process_exception_with_pygments`, `test_process_exception_with_special_characters`, `test_process_exception_without_pygments`
+
+The relevant prompt section
+- Relevant prompt section: 
+  - The `request` value should replace `>` and `<` with `&gt;` and `&lt;`,
+
+Reason why the flawed solution fails the test case
+- The test expects extracted_data['request'] to equal `&lt;Request: GET /test&gt;`, which is the HTML-escaped representation of the request. The flawed solution returns `<Request: GET /test>`, which does not match the expected escaped string. Therefore, the test fails due to a mismatch between the actual output of the flawed solution and the expected output defined in the test case.
