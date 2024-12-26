@@ -1,0 +1,12 @@
+# - This code defines a method called `LineGen` that takes a multiline string as input and processes it, distinguishing between project headers and tasks.
+# - Process Each Line in the input string list, and through each line:
+#     - identify the project headers, by checking the current line with the previous line. And if it, then update the current project to new project header.
+#     - Check for Task Association, by checking if the line is associated with a specific project task.
+#         - If it is:
+#             - If the line represents a task for a different project than the current one, it is added to deferredTasks.
+#             - If the line matches the current project, it is yielded (returned) along with the project information.
+#         - If it is not:
+#             - If the line does not represent a task but there is a current project, the line is yielded with the current project.
+#             - If there is no current project, the line is added to deferredTasks.
+# - After all lines are processed, the method goes through the deferred tasks and yields each one with its associated project information.
+$PlaceHolder$

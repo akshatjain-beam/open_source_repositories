@@ -1,0 +1,31 @@
+"""
+Encode a given binary string to a base2p15 encoded string.
+
+This encoding method converts the input binary string into chunks of 15 bits,
+pads the string if necessary, and maps each chunk to a corresponding character
+in a custom base2p15 encoding. The encoded string starts with a hex character
+representing the number of padding bits added.
+
+Parameters
+----------
+bit_string : str
+    A binary string (e.g., "00001001").
+
+Returns
+-------
+str
+    The base2p15 encoded string.
+
+Notes
+-----
+- The function pads the input binary string to ensure its length is a multiple
+    of 15 by appending '0' bits.
+- The first character of the output string represents the number of padding bits
+    added (in hexadecimal).
+- No padding is required if length of input string is already a multiple of 15
+- Each 15-bit chunk of the padded binary string is then converted to an integer,
+    which is mapped to a character by adding an offset of 0xA1 (161 in decimal).
+- The function uses the `gen_chunks` helper function to split the input string
+    into 15-bit chunks.
+"""
+$PlaceHolder$

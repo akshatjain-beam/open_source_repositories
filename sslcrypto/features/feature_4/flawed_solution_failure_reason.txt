@@ -1,0 +1,4 @@
+Unit test failed: test_large_prime_case and test_non_quadratic_residue and test_prime_cases
+Relevant prompt section - "Specifically, it returns: -1 if 'a' is a non-residue modulo 'p' (if the result is smaller than p by 1.)"
+
+Reason -The LLM Generated solution fails to correctly classify the results of the Legendre symbol. It does not account for the case where res equals p−1 (indicating that a is a non-residue). Instead, it directly returns the result of the modular exponentiation, which yields in values that do not correspond to the expected outcomes of the Legendre symbol.

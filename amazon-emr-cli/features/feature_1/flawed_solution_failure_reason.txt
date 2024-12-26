@@ -1,0 +1,1 @@
+The LLM Generated solution fails as, it is uses `lstrip("/")` which only removes leading slashes, despite explicit mention of discarding trailing and leading slahes in the prompt.

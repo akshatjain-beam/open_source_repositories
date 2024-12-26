@@ -1,0 +1,10 @@
+"""
+Create a function `parse_datetime` that parses a string into a datetime object with timezone information.
+If the parsed datetime lacks timezone information, UTC is assigned.
+
+:param ts: The date-time string to parse.
+:type ts: str
+
+:returns: A datetime object
+"""
+$PlaceHolder$

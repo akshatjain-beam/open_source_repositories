@@ -1,0 +1,9 @@
+"""
+- The code begins by comparing stroke counts. 
+- For the first character, it checks if the stroke count at the current position is greater than the next. If so, it swaps the values. 
+- If any stroke count list is shorter than the current character index, it adds a '0' to that list. 
+- For subsequent characters, it compares stroke counts at the previous position first. 
+- If they are equal, it then compares the current position. 
+- If the current stroke count is higher, it swaps the tuples.
+"""
+$PlaceHolder$

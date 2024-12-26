@@ -1,0 +1,13 @@
+// Error returns a formatted error message for a bitFieldOfUnsupportedTypeError.
+// The message provides details about the error, including the function name,
+// format struct, word struct, bit field name, and the unsupported type.
+//
+// The format of the error message is as follows:
+// "A bit field is represented by an exported field of a word-struct of type
+// uintN or bool. Argument to <functionName> points to a format-struct
+// <formatName> nesting a word-struct <wordName> that has a bit field
+// <bitFieldName> of unsupported type <bitFieldType>."
+//
+// Returns:
+// A string containing the formatted error message.
+$PlaceHolder$

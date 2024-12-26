@@ -1,0 +1,15 @@
+Sthir
+=====
+
+.. toctree::
+   :maxdepth: 4
+
+   CLI
+   Test
+   convert_2p15
+   convert_byte
+   generate_search
+   mmh3
+   parse
+   scan
+   spectral_bloom_filter

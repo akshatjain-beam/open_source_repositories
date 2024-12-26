@@ -1,0 +1,18 @@
+Differences Between Correct and Flawed Solutions
+
+1. Bit Field Byte Preparation:
+   - Correct Solution: Inside the loop, it checks the length of `bytes` and prepares `bitFieldBytes` accordingly for each `bitField` in `m.bitFields`. If `bytes` is less than `wordLengthUpperLimitBytes`, it pads `bitFieldBytes` with zeros at the start.
+   - Flawed Solution: The check for the length of `bytes` is done outside the loop. This means `bitFieldBytes` is set once, and the same reference is used for all fields, which does not account for varying lengths that may be required when processing each bit field.
+
+2. Bit Field Unmarshaling:
+   - Correct Solution: Calls `unmarshal` for each bit field using the correct `bitFieldBytes` prepared for each iteration of the loop.
+   - Flawed Solution: It incorrectly uses `bitFieldBytes[wordLengthUpperLimitBytes-m.lengthInBytes:]`, which can lead to slicing errors, particularly when `m.lengthInBytes` exceeds the length of `bitFieldBytes`.
+
+Why the Tests Failed
+
+Test case which the flawed solution fails (TestWordMetadataUnmarshal)
+- The relevant prompt section:
+  > "The function will then unmarshal the bit field bytes into the respective struct field using reflection."
+
+- Reason why the flawed solution fails the test case:
+  The flawed solution incorrectly processes the `bitFieldBytes` by using a slice that assumes `m.lengthInBytes` is always valid. If `bytes` is smaller than `wordLengthUpperLimitBytes`, the calculated slice can result in an index out of range error because the length of `bitFieldBytes` may not support that slice operation. Specifically, the code attempts to access indices in `bitFieldBytes` that may not exist when `len(bytes)` is less than the expected limit.

@@ -1,6 +1,7 @@
 from . import REGIONS
 import numpy as np
 
+
 def relative_change(dataset, years, start, end):
     """Calculate fractional change values from year ``start`` to year ``end``.
 
@@ -9,9 +10,6 @@ def relative_change(dataset, years, start, end):
     return (
         dataset[..., years.index(end)] - dataset[..., years.index(start)]
     ) / dataset[..., years.index(start)]
-
-    
-
 
 def convert_to_location_dictionary(array, locations=REGIONS):
     """Convert array of values ``array`` with order ``locations`` to a dictionary:

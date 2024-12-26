@@ -1,0 +1,21 @@
+"""Find on a set of candidates the parameters needed to execute a callable.
+
+Returns a dictionary with the `candidates` found on `callable_`.
+When any of the required parameters of a callable is not found,
+it raises a `AttributeError` exception. A signature parameter
+whitout a default value is considered as required.
+
+If the `callable_` includes variadic parameters (`*args` or `**kwargs`), all 
+provided candidates will be included.
+
+:param callable_: callable object
+:param candidates: dict with the possible parameters to use
+    with the callable
+:param excluded: tuple with default parameters to exclude
+
+:result: dict of parameters ready to use with the callable
+
+:raises AttributeError: when any of the required parameters for
+    executing a callable is not found in `candidates`
+"""
+$PlaceHolder$

@@ -1,0 +1,6 @@
+Unit tets failed-
+ test_mark_done_when_not_done
+
+The relevant prompt section:
+ “When marking the task as done: ... The task's raw string is updated to include a completion marker (x ), the current date in ISO format, and the existing raw string.”
+Reason- The LLM Generated solution adds a new completion marker (x ) and date each time the task is marked done, resulting in a raw string that contains multiple completion markers (e.g., x 2024-10-24 x 2024-10-24 Sample task). The expected outcome is to have a single completion marker, thus failing the assertion that checks for the expected raw string format.
