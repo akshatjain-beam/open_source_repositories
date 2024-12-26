@@ -1,0 +1,6 @@
+"""
+Write `if` condition  that Verifies if point (x, y) is valid on the elliptic curve given by:
+y^2 = x^3 + ax + b  
+it calculates both sides of the equation modulo `p`. False is returned if there is no match
+"""
+$PlaceHolder$

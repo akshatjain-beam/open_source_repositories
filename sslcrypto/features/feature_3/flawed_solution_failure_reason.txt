@@ -1,0 +1,15 @@
+Test Case: test_point_off_curve
+Relevant Prompt Section: "False is returned if there is no match."
+Reason: This test checks if a point not on the curve returns False. Since the LLM Generated solution only checks for a True condition, it doesn’t explicitly return False for off-curve points, causing it to fail this test.
+
+Test Case: test_point_at_infinity
+Relevant Prompt Section: "False is returned if there is no match."
+Reason: The LLM Generated solution fails to identify (0, 0) as not satisfying the curve equation. The solution lacks an explicit False condition for invalid points, causing the else to trigger incorrectly, leading to failure.
+
+Test Case: test_negative_coordinates
+Relevant Prompt Section: "Calculates both sides of the equation modulo p."
+Reason: Negative coordinates mod p do not satisfy the elliptic curve equation. The LLM Generated solution’s logic does not explicitly check and return False for such values, resulting in a test failure.
+
+Test Case: test_large_coordinates
+Relevant Prompt Section: "Calculates both sides of the equation modulo p."
+Reason: Large coordinates near the boundary of p fail to satisfy the elliptic equation, but the LLM Generated solution returns True due to lacking a specific failure condition, resulting in a failed test.
