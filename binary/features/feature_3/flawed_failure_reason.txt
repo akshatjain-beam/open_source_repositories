@@ -1,0 +1,2 @@
+The LLM Generated solution is failing as it is putting an additional '}' at the end of whole code. This is causing syntax error and causing all test case to fail.
+Multiplt iterations has been done , but this additional '}' persist.
