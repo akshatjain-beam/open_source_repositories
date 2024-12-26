@@ -1,7 +1,4 @@
-from matplotlib import pyplot as plt
-
-
-def plot_with_uncertainty(df, key=None, **kwargs):
+``` 
     if key:
         uncertainty = df[[f"{key}_std_dev_left",
                           f"{key}_std_dev_right"]]
@@ -10,5 +7,7 @@ def plot_with_uncertainty(df, key=None, **kwargs):
     else:
         if hasattr(df, "nominal_value"):
             df.nominal_value.plot(yerr=df.std_dev, **kwargs)
+    
         else:
             df.plot(**kwargs)
+```
