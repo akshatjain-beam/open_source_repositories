@@ -5,6 +5,7 @@ import pytest
 import sys
 import warnings
 import uritemplate
+import unittest
 
 this_dir = dirname(abspath(__file__))
 sys.path.append(join(this_dir, '..'))
@@ -12,6 +13,7 @@ sys.path.append(join(this_dir, '..'))
 data_dir = join(this_dir, 'data')
 
 from pokapi import Folio, FolioRecord
+from pokapi.folio import pub_authors
 
 # In the tests that follow, we don't contact a live Folio server because we
 # would have to hardwire a specific server's credentials in here (e.g.,
@@ -142,3 +144,53 @@ class TestCleanedFunction(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+import regex
+import unittest
+
+class TestExtractedName(unittest.TestCase):
+    """Unit tests for the pub_authors function to validate author name extraction and formatting."""
+    
+    def test_single_primary_author(self):
+        """Test that a single primary author returns correctly without modifications."""
+        result = pub_authors([{'name': 'Alice Wonderland', 'primary': True}])
+        self.assertEqual(result, 'Alice Wonderland')
+
+    def test_single_primary_author_with_hyphens(self):
+        """Test that a single primary author with hyphens is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '   Emily - A.  ', 'primary': True}])
+        self.assertEqual(result, 'Emily - A.')
+
+    def test_invalid_name(self):
+        """Test that an invalid name returns correctly (in this case, a name in Chinese)."""
+        result = pub_authors([{'name': '王小明', 'primary': True}])
+        self.assertEqual(result, '王小明')
+
+    def test_only_spaces(self):
+        """Test that a name with only spaces returns an empty string."""
+        result = pub_authors([{'name': '    ', 'primary': True}])
+        self.assertEqual(result, '')
+
+    def test_chinese_name(self):
+        """Test that a valid Chinese name is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '  张伟  ', 'primary': True}])
+        self.assertEqual(result, '张伟')
+
+    def test_spanish_name(self):
+        """Test that a valid Spanish name is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '  Juan Carlos  ', 'primary': True}])
+        self.assertEqual(result, 'Juan Carlos')
+
+    def test_french_name(self):
+        """Test that a valid French name is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '  Marie Curie  ', 'primary': True}])
+        self.assertEqual(result, 'Marie Curie')
+
+    def test_russian_name(self):
+        """Test that a valid Russian name is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '  Анна Каренина  ', 'primary': True}])
+        self.assertEqual(result, 'Анна Каренина')
+
+    def test_arabic_name(self):
+        """Test that a valid Arabic name is returned correctly after stripping whitespace."""
+        result = pub_authors([{'name': '  أحمد  ', 'primary': True}])
+        self.assertEqual(result, 'أحمد')
