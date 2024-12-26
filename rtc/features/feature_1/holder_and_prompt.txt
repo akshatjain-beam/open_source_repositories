@@ -1,0 +1,21 @@
+// Create a function `applyBuiltinValidator` that assigns the appropriate built-in validator function
+// based on the Column's Type. It checks the Column's Type and sets the 
+// corresponding validator from the `valide` package to the Column's Validator field.
+// The supported types include "string", "int", "float32", "float64", 
+// "json.RawMessage", and "[]byte". If the Column's Type is empty or unrecognized,
+// an error is returned.
+//
+// This method is useful for automatically setting up the right validation logic
+// for column values during schema validation.
+//
+// Parameters:
+//   - c (*Column): A pointer to the Column object. 
+//
+// Returns:
+//   - error: Returns an error if the Column's Type is empty or unrecognized.
+//     Possible errors are:
+//       - `errNilColumnType` if the Column's Type is an empty string.
+//       - `errUnallowedColumnType` if the Column's Type is not supported.
+//For example:
+//    - If the Column's Type is "string", it assigns `valide.String` as the validator.
+$PlaceHolder$

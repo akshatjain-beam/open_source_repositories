@@ -62,6 +62,9 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 		wantErr       error
 	}{
 		{
+			// Test case for "JSON" type
+			// We expect that the "json" type will be mapped to the "json.RawMessage" type
+			// and the corresponding validator should be valide.JSON.
 			name:          "JSON type",
 			Type:          "json",
 			wantType:      "json.RawMessage",
@@ -69,6 +72,8 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for "BYTES" type
+			// The "bytes" type should map to the Go type "[]byte" and use the validator valide.Bytes.
 			name:          "BYTES type",
 			Type:          "bytes",
 			wantType:      "[]byte",
@@ -76,6 +81,8 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for "STRING" type
+			// The "string" type should remain a "string" in Go and use the valide.String validator.
 			name:          "STR type",
 			Type:          "string",
 			wantType:      "string",
@@ -83,6 +90,8 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for "INT" type
+			// The "int" type should map to Go's "int" and use the valide.Int validator.
 			name:          "INT type",
 			Type:          "int",
 			wantType:      "int",
@@ -90,6 +99,8 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for "FLOAT32" type
+			// The "float32" type should map to Go's "float32" type and use the valide.Float32 validator.
 			name:          "FLOAT32 type",
 			Type:          "float32",
 			wantType:      "float32",
@@ -97,6 +108,8 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for "FLOAT64" type
+			// The "float64" type should map to Go's "float64" type and use the valide.Float64 validator.
 			name:          "FLOAT64 type",
 			Type:          "float64",
 			wantType:      "float64",
@@ -104,13 +117,18 @@ func TestColumn_applyBuiltinValidator(t *testing.T) {
 			wantErr:       nil,
 		},
 		{
+			// Test case for an empty or NIL type
+			// An empty string or a "nil" type should result in an error (errNilColumnType).
 			name:    "NIL type",
 			Type:    "",
 			wantErr: errNilColumnType,
 		},
 
 		{
-			name:     "INVALId type",
+			// Test case for an invalid type
+			// If the type is not recognized (e.g., "invalid"), the function should return
+			// an error (errUnallowedColumnType), and the Type should remain unchanged.
+			name:     "INVALID type",
 			Type:     "invalid",
 			wantType: "invalid",
 			wantErr:  errUnallowedColumnType,
