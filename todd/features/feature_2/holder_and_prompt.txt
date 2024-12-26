@@ -1,0 +1,22 @@
+"""
+Mark the task as done or undone and update its status accordingly.
+
+This method modifies the task's state based on the provided `done` parameter. If the task is already in the desired state, no action is taken.
+
+When marking the task as done:
+- The task's priority is removed.
+- The task's raw string is updated to include a completion marker (`x `), the current date in ISO format, and the existing raw string.
+- If the task has a recurrence interval, the due date is adjusted:
+- The recurrence interval is parsed into its prefix, value, and interval type using a regular expression `_rec_int_parts_regex`.
+- The prefix determines whether to add the recurrence interval to the current due date (if `prefix` is "+") or to today's date.
+- The new due date is calculated using the `date_add_interval` method from the `Util` class.
+
+When marking the task as undone, the completion marker is removed from the task's raw string using `_done_regex`.
+
+Args:
+    done (bool): If True, marks the task as done; if False, marks it as undone.
+
+Returns:
+    datetime or None: Returns the new due date if the task is marked as done and has a recurrence interval; otherwise, returns None.
+"""
+$PlaceHolder$
