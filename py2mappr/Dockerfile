@@ -10,7 +10,7 @@ COPY . /py2mappr
 # Install pytest globally
 RUN pip install pytest
 
-# Install all dependencies using Poetry
+# Install all dependencies using pip
 RUN pip install -r _requirements.txt
 
 # Run tests using pytest
