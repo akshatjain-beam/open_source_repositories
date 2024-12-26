@@ -118,3 +118,6 @@ go.work.sum
 
 # Ignore the entire feature folder with all nested data
 features/
+
+# Ignore all GZIP files
+*.tar.gz

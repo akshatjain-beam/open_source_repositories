@@ -8,7 +8,7 @@ ENV GO111MODULE=on
 ENV XDG_CACHE_HOME=/tmp/cache
 
 # Set the Current Working Directory inside the container
-WORKDIR /rtc
+WORKDIR /app
 
 # Copy go.mod and go.sum files to the container
 COPY go.mod go.sum ./
