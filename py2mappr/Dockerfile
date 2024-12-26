@@ -10,11 +10,11 @@ COPY . /py2mappr
 # Install pytest globally
 RUN pip install pytest
 
-# Install all dependencies 
+# Install all dependencies using pip
 RUN pip install -r _requirements.txt
 
 # Run tests using pytest
-RUN python -m pytest 
+RUN python -m pytest tests/
 
 # Set the working directory to the root
 WORKDIR /
