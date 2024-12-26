@@ -1,0 +1,18 @@
+// The `VerifySlackRequest` function validates the authenticity of a Slack request by checking the HMAC
+// signature in the request headers, using the signing secret stored in the "SLACK_SIGNING_SECRET" environment
+// variable.
+//
+// Parameters:
+// - r: The HTTP request object received from Slack.
+// - body: The raw request body as a byte slice.
+// Returns:
+// - bool: Returns true if the computed HMAC signature matches the "X-Slack-Signature" header, 
+//   confirming that the request is legitimate. Returns false otherwise.
+//
+// This function generates the HMAC signature by combining the value from the "X-Slack-Request-Timestamp" header
+// with the request body, formatted as "v0:<timestamp>:<body>". It then compares this computed signature 
+// with the signature provided by Slack, which is prefixed with "v0=".
+//
+// Note: The function ensures that the data is properly written in the HMAC hash function. If an error occurs 
+// during the process, it halts execution and returns false.
+$PlaceHolder$
