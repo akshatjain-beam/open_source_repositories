@@ -1,0 +1,25 @@
+"""
+Create a function `legendre` that  Compute the Legendre symbol (a/p).
+
+The Legendre symbol is a mathematical notation that indicates whether 
+a given integer 'a' is a quadratic residue modulo a prime 'p'. 
+The function computes the Legendre symbol using the property -
+(a/p) ≡ a^((p-1)/2) (mod p)
+
+Specifically, it returns:
+- 1 if 'a' is a quadratic residue modulo 'p'
+- -1 if 'a' is a non-residue modulo 'p'(if the result is smaller than p by 1.)
+- 0 if 'a' is congruent to 0 modulo 'p'.
+
+Parameters:
+a (int): The integer for which the Legendre symbol is to be computed.
+p (int): A prime number.
+
+Return:
+    int: The value of the Legendre symbol (a/p), which can be:
+        1 if a is a quadratic residue modulo p and a ≠ 0,
+        -1 if a is a non-quadratic residue modulo p,
+        0 if a is 0.
+
+"""
+$PlaceHolder$
