@@ -1,0 +1,14 @@
+"""
+Create a dictionary `context` Context dictionary for error reporting.
+
+This dictionary contains information to be used in error handling and reporting, particularly for generating an HTML error page. The keys and their corresponding values are as follows:
+
+Attributes:
+    title (str): A string representation of the exception message.
+    traceback (str): The formatted HTML traceback of the error.
+    request (str): This line converts a `request` object to its string representation, then replaces any `>` and `<` symbols with their HTML-safe equivalents, `&gt;` and `&lt;`, to prevent HTML injection.
+    version (str): The version of the application or service.
+    python_version (str): A formatted string representing the current Python version (format: `major.minor.micro-releaselevel-serial`)
+    css (str): The CSS styles to be applied for error display
+"""
+$PlaceHolder$
