@@ -1,0 +1,10 @@
+"""
+  Returns True if `obj` is a sequence-like object (but not a string or
+  dict); i.e. a tuple, list, subclass thereof, or having an interface
+  that supports iteration.
+  
+  Parameters:
+    obj (object): The object to check.
+
+"""
+$PlaceHolder$
